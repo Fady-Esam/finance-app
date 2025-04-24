@@ -21,5 +21,37 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "activity": MessageLookupByLibrary.simpleMessage("Activity"),
+    "all_activities": MessageLookupByLibrary.simpleMessage("All Activities"),
+    "balance": MessageLookupByLibrary.simpleMessage("Balance"),
+    "dark_mode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
+    "minus": MessageLookupByLibrary.simpleMessage("Minus"),
+    "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "onBoarding_subTitle_1": MessageLookupByLibrary.simpleMessage(
+      "Get a clear view of where your money goes every month",
+    ),
+    "onBoarding_subTitle_2": MessageLookupByLibrary.simpleMessage(
+      "Control your finances by creating monthly budgets",
+    ),
+    "onBoarding_subTitle_3": MessageLookupByLibrary.simpleMessage(
+      "Save money and reach your financial goals faster",
+    ),
+    "onBoarding_title_1": MessageLookupByLibrary.simpleMessage(
+      "Track Your Spending",
+    ),
+    "onBoarding_title_2": MessageLookupByLibrary.simpleMessage(
+      "Set Budgets Easily",
+    ),
+    "onBoarding_title_3": MessageLookupByLibrary.simpleMessage(
+      "Achieve Your Goals",
+    ),
+    "plus": MessageLookupByLibrary.simpleMessage("Plus"),
+    "see_all": MessageLookupByLibrary.simpleMessage("See All"),
+    "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+    "splash_screen_title": MessageLookupByLibrary.simpleMessage("Finance"),
+    "start": MessageLookupByLibrary.simpleMessage("Get Started"),
+    "total_balance": MessageLookupByLibrary.simpleMessage("Total Balance"),
+    "welcome_title": MessageLookupByLibrary.simpleMessage("Welcome to Finance"),
+  };
 }

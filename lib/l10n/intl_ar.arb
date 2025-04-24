@@ -1,1 +1,21 @@
-{}
+{
+    "splash_screen_title": "الماليات",
+    "skip": "تخطى",
+    "next": "التالى",
+    "start": "ابدأ",
+    "onBoarding_title_1": "تتبع نفقاتك",
+    "onBoarding_title_2": "أنشئ ميزانيات بسهولة",
+    "onBoarding_title_3": "حقق أهدافك",
+    "onBoarding_subTitle_1": "احصل على رؤية واضحة لمصروفاتك الشهرية",
+    "onBoarding_subTitle_2": "تحكم في أموالك من خلال إنشاء ميزانيات شهرية",
+    "onBoarding_subTitle_3": "ادخر المال وحقق أهدافك المالية بشكل أسرع",
+    "welcome_title": "مرحبًا بك في تطبيقنا المالي",
+    "dark_mode": "الوضع المظلم",
+    "all_activities": "جميع الأنشطة",
+    "plus": "إضافة",
+    "minus": "نقص",
+    "balance": "الرصيد",
+    "total_balance": "إجمالي الرصيد",
+    "activity": "النشاط",
+    "see_all" : "عرض الكل"
+}

@@ -1,1 +1,22 @@
-{}
+{
+    "splash_screen_title": "Finance",
+    "skip": "Skip",
+    "next": "Next",
+    "start": "Get Started",
+    "onBoarding_title_1": "Track Your Spending",
+    "onBoarding_title_2": "Set Budgets Easily",
+    "onBoarding_title_3": "Achieve Your Goals",
+    "onBoarding_subTitle_1": "Get a clear view of where your money goes every month",
+    "onBoarding_subTitle_2": "Control your finances by creating monthly budgets",
+    "onBoarding_subTitle_3": "Save money and reach your financial goals faster",
+    "welcome_title": "Welcome to Finance",
+    "dark_mode": "Dark Mode",
+    "all_activities": "All Activities",
+    "plus": "Plus",
+    "minus": "Minus",
+    "balance": "Balance",
+    "total_balance": "Total Balance",
+    "activity": "Activity",
+    "see_all": "See All"
+
+}

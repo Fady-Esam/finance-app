@@ -21,5 +21,35 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "activity": MessageLookupByLibrary.simpleMessage("النشاط"),
+    "all_activities": MessageLookupByLibrary.simpleMessage("جميع الأنشطة"),
+    "balance": MessageLookupByLibrary.simpleMessage("الرصيد"),
+    "dark_mode": MessageLookupByLibrary.simpleMessage("الوضع المظلم"),
+    "minus": MessageLookupByLibrary.simpleMessage("نقص"),
+    "next": MessageLookupByLibrary.simpleMessage("التالى"),
+    "onBoarding_subTitle_1": MessageLookupByLibrary.simpleMessage(
+      "احصل على رؤية واضحة لمصروفاتك الشهرية",
+    ),
+    "onBoarding_subTitle_2": MessageLookupByLibrary.simpleMessage(
+      "تحكم في أموالك من خلال إنشاء ميزانيات شهرية",
+    ),
+    "onBoarding_subTitle_3": MessageLookupByLibrary.simpleMessage(
+      "ادخر المال وحقق أهدافك المالية بشكل أسرع",
+    ),
+    "onBoarding_title_1": MessageLookupByLibrary.simpleMessage("تتبع نفقاتك"),
+    "onBoarding_title_2": MessageLookupByLibrary.simpleMessage(
+      "أنشئ ميزانيات بسهولة",
+    ),
+    "onBoarding_title_3": MessageLookupByLibrary.simpleMessage("حقق أهدافك"),
+    "plus": MessageLookupByLibrary.simpleMessage("إضافة"),
+    "see_all": MessageLookupByLibrary.simpleMessage("عرض الكل"),
+    "skip": MessageLookupByLibrary.simpleMessage("تخطى"),
+    "splash_screen_title": MessageLookupByLibrary.simpleMessage("الماليات"),
+    "start": MessageLookupByLibrary.simpleMessage("ابدأ"),
+    "total_balance": MessageLookupByLibrary.simpleMessage("إجمالي الرصيد"),
+    "welcome_title": MessageLookupByLibrary.simpleMessage(
+      "مرحبًا بك في تطبيقنا المالي",
+    ),
+  };
 }

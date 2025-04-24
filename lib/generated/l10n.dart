@@ -54,6 +54,151 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
+
+  /// `Finance`
+  String get splash_screen_title {
+    return Intl.message(
+      'Finance',
+      name: 'splash_screen_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Skip`
+  String get skip {
+    return Intl.message('Skip', name: 'skip', desc: '', args: []);
+  }
+
+  /// `Next`
+  String get next {
+    return Intl.message('Next', name: 'next', desc: '', args: []);
+  }
+
+  /// `Get Started`
+  String get start {
+    return Intl.message('Get Started', name: 'start', desc: '', args: []);
+  }
+
+  /// `Track Your Spending`
+  String get onBoarding_title_1 {
+    return Intl.message(
+      'Track Your Spending',
+      name: 'onBoarding_title_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set Budgets Easily`
+  String get onBoarding_title_2 {
+    return Intl.message(
+      'Set Budgets Easily',
+      name: 'onBoarding_title_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Achieve Your Goals`
+  String get onBoarding_title_3 {
+    return Intl.message(
+      'Achieve Your Goals',
+      name: 'onBoarding_title_3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get a clear view of where your money goes every month`
+  String get onBoarding_subTitle_1 {
+    return Intl.message(
+      'Get a clear view of where your money goes every month',
+      name: 'onBoarding_subTitle_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Control your finances by creating monthly budgets`
+  String get onBoarding_subTitle_2 {
+    return Intl.message(
+      'Control your finances by creating monthly budgets',
+      name: 'onBoarding_subTitle_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save money and reach your financial goals faster`
+  String get onBoarding_subTitle_3 {
+    return Intl.message(
+      'Save money and reach your financial goals faster',
+      name: 'onBoarding_subTitle_3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Welcome to Finance`
+  String get welcome_title {
+    return Intl.message(
+      'Welcome to Finance',
+      name: 'welcome_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark Mode`
+  String get dark_mode {
+    return Intl.message('Dark Mode', name: 'dark_mode', desc: '', args: []);
+  }
+
+  /// `All Activities`
+  String get all_activities {
+    return Intl.message(
+      'All Activities',
+      name: 'all_activities',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Plus`
+  String get plus {
+    return Intl.message('Plus', name: 'plus', desc: '', args: []);
+  }
+
+  /// `Minus`
+  String get minus {
+    return Intl.message('Minus', name: 'minus', desc: '', args: []);
+  }
+
+  /// `Balance`
+  String get balance {
+    return Intl.message('Balance', name: 'balance', desc: '', args: []);
+  }
+
+  /// `Total Balance`
+  String get total_balance {
+    return Intl.message(
+      'Total Balance',
+      name: 'total_balance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Activity`
+  String get activity {
+    return Intl.message('Activity', name: 'activity', desc: '', args: []);
+  }
+
+  /// `See All`
+  String get see_all {
+    return Intl.message('See All', name: 'see_all', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
