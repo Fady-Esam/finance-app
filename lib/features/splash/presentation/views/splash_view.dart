@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
-  static const routeName = '/';
+  static const routeName = 'splash';
   @override
   State<SplashView> createState() => _SplashViewState();
 }

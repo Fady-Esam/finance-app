@@ -24,9 +24,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "activity": MessageLookupByLibrary.simpleMessage("النشاط"),
     "all_activities": MessageLookupByLibrary.simpleMessage("جميع الأنشطة"),
-    "balance": MessageLookupByLibrary.simpleMessage("الرصيد"),
     "dark_mode": MessageLookupByLibrary.simpleMessage("الوضع المظلم"),
     "minus": MessageLookupByLibrary.simpleMessage("نقص"),
+    "my_balance": MessageLookupByLibrary.simpleMessage("رصيدي"),
     "next": MessageLookupByLibrary.simpleMessage("التالى"),
     "onBoarding_subTitle_1": MessageLookupByLibrary.simpleMessage(
       "احصل على رؤية واضحة لمصروفاتك الشهرية",
@@ -47,7 +47,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "skip": MessageLookupByLibrary.simpleMessage("تخطى"),
     "splash_screen_title": MessageLookupByLibrary.simpleMessage("الماليات"),
     "start": MessageLookupByLibrary.simpleMessage("ابدأ"),
-    "total_balance": MessageLookupByLibrary.simpleMessage("إجمالي الرصيد"),
+    "today_total_balance": MessageLookupByLibrary.simpleMessage(
+      " إجمالي الرصيد اليومي",
+    ),
     "welcome_title": MessageLookupByLibrary.simpleMessage(
       "مرحبًا بك في تطبيقنا المالي",
     ),

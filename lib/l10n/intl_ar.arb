@@ -14,8 +14,8 @@
     "all_activities": "جميع الأنشطة",
     "plus": "إضافة",
     "minus": "نقص",
-    "balance": "الرصيد",
-    "total_balance": "إجمالي الرصيد",
+    "my_balance": "رصيدي",
+    "today_total_balance": " إجمالي الرصيد اليومي",
     "activity": "النشاط",
     "see_all" : "عرض الكل"
 }

@@ -24,9 +24,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "activity": MessageLookupByLibrary.simpleMessage("Activity"),
     "all_activities": MessageLookupByLibrary.simpleMessage("All Activities"),
-    "balance": MessageLookupByLibrary.simpleMessage("Balance"),
     "dark_mode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
     "minus": MessageLookupByLibrary.simpleMessage("Minus"),
+    "my_balance": MessageLookupByLibrary.simpleMessage("My Balance"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
     "onBoarding_subTitle_1": MessageLookupByLibrary.simpleMessage(
       "Get a clear view of where your money goes every month",
@@ -51,7 +51,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
     "splash_screen_title": MessageLookupByLibrary.simpleMessage("Finance"),
     "start": MessageLookupByLibrary.simpleMessage("Get Started"),
-    "total_balance": MessageLookupByLibrary.simpleMessage("Total Balance"),
+    "today_total_balance": MessageLookupByLibrary.simpleMessage(
+      "Today Total Balance",
+    ),
     "welcome_title": MessageLookupByLibrary.simpleMessage("Welcome to Finance"),
   };
 }

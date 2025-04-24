@@ -175,16 +175,16 @@ class S {
     return Intl.message('Minus', name: 'minus', desc: '', args: []);
   }
 
-  /// `Balance`
-  String get balance {
-    return Intl.message('Balance', name: 'balance', desc: '', args: []);
+  /// `My Balance`
+  String get my_balance {
+    return Intl.message('My Balance', name: 'my_balance', desc: '', args: []);
   }
 
-  /// `Total Balance`
-  String get total_balance {
+  /// `Today Total Balance`
+  String get today_total_balance {
     return Intl.message(
-      'Total Balance',
-      name: 'total_balance',
+      'Today Total Balance',
+      name: 'today_total_balance',
       desc: '',
       args: [],
     );

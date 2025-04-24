@@ -14,8 +14,8 @@
     "all_activities": "All Activities",
     "plus": "Plus",
     "minus": "Minus",
-    "balance": "Balance",
-    "total_balance": "Total Balance",
+    "my_balance": "My Balance",
+    "today_total_balance": "Today Total Balance",
     "activity": "Activity",
     "see_all": "See All"
 
