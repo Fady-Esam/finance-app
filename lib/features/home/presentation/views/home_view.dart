@@ -1,6 +1,8 @@
 import 'package:finance_flutter_app/cubits/change_language_cubit/change_language_cubit.dart';
 import 'package:finance_flutter_app/cubits/change_theme_cubit/change_theme_cubit.dart';
+import 'package:finance_flutter_app/features/home/data/enums/transaction_type_enum.dart';
 import 'package:finance_flutter_app/features/home/data/models/finance_item_model.dart';
+import 'package:finance_flutter_app/features/home/presentation/views/manage_transaction_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -135,15 +137,39 @@ class _HomeViewState extends State<HomeView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  TransactionButton(
-                    title: S.of(context).plus,
-                    icon: const Icon(Icons.add),
-                    color: Colors.green,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        ManageTransactionView.routeName,
+                        arguments: {
+                          'transactionTypeEnum': TransactionTypeEnum.plus,
+                          'financeItemModel': null,
+                        },
+                      );
+                    },
+                    child: TransactionButton(
+                      title: S.of(context).plus,
+                      icon: const Icon(Icons.add),
+                      color: Colors.green,
+                    ),
                   ),
-                  TransactionButton(
-                    title: S.of(context).minus,
-                    icon: const Icon(Icons.remove),
-                    color: Colors.blue,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        ManageTransactionView.routeName,
+                        arguments: {
+                          'transactionTypeEnum': TransactionTypeEnum.minus,
+                          'financeItemModel': null,
+                        },
+                      );
+                    },
+                    child: TransactionButton(
+                      title: S.of(context).minus,
+                      icon: const Icon(Icons.remove),
+                      color: Colors.blue,
+                    ),
                   ),
                 ],
               ),
@@ -153,7 +179,10 @@ class _HomeViewState extends State<HomeView> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(S.of(context).activity, style: TextStyle(fontSize: 22)),
+                    Text(
+                      S.of(context).activity,
+                      style: TextStyle(fontSize: 22),
+                    ),
                     GestureDetector(
                       onTap: () {
                         // Handle tap

@@ -23,9 +23,9 @@ void main() async {
       deviceLang == "ar" || deviceLang == "en" ? deviceLang : "en";
   final savedLanguage = prefs.getString("language") ?? defaultLangCode;
   final savedTheme = prefs.getString("theme") ?? "system";
-  await Hive.initFlutter();
-  Hive.registerAdapter(FinanceItemModelAdapter());
-  await Hive.openBox<FinanceItemModel>('finance');
+  // await Hive.initFlutter();
+  // Hive.registerAdapter(FinanceItemModelAdapter());
+  // await Hive.openBox<FinanceItemModel>('finance');
   runApp(
     //MyApp(),
     MyApp(savedLanguage: savedLanguage, savedTheme: savedTheme),

@@ -170,9 +170,34 @@ class S {
     return Intl.message('Plus', name: 'plus', desc: '', args: []);
   }
 
+  /// `Edit`
+  String get edit {
+    return Intl.message('Edit', name: 'edit', desc: '', args: []);
+  }
+
   /// `Minus`
   String get minus {
     return Intl.message('Minus', name: 'minus', desc: '', args: []);
+  }
+
+  /// `Details here....`
+  String get details {
+    return Intl.message(
+      'Details here....',
+      name: 'details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Done`
+  String get done {
+    return Intl.message('Done', name: 'done', desc: '', args: []);
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
   }
 
   /// `My Balance`
