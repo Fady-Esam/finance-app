@@ -14,7 +14,11 @@ class FinanceItem extends StatelessWidget {
         backgroundColor:
             financeItemModel.amount > 0 ? Colors.green : Colors.blue,
       ),
-      title: Text(financeItemModel.title),
+      title: Text(
+        financeItemModel.title,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+      ),
       subtitle: Text(
         DateFormat('yyyy/MM/dd hh:mm a').format(financeItemModel.dateTime),
       ),

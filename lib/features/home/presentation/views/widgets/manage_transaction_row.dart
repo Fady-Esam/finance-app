@@ -32,18 +32,14 @@ class ManageTransactionRow extends StatelessWidget {
             onPressed: () async {
               String text = amountController.text.trim();
               // Validation Step
-              if (text.isEmpty || double.tryParse(text) == 0.0) {
+              if (text.isEmpty ||
+                  double.tryParse(text) == 0.0 ||
+                  !RegExp(r'[0-9.<]').hasMatch(text)) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      S.of(context).pleaseEnterValidAmount,
-                    ),
-                    //backgroundColor: Colors.red,
-                  ),
+                  SnackBar(content: Text(S.of(context).pleaseEnterValidAmount)),
                 );
-                return; 
+                return;
               }
-
               double amount = double.tryParse(amountController.text) ?? 0.0;
               if (transactionTypeEnum == TransactionTypeEnum.minus ||
                   transactionTypeEnum == TransactionTypeEnum.editMinus) {
@@ -60,6 +56,7 @@ class ManageTransactionRow extends StatelessWidget {
               await BlocProvider.of<ManageFinanceCubit>(context).addFinance(
                 FinanceItemModel(
                   title: titleController.text,
+                  //! Here
                   dateTime: DateTime.now(),
                   amount: amount,
                 ),

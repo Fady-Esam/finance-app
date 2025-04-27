@@ -63,8 +63,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "today_total_balance": MessageLookupByLibrary.simpleMessage(
       " إجمالي الرصيد اليومي",
     ),
-    "welcome_title": MessageLookupByLibrary.simpleMessage(
-      "مرحبًا بك في تطبيقنا المالي",
-    ),
+    "welcome_title": MessageLookupByLibrary.simpleMessage("مرحبًا بك "),
   };
 }

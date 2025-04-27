@@ -52,6 +52,7 @@ void handleKeyTap(String digit) {
       TextPosition(offset: currentText.length),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return GridView.builder(

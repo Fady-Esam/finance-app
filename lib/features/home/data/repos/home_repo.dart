@@ -9,7 +9,7 @@ abstract class HomeRepo {
   Future<Either<Failure, void>> updateFinance(
   FinanceItemModel item,
   );
-  Future<Either<Failure, List<FinanceItemModel>>> getAllFinances();
+  Either<Failure, List<FinanceItemModel>> getAllFinances();
   Either<Failure, List<FinanceItemModel>> getFinancesByDay(DateTime dateTime);
   Either<Failure, double> getTodayTotalBalance();
   Either<Failure, double> getAllTotalBalance();

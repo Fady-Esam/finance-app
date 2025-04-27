@@ -15,7 +15,7 @@ class CustomManageTransactionButton extends StatelessWidget {
     return TextButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(
-        padding: const EdgeInsets.symmetric(vertical: 18),
+        padding: const EdgeInsets.symmetric(vertical: 8),
         backgroundColor: color, // Subtle background
         textStyle: const TextStyle(
           fontSize: 16,

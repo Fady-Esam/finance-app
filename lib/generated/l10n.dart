@@ -140,14 +140,9 @@ class S {
     );
   }
 
-  /// `Welcome to Finance`
+  /// `Welcome`
   String get welcome_title {
-    return Intl.message(
-      'Welcome to Finance',
-      name: 'welcome_title',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Welcome', name: 'welcome_title', desc: '', args: []);
   }
 
   /// `Dark Mode`

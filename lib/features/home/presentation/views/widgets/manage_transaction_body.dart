@@ -36,7 +36,9 @@ class ManageTransactionBody extends StatelessWidget {
             const SizedBox(height: 30),
             Directionality(
               textDirection: TextDirection.ltr,
-              child: CustomNumberKeyboard(amountController: amountController)),
+              child: CustomNumberKeyboard(amountController: amountController),
+            ),
+            const SizedBox(height: 15),
             ManageTransactionRow(
               transactionTypeEnum: transactionTypeEnum,
               amountController: amountController,

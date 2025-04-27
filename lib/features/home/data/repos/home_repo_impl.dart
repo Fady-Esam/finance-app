@@ -27,7 +27,7 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Either<Failure, List<FinanceItemModel>>> getAllFinances() async {
+  Either<Failure, List<FinanceItemModel>> getAllFinances()  {
     try {
       var box = Hive.box<FinanceItemModel>('finance');
       return right(box.values.toList());
@@ -64,13 +64,11 @@ class HomeRepoImpl implements HomeRepo {
   Either<Failure, List<FinanceItemModel>> getFinancesByDay(DateTime dateTime) {
     try {
       var box = Hive.box<FinanceItemModel>('finance');
-      List<FinanceItemModel> finances =
-          box.values.where((item) {
+      return right(box.values.where((item) {
             return item.dateTime.year == dateTime.year &&
                 item.dateTime.month == dateTime.month &&
                 item.dateTime.day == dateTime.day;
-          }).toList();
-      return right(finances);
+          }).toList());
     } catch (e) {
       return left(Failure(technicalMessage: e.toString()));
     }

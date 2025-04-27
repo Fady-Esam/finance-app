@@ -25,14 +25,15 @@ class _HomeBodyState extends State<HomeBody> {
   List<FinanceItemModel> financeItems = [];
   double allTotalBalance = 0.0;
   double todayTotalBalance = 0.0;
-  Future<void> getFinances() async {
-    await BlocProvider.of<ManageFinanceCubit>(context).getAllFinances();
-  }
 
   @override
   void initState() {
     super.initState();
-    getFinances();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        BlocProvider.of<ManageFinanceCubit>(context).getAllFinances();
+      });
+    });
   }
 
   String formatAmount(double value) {
@@ -179,6 +180,7 @@ class _HomeBodyState extends State<HomeBody> {
                 log(state.failureMessage.toString());
               } else if (state is GetAllFinanceSuccessState) {
                 financeItems = state.financeItems;
+                setState(() {});
               } else if (state is DeleteFinanceFailureState) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(S.of(context).somethingWentWrong)),

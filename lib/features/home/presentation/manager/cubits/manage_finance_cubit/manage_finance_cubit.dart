@@ -14,9 +14,9 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
     var res = await homeRepo.addFinance(item);
     res.fold(
       (l) => emit(AddFinanceFailureState(failureMessage: l.technicalMessage)),
-      (r) async{
+      (r) async {
         emit(AddFinanceSuccessState());
-        await getAllFinances();
+        getAllFinances();
       },
     );
   }
@@ -25,10 +25,12 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
     emit(DeleteFinanceLoadingState());
     var res = await homeRepo.deleteFinance(item);
     res.fold(
-      (l) => emit(DeleteFinanceFailureState(failureMessage: l.technicalMessage)),
+      (l) =>
+          emit(DeleteFinanceFailureState(failureMessage: l.technicalMessage)),
       (r) async {
         emit(DeleteFinanceSuccessState());
-        await getAllFinances();
+        getFinancesByDay(item.dateTime);
+        getAllFinances();
       },
     );
   }
@@ -37,7 +39,8 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
     emit(UpdateFinanceLoadingState());
     var res = await homeRepo.updateFinance(item);
     res.fold(
-      (l) => emit(UpdateFinanceFailureState(failureMessage: l.technicalMessage)),
+      (l) =>
+          emit(UpdateFinanceFailureState(failureMessage: l.technicalMessage)),
       (r) {
         emit(UpdateFinanceSuccessState());
         getAllTotalBalance();
@@ -46,11 +49,12 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
     );
   }
 
-  Future<void> getAllFinances() async {
+  void getAllFinances()  {
     emit(GetAllFinanceLoadingState());
-    var res = await homeRepo.getAllFinances();
+    var res =  homeRepo.getAllFinances();
     res.fold(
-      (l) => emit(GetAllFinanceFailureState(failureMessage: l.technicalMessage)),
+      (l) =>
+          emit(GetAllFinanceFailureState(failureMessage: l.technicalMessage)),
       (r) {
         emit(GetAllFinanceSuccessState(financeItems: r));
         getAllTotalBalance();
@@ -58,27 +62,36 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
       },
     );
   }
+
   void getFinancesByDay(DateTime dateTime) async {
     emit(GetFinancesByDayLoadingState());
-    var res =  homeRepo.getFinancesByDay(dateTime);
+    var res = homeRepo.getFinancesByDay(dateTime);
     res.fold(
-      (l) => emit(GetFinancesByDayFailureState(failureMessage: l.technicalMessage)),
+      (l) => emit(
+        GetFinancesByDayFailureState(failureMessage: l.technicalMessage),
+      ),
       (r) => emit(GetFinancesByDaySuccessState(financeItems: r)),
     );
   }
-  void getAllTotalBalance()  {
+
+  void getAllTotalBalance() {
     emit(GetAllTotalBalanceLoadingState());
-    var res =  homeRepo.getAllTotalBalance();
+    var res = homeRepo.getAllTotalBalance();
     res.fold(
-      (l) => emit(GetAllTotalBalanceFailureState(failureMessage: l.technicalMessage)),
+      (l) => emit(
+        GetAllTotalBalanceFailureState(failureMessage: l.technicalMessage),
+      ),
       (r) => emit(GetAllTotalBalanceSuccessState(totalBalance: r)),
     );
   }
-  void getTodayTotalBalance()  {
+
+  void getTodayTotalBalance() {
     emit(GetTodayTotalBalanceLoadingState());
-    var res =  homeRepo.getTodayTotalBalance();
+    var res = homeRepo.getTodayTotalBalance();
     res.fold(
-      (l) => emit(GetTodayTotalBalanceFailureState(failureMessage: l.technicalMessage)),
+      (l) => emit(
+        GetTodayTotalBalanceFailureState(failureMessage: l.technicalMessage),
+      ),
       (r) => emit(GetTodayTotalBalanceSuccessState(totalBalance: r)),
     );
   }

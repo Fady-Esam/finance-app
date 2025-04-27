@@ -84,9 +84,9 @@ class _AllActivitiesViewState extends State<AllActivitiesView> {
                   );
                   log(state.failureMessage.toString());
                 } else if (state is DeleteFinanceSuccessState) {
-                  BlocProvider.of<ManageFinanceCubit>(
-                    context,
-                  ).getFinancesByDay(_selectedDay);
+                  // BlocProvider.of<ManageFinanceCubit>(
+                  //   context,
+                  // ).getFinancesByDay(_selectedDay);
                 }
               },
               builder: (context, state) {

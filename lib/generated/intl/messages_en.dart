@@ -67,6 +67,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "today_total_balance": MessageLookupByLibrary.simpleMessage(
       "Today Total Balance",
     ),
-    "welcome_title": MessageLookupByLibrary.simpleMessage("Welcome to Finance"),
+    "welcome_title": MessageLookupByLibrary.simpleMessage("Welcome"),
   };
 }

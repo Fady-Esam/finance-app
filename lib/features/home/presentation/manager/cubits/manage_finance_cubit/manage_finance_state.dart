@@ -53,6 +53,7 @@ class GetAllFinanceSuccessState extends ManageFinanceState {
   GetAllFinanceSuccessState({required this.financeItems});
 }
 
+
 //! Get By Day
 
 class GetFinancesByDayLoadingState extends ManageFinanceState {}
