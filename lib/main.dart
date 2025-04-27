@@ -90,8 +90,6 @@ class MyApp extends StatelessWidget {
                     mode == ThemeMode.dark ? ThemeMode.dark : ThemeMode.light,
                 theme: setThemeData(Brightness.light),
                 darkTheme: setThemeData(Brightness.dark),
-                // onGenerateRoute: onGenerateRoute,
-                // initialRoute: ChooseUserTypeView.routeName,
                 onGenerateRoute: onGenerateRoute,
                 initialRoute: SplashView.routeName,
               );

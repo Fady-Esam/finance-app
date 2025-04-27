@@ -7,7 +7,7 @@ import 'widgets/home_drawer.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
-  static const routeName = 'home';
+  static const routeName = 'home-view';
   @override
   State<HomeView> createState() => _HomeViewState();
 }

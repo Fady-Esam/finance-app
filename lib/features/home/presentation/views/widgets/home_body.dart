@@ -37,13 +37,13 @@ class _HomeBodyState extends State<HomeBody> {
 
   String formatAmount(double value) {
     double absValue = value.abs();
-
     String format(double val, String suffix) {
-      String formattedValue = val.toStringAsFixed(2);
+      String formattedValue =
+          val == 0 ? '0.0' : val.toStringAsFixed(val == val.toInt() ? 1 : 2);
       if (formattedValue.endsWith('.00')) {
         formattedValue = formattedValue.substring(0, formattedValue.length - 3);
       }
-      log((formattedValue + suffix).toString());
+      //log((formattedValue + suffix).toString());
       return formattedValue + suffix;
     }
 

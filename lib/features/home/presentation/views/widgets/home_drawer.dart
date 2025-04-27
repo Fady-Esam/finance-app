@@ -21,7 +21,6 @@ class HomeDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          // DrawerHeader(child: Image.asset(AppImages.financeDrawerImage)),
           DrawerHeader(
             child: Container(
               decoration: BoxDecoration(

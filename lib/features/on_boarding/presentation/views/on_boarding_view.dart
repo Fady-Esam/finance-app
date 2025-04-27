@@ -1,6 +1,7 @@
 
 
 
+import 'package:finance_flutter_app/features/home/presentation/views/home_view.dart';
 import 'package:finance_flutter_app/features/on_boarding/presentation/views/widgets/on_boarding_view_body.dart';
 import 'package:finance_flutter_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoardingView extends StatelessWidget {
   const OnBoardingView({super.key});
-  static const routeName = "onBoarding";
+  static const routeName = "onboarding-view";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +21,7 @@ class OnBoardingView extends StatelessWidget {
             onPressed: () async {
               final prefs = await SharedPreferences.getInstance();
               await prefs.setBool('onboarding_seen', true);
-              Navigator.pushNamed(context, 'home');
+              Navigator.pushNamed(context, HomeView.routeName);
             },
             child: Text(S.of(context).skip),
           ),

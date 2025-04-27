@@ -17,7 +17,7 @@ class ManageTransactionView extends StatefulWidget {
   });
   final TransactionTypeEnum transactionTypeEnum;
   final FinanceItemModel? financeItemModel;
-  static const routeName = 'manageTransaction';
+  static const routeName = 'manage-transaction-view';
   @override
   State<ManageTransactionView> createState() => _ManageTransactionViewState();
 }

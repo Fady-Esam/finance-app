@@ -24,7 +24,6 @@ class _AllActivitiesViewState extends State<AllActivitiesView> {
   List<FinanceItemModel> financeItems = [];
   void getFinancesByDay(DateTime day) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // Make sure any setState() or state-modifying code here is called after the build.
       setState(() {
         BlocProvider.of<ManageFinanceCubit>(
           context,
