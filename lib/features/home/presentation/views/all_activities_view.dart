@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:finance_flutter_app/features/home/presentation/manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
 import 'package:finance_flutter_app/features/home/presentation/manager/cubits/manage_finance_cubit/manage_finance_state.dart';
 import 'package:finance_flutter_app/features/home/presentation/views/widgets/finance_list_view_builder.dart';
@@ -13,6 +12,7 @@ import '../../data/models/finance_item_model.dart';
 class AllActivitiesView extends StatefulWidget {
   const AllActivitiesView({super.key});
   static const String routeName = 'all-activities-view';
+
   @override
   State<AllActivitiesView> createState() => _AllActivitiesViewState();
 }
@@ -36,58 +36,66 @@ class _AllActivitiesViewState extends State<AllActivitiesView> {
     getFinancesByDay(_selectedDay);
   }
 
+  Future<void> _onRefresh() async {
+    BlocProvider.of<ManageFinanceCubit>(context).getFinancesByDay(_selectedDay);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(S.of(context).all_activities)),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            TableCalendar(
-              firstDay: DateTime.utc(2000, 1, 1),
-              lastDay: DateTime.utc(2100, 12, 31),
-              focusedDay: _focusedDay,
-              calendarFormat: _calendarFormat,
-              selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-              onDaySelected: (selectedDay, focusedDay) {
-                setState(() {
-                  _selectedDay = selectedDay;
+      body: RefreshIndicator(
+        onRefresh: _onRefresh,
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Column(
+            children: [
+              TableCalendar(
+                firstDay: DateTime.utc(2000, 1, 1),
+                lastDay: DateTime.utc(2100, 12, 31),
+                focusedDay: _focusedDay,
+                calendarFormat: _calendarFormat,
+                selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+                onDaySelected: (selectedDay, focusedDay) {
+                  setState(() {
+                    _selectedDay = selectedDay;
+                    _focusedDay = focusedDay;
+                  });
+                  BlocProvider.of<ManageFinanceCubit>(
+                    context,
+                  ).getFinancesByDay(_selectedDay);
+                },
+                onFormatChanged: (format) {
+                  setState(() {
+                    _calendarFormat = format;
+                  });
+                },
+                onPageChanged: (focusedDay) {
                   _focusedDay = focusedDay;
-                });
-                BlocProvider.of<ManageFinanceCubit>(
-                  context,
-                ).getFinancesByDay(_selectedDay);
-              },
-              onFormatChanged: (format) {
-                setState(() {
-                  _calendarFormat = format;
-                });
-              },
-              onPageChanged: (focusedDay) {
-                _focusedDay = focusedDay;
-              },
-            ),
-            BlocConsumer<ManageFinanceCubit, ManageFinanceState>(
-              listener: (context, state) {
-                if (state is GetFinancesByDayFailureState) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(S.of(context).somethingWentWrong)),
-                  );
-                  log(state.failureMessage.toString());
-                } else if (state is GetFinancesByDaySuccessState) {
-                  financeItems = state.financeItems;
-                } else if (state is DeleteFinanceFailureState) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(S.of(context).somethingWentWrong)),
-                  );
-                  log(state.failureMessage.toString());
-                } else if (state is DeleteFinanceSuccessState) {}
-              },
-              builder: (context, state) {
-                return FinanceListViewBuilder(financeItems: financeItems);
-              },
-            ),
-          ],
+                },
+              ),
+              BlocConsumer<ManageFinanceCubit, ManageFinanceState>(
+                listener: (context, state) {
+                  if (state is GetFinancesByDayFailureState) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(S.of(context).somethingWentWrong)),
+                    );
+                    log(state.failureMessage.toString());
+                  } else if (state is GetFinancesByDaySuccessState) {
+                    financeItems = state.financeItems;
+                  } else if (state is DeleteFinanceFailureState) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(S.of(context).somethingWentWrong)),
+                    );
+                    log(state.failureMessage.toString());
+                  } else if (state is DeleteFinanceSuccessState) {}
+                },
+                builder: (context, state) {
+                  return FinanceListViewBuilder(financeItems: financeItems);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
