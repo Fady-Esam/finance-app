@@ -1,13 +1,13 @@
 import 'package:hive/hive.dart';
 part 'finance_item_model.g.dart';
 @HiveType(typeId: 0)
-class FinanceItemModel {
+class FinanceItemModel extends HiveObject {
   @HiveField(0)
-  final String title;
+  String title;
   @HiveField(1)
-  final DateTime dateTime;
+  DateTime dateTime;
   @HiveField(2)
-  final double amount;
+  double amount;
 
   FinanceItemModel({
     required this.title,

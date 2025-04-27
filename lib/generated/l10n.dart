@@ -175,6 +175,11 @@ class S {
     return Intl.message('Edit', name: 'edit', desc: '', args: []);
   }
 
+  /// `Delete`
+  String get delete {
+    return Intl.message('Delete', name: 'delete', desc: '', args: []);
+  }
+
   /// `Minus`
   String get minus {
     return Intl.message('Minus', name: 'minus', desc: '', args: []);
@@ -223,6 +228,41 @@ class S {
   /// `See All`
   String get see_all {
     return Intl.message('See All', name: 'see_all', desc: '', args: []);
+  }
+
+  /// `Something went wrong, Please try again`
+  String get somethingWentWrong {
+    return Intl.message(
+      'Something went wrong, Please try again',
+      name: 'somethingWentWrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid amount greater than 0`
+  String get pleaseEnterValidAmount {
+    return Intl.message(
+      'Please enter a valid amount greater than 0',
+      name: 'pleaseEnterValidAmount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Close Drawer`
+  String get closeDrawer {
+    return Intl.message(
+      'Close Drawer',
+      name: 'closeDrawer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Exit App`
+  String get closeApp {
+    return Intl.message('Exit App', name: 'closeApp', desc: '', args: []);
   }
 }
 

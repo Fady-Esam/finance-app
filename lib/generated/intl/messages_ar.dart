@@ -25,8 +25,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "activity": MessageLookupByLibrary.simpleMessage("النشاط"),
     "all_activities": MessageLookupByLibrary.simpleMessage("جميع الأنشطة"),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "closeApp": MessageLookupByLibrary.simpleMessage("إغلاق التطبيق"),
+    "closeDrawer": MessageLookupByLibrary.simpleMessage("إغلاق السحب"),
     "dark_mode": MessageLookupByLibrary.simpleMessage("الوضع المظلم"),
-    "details": MessageLookupByLibrary.simpleMessage("...تفاصيل هنا"),
+    "delete": MessageLookupByLibrary.simpleMessage("حذف"),
+    "details": MessageLookupByLibrary.simpleMessage("التفاصيل هنا..."),
     "done": MessageLookupByLibrary.simpleMessage("تم"),
     "edit": MessageLookupByLibrary.simpleMessage("تعديل"),
     "minus": MessageLookupByLibrary.simpleMessage("نقص"),
@@ -46,9 +49,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "أنشئ ميزانيات بسهولة",
     ),
     "onBoarding_title_3": MessageLookupByLibrary.simpleMessage("حقق أهدافك"),
+    "pleaseEnterValidAmount": MessageLookupByLibrary.simpleMessage(
+      "من فضلك أدخل قيمة صحيحة أكبر من صفر",
+    ),
     "plus": MessageLookupByLibrary.simpleMessage("إضافة"),
     "see_all": MessageLookupByLibrary.simpleMessage("عرض الكل"),
     "skip": MessageLookupByLibrary.simpleMessage("تخطى"),
+    "somethingWentWrong": MessageLookupByLibrary.simpleMessage(
+      "حدث خطأ ما، يرجى المحاولة مرة أخرى",
+    ),
     "splash_screen_title": MessageLookupByLibrary.simpleMessage("الماليات"),
     "start": MessageLookupByLibrary.simpleMessage("ابدأ"),
     "today_total_balance": MessageLookupByLibrary.simpleMessage(

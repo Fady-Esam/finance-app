@@ -14,6 +14,7 @@
     "all_activities": "All Activities",
     "plus": "Plus",
     "edit": "Edit",
+    "delete": "Delete",
     "minus": "Minus",
     "details": "Details here....",
     "done" : "Done",
@@ -21,6 +22,11 @@
     "my_balance": "My Balance",
     "today_total_balance": "Today Total Balance",
     "activity": "Activity",
-    "see_all": "See All"
+    "see_all": "See All",
+    "somethingWentWrong" : "Something went wrong, Please try again",
+    "pleaseEnterValidAmount": "Please enter a valid amount greater than 0",
+    "closeDrawer": "Close Drawer",
+    "closeApp": "Exit App"
+
 
 }

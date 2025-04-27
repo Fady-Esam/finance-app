@@ -1,5 +1,6 @@
 enum TransactionTypeEnum {
   plus,
   minus,
-  edit
+  editPlus,
+  editMinus,
 }

@@ -15,11 +15,16 @@
     "plus": "إضافة",
     "minus": "نقص",
     "edit": "تعديل",
-    "details": "...تفاصيل هنا",
+    "delete": "حذف",
+    "details":"التفاصيل هنا...",
     "done" : "تم",
     "cancel" : "إلغاء",
     "my_balance": "رصيدي",
     "today_total_balance": " إجمالي الرصيد اليومي",
     "activity": "النشاط",
-    "see_all" : "عرض الكل"
+    "see_all" : "عرض الكل",
+    "somethingWentWrong" : "حدث خطأ ما، يرجى المحاولة مرة أخرى",
+    "pleaseEnterValidAmount": "من فضلك أدخل قيمة صحيحة أكبر من صفر",
+    "closeDrawer": "إغلاق السحب",
+    "closeApp": "إغلاق التطبيق"
 }

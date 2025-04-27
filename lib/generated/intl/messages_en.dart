@@ -25,7 +25,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "activity": MessageLookupByLibrary.simpleMessage("Activity"),
     "all_activities": MessageLookupByLibrary.simpleMessage("All Activities"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "closeApp": MessageLookupByLibrary.simpleMessage("Exit App"),
+    "closeDrawer": MessageLookupByLibrary.simpleMessage("Close Drawer"),
     "dark_mode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
+    "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "details": MessageLookupByLibrary.simpleMessage("Details here...."),
     "done": MessageLookupByLibrary.simpleMessage("Done"),
     "edit": MessageLookupByLibrary.simpleMessage("Edit"),
@@ -50,9 +53,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "onBoarding_title_3": MessageLookupByLibrary.simpleMessage(
       "Achieve Your Goals",
     ),
+    "pleaseEnterValidAmount": MessageLookupByLibrary.simpleMessage(
+      "Please enter a valid amount greater than 0",
+    ),
     "plus": MessageLookupByLibrary.simpleMessage("Plus"),
     "see_all": MessageLookupByLibrary.simpleMessage("See All"),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+    "somethingWentWrong": MessageLookupByLibrary.simpleMessage(
+      "Something went wrong, Please try again",
+    ),
     "splash_screen_title": MessageLookupByLibrary.simpleMessage("Finance"),
     "start": MessageLookupByLibrary.simpleMessage("Get Started"),
     "today_total_balance": MessageLookupByLibrary.simpleMessage(
