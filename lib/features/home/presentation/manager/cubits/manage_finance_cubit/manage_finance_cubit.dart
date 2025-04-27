@@ -16,7 +16,8 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
       (l) => emit(AddFinanceFailureState(failureMessage: l.technicalMessage)),
       (r) async {
         emit(AddFinanceSuccessState());
-        getAllFinances();
+        getFinancesByDay(item.dateTime); //! Now
+        //getAllFinances();
       },
     );
   }
@@ -27,10 +28,9 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
     res.fold(
       (l) =>
           emit(DeleteFinanceFailureState(failureMessage: l.technicalMessage)),
-      (r) async {
+      (r) {
         emit(DeleteFinanceSuccessState());
         getFinancesByDay(item.dateTime);
-        getAllFinances();
       },
     );
   }
@@ -49,20 +49,22 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
     );
   }
 
-  void getAllFinances()  {
-    emit(GetAllFinanceLoadingState());
-    var res =  homeRepo.getAllFinances();
-    res.fold(
-      (l) =>
-          emit(GetAllFinanceFailureState(failureMessage: l.technicalMessage)),
-      (r) {
-        emit(GetAllFinanceSuccessState(financeItems: r));
-        getAllTotalBalance();
-        getTodayTotalBalance();
-      },
-    );
+  // void getAllFinances()  {
+  //   emit(GetAllFinanceLoadingState());
+  //   var res =  homeRepo.getAllFinances();
+  //   res.fold(
+  //     (l) =>
+  //         emit(GetAllFinanceFailureState(failureMessage: l.technicalMessage)),
+  //     (r) {
+  //       emit(GetAllFinanceSuccessState(financeItems: r));
+  //       getAllTotalBalance();
+  //       getTodayTotalBalance();
+  //     },
+  //   );
+  // }
+bool isSameDate(DateTime d1, DateTime d2) {
+    return d1.year == d2.year && d1.month == d2.month && d1.day == d2.day;
   }
-
   void getFinancesByDay(DateTime dateTime) async {
     emit(GetFinancesByDayLoadingState());
     var res = homeRepo.getFinancesByDay(dateTime);
@@ -70,7 +72,16 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
       (l) => emit(
         GetFinancesByDayFailureState(failureMessage: l.technicalMessage),
       ),
-      (r) => emit(GetFinancesByDaySuccessState(financeItems: r)),
+      (r) {
+        if (isSameDate(dateTime, DateTime.now())) {
+          emit(GetTodayFinanceSuccessState(financeItems: r));
+          emit(GetFinancesByDaySuccessState(financeItems: r));
+        } else {
+          emit(GetFinancesByDaySuccessState(financeItems: r));
+        }
+        getAllTotalBalance();
+        getTodayTotalBalance();
+      },
     );
   }
 

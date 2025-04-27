@@ -1,10 +1,8 @@
 import 'dart:developer';
-
 import 'package:finance_flutter_app/features/home/data/models/finance_item_model.dart';
 import 'package:finance_flutter_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../data/enums/transaction_type_enum.dart';
 import '../../manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
 import '../../manager/cubits/manage_finance_cubit/manage_finance_state.dart';
@@ -31,7 +29,9 @@ class _HomeBodyState extends State<HomeBody> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
-        BlocProvider.of<ManageFinanceCubit>(context).getAllFinances();
+        BlocProvider.of<ManageFinanceCubit>(
+          context,
+        ).getFinancesByDay(DateTime.now());
       });
     });
   }
@@ -172,15 +172,14 @@ class _HomeBodyState extends State<HomeBody> {
             ),
           ),
           BlocConsumer<ManageFinanceCubit, ManageFinanceState>(
-            listener: (context, state) async {
-              if (state is GetAllFinanceFailureState) {
+            listener: (context, state) {
+              if (state is GetFinancesByDayFailureState) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(S.of(context).somethingWentWrong)),
                 );
                 log(state.failureMessage.toString());
-              } else if (state is GetAllFinanceSuccessState) {
+              } else if (state is GetTodayFinanceSuccessState) {
                 financeItems = state.financeItems;
-                setState(() {});
               } else if (state is DeleteFinanceFailureState) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(S.of(context).somethingWentWrong)),

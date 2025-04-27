@@ -25,9 +25,7 @@ class _AllActivitiesViewState extends State<AllActivitiesView> {
   void getFinancesByDay(DateTime day) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
-        BlocProvider.of<ManageFinanceCubit>(
-          context,
-        ).getFinancesByDay(day);
+        BlocProvider.of<ManageFinanceCubit>(context).getFinancesByDay(day);
       });
     });
   }
@@ -70,7 +68,7 @@ class _AllActivitiesViewState extends State<AllActivitiesView> {
               },
             ),
             BlocConsumer<ManageFinanceCubit, ManageFinanceState>(
-              listener: (context, state) async {
+              listener: (context, state) {
                 if (state is GetFinancesByDayFailureState) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text(S.of(context).somethingWentWrong)),
@@ -83,11 +81,7 @@ class _AllActivitiesViewState extends State<AllActivitiesView> {
                     SnackBar(content: Text(S.of(context).somethingWentWrong)),
                   );
                   log(state.failureMessage.toString());
-                } else if (state is DeleteFinanceSuccessState) {
-                  // BlocProvider.of<ManageFinanceCubit>(
-                  //   context,
-                  // ).getFinancesByDay(_selectedDay);
-                }
+                } else if (state is DeleteFinanceSuccessState) {}
               },
               builder: (context, state) {
                 return FinanceListViewBuilder(financeItems: financeItems);
