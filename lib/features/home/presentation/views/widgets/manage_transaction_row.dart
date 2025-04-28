@@ -50,6 +50,7 @@ class ManageTransactionRow extends StatelessWidget {
               if (financeItemModel != null) {
                 financeItemModel!.amount = amount;
                 financeItemModel!.title = titleController.text;
+                financeItemModel!.dateTime = dateTime;
                 await BlocProvider.of<ManageFinanceCubit>(
                   context,
                 ).updateFinance(financeItemModel!);
