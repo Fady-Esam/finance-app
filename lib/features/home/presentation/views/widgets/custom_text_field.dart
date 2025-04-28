@@ -63,14 +63,14 @@ class CustomTextField extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
-        ), 
+        ),
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         contentPadding: EdgeInsetsDirectional.only(
-          top: 24,
-          bottom: 24,
-          start: 24,
-          end: 16,
+          top: isAmount ? 8 : 16,
+          bottom: isAmount ? 8 : 16,
+          start: 16,
+          end: 8,
         ),
       ),
     );

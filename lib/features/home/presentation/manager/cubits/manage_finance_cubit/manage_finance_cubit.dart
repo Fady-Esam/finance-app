@@ -16,7 +16,7 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
       (l) => emit(AddFinanceFailureState(failureMessage: l.technicalMessage)),
       (r) async {
         emit(AddFinanceSuccessState());
-        getFinancesByDay(item.dateTime); //! Now
+        getFinancesByDay(item.dateTime);
         //getAllFinances();
       },
     );

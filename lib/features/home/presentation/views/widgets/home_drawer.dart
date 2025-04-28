@@ -40,7 +40,7 @@ class HomeDrawer extends StatelessWidget {
                 onThemeChanged();
               },
             ),
-            onTap: () => onThemeChanged(),
+            onTap: onThemeChanged,
           ),
           ListTile(
             title: Text(S.of(context).all_activities),
@@ -50,20 +50,20 @@ class HomeDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: Text(S.of(context).closeDrawer), // Fetch localized string
+            title: Text(S.of(context).closeDrawer),
             onTap: () {
-              Navigator.of(context).pop(); // Close the drawer
+              Navigator.of(context).pop();
             },
-            trailing: const Icon(Icons.close), // Add a close icon
+            trailing: const Icon(Icons.close),
           ),
-          // Close App ListTile
+
           ListTile(
-            title: Text(S.of(context).closeApp), // Fetch localized string
+            title: Text(S.of(context).closeApp),
             onTap: () {
-              Navigator.of(context).pop(); // Close the drawer first
-              SystemNavigator.pop(); // Then close the app
+              Navigator.of(context).pop();
+              SystemNavigator.pop();
             },
-            trailing: const Icon(Icons.exit_to_app), // Add an exit icon
+            trailing: const Icon(Icons.exit_to_app),
           ),
         ],
       ),

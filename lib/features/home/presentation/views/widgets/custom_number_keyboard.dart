@@ -22,7 +22,7 @@ class _CustomNumberKeyboardState extends State<CustomNumberKeyboard> {
     return '';
   }
 
-void handleKeyTap(String digit) {
+  void handleKeyTap(String digit) {
     String currentText = widget.amountController.text;
     if (digit == '<') {
       if (currentText.isNotEmpty) {
@@ -31,16 +31,16 @@ void handleKeyTap(String digit) {
     } else {
       if (digit == '.') {
         if (currentText.contains('.')) {
-          return; // Already has a dot, don't allow another one
+          return;
         }
         if (currentText.isEmpty) {
-          currentText = '0'; // Auto add '0' before dot if empty
+          currentText = '0';
         }
       } else {
         if (currentText.contains('.')) {
           int dotIndex = currentText.indexOf('.');
           if (currentText.length - dotIndex > 2) {
-            return; // Already has 2 digits after dot
+            return;
           }
         }
       }
@@ -62,7 +62,7 @@ void handleKeyTap(String digit) {
         crossAxisCount: 3,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
-        childAspectRatio: 1.3,
+        childAspectRatio: 1.6,
       ),
       itemCount: 12,
       itemBuilder: (context, index) {

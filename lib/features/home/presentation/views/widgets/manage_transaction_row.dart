@@ -12,13 +12,15 @@ class ManageTransactionRow extends StatelessWidget {
     required this.transactionTypeEnum,
     required this.amountController,
     required this.titleController,
-    this.financeItemModel,
+    this.financeItemModel, 
+    required this.dateTime,
   });
 
   final TransactionTypeEnum transactionTypeEnum;
   final TextEditingController amountController;
   final TextEditingController titleController;
   final FinanceItemModel? financeItemModel;
+  final DateTime dateTime;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +59,7 @@ class ManageTransactionRow extends StatelessWidget {
                 FinanceItemModel(
                   title: titleController.text,
                   //! Here
-                  dateTime: DateTime.now(),
+                  dateTime: dateTime,
                   amount: amount,
                 ),
               );
