@@ -4,7 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'change_theme_state.dart';
 
 class ChangeThemeCubit extends Cubit<ChangeThemeState> {
-  ChangeThemeCubit() : super(ChangeThemeInitial());
+  ChangeThemeCubit({required ThemeMode initialTheme})
+    : super(ChangeThemeDone(theme: initialTheme));
   Future<void> changeTheme(ThemeMode newTheme) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString("theme", newTheme.toString().split('.').last);

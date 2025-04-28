@@ -7,8 +7,8 @@ import '../../features/home/presentation/views/home_view.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
-    case SplashView.routeName:
-      return MaterialPageRoute(builder: (context) => const SplashView());
+    // case SplashView.routeName:
+    //   return MaterialPageRoute(builder: (context) => const SplashView());
     case OnBoardingView.routeName:
       return MaterialPageRoute(builder: (context) => const OnBoardingView());
     case HomeView.routeName:
@@ -25,6 +25,6 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case AllActivitiesView.routeName:
       return MaterialPageRoute(builder: (context) => const AllActivitiesView());
     default:
-      return MaterialPageRoute(builder: (context) => const Scaffold());
+      return MaterialPageRoute(builder: (context) => const SplashView());
   }
 }

@@ -6,7 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'change_language_state.dart';
 
 class ChangeLanguageCubit extends Cubit<ChangeLanguageState> {
-  ChangeLanguageCubit() : super(ChangeLanguageInitial());
+  ChangeLanguageCubit({required Locale initialLocale})
+    : super(ChangeLanguageDone(language: initialLocale));
   Future<void> changeLanguage(String newLanguageCode) async {
     final newLocale = Locale(newLanguageCode);
     final prefs = await SharedPreferences.getInstance();

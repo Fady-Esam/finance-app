@@ -28,11 +28,9 @@ class _HomeBodyState extends State<HomeBody> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      setState(() {
         BlocProvider.of<ManageFinanceCubit>(
           context,
         ).getFinancesByDay(DateTime.now());
-      });
     });
   }
 

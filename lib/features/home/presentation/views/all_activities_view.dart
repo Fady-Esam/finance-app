@@ -20,13 +20,11 @@ class AllActivitiesView extends StatefulWidget {
 class _AllActivitiesViewState extends State<AllActivitiesView> {
   DateTime _focusedDay = DateTime.now();
   DateTime _selectedDay = DateTime.now();
-  CalendarFormat _calendarFormat = CalendarFormat.month;
+  CalendarFormat _calendarFormat = CalendarFormat.week;
   List<FinanceItemModel> financeItems = [];
   void getFinancesByDay(DateTime day) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      setState(() {
-        BlocProvider.of<ManageFinanceCubit>(context).getFinancesByDay(day);
-      });
+      BlocProvider.of<ManageFinanceCubit>(context).getFinancesByDay(day);
     });
   }
 
@@ -73,6 +71,7 @@ class _AllActivitiesViewState extends State<AllActivitiesView> {
                 onPageChanged: (focusedDay) {
                   _focusedDay = focusedDay;
                 },
+                daysOfWeekHeight: 30,
               ),
               BlocConsumer<ManageFinanceCubit, ManageFinanceState>(
                 listener: (context, state) {

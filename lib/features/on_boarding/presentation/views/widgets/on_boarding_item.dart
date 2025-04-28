@@ -21,10 +21,7 @@ class OnBoardingItem extends StatelessWidget {
         SizedBox(height: 10),
         Text(
           onBoardingModel.subTitle,
-          style: TextStyle(
-            fontSize: 16,
-            color: const Color.fromARGB(255, 109, 108, 108),
-          ),
+          style: TextStyle(fontSize: 16),
           textAlign: TextAlign.center,
         ),
       ],

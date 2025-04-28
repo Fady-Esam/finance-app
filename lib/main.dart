@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:finance_flutter_app/core/helper/on_generate_routes.dart';
 import 'package:finance_flutter_app/features/home/data/repos/home_repo_impl.dart';
 import 'package:finance_flutter_app/features/home/presentation/manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
-import 'package:finance_flutter_app/features/splash/presentation/views/splash_view.dart';
 import 'package:finance_flutter_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,9 +25,9 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
   String deviceLang = PlatformDispatcher.instance.locale.languageCode;
   String defaultLangCode =
-      deviceLang == "ar" || deviceLang == "en" ? deviceLang : "en";
+      deviceLang == "ar" || deviceLang == "en" ? deviceLang : "en"; 
   final savedLanguage = prefs.getString("language") ?? defaultLangCode;
-  final savedTheme = prefs.getString("theme") ?? "system";
+  final savedTheme = prefs.getString("theme") ?? "system";  
   runApp(
     //MyApp(),
     MyApp(savedLanguage: savedLanguage, savedTheme: savedTheme),
@@ -59,13 +58,14 @@ class MyApp extends StatelessWidget {
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => ChangeLanguageCubit()),
-        BlocProvider(create: (context) => ChangeThemeCubit()),
+        BlocProvider(
+          create: (context) => ChangeLanguageCubit(initialLocale: locale),
+        ),
+        BlocProvider(create: (context) => ChangeThemeCubit(initialTheme: mode)),
         BlocProvider(
           create: (context) => ManageFinanceCubit(homeRepo: HomeRepoImpl()),
         ),
       ],
-
       child: BlocBuilder<ChangeThemeCubit, ChangeThemeState>(
         builder: (context, state) {
           if (state is ChangeThemeDone) {
@@ -86,12 +86,11 @@ class MyApp extends StatelessWidget {
                   GlobalCupertinoLocalizations.delegate,
                 ],
                 supportedLocales: S.delegate.supportedLocales,
-                themeMode:
-                    mode == ThemeMode.dark ? ThemeMode.dark : ThemeMode.light,
+                themeMode: mode,
                 theme: setThemeData(Brightness.light),
                 darkTheme: setThemeData(Brightness.dark),
                 onGenerateRoute: onGenerateRoute,
-                initialRoute: SplashView.routeName,
+                // initialRoute: SplashView.routeName,
               );
             },
           );
