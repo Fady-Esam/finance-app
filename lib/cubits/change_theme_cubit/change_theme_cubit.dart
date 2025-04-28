@@ -15,8 +15,10 @@ class ChangeThemeCubit extends Cubit<ChangeThemeState> {
   Future<ThemeMode> getSavedTheme() async {
     final prefs = await SharedPreferences.getInstance();
     final savedTheme = prefs.getString("theme") ?? "system";
-    return getThemeModeFromString(savedTheme);
+    ThemeMode themeMode = getThemeModeFromString(savedTheme);
+    return themeMode;
   }
+
   ThemeMode getThemeModeFromString(String theme) {
     switch (theme) {
       case "light":
@@ -24,7 +26,10 @@ class ChangeThemeCubit extends Cubit<ChangeThemeState> {
       case "dark":
         return ThemeMode.dark;
       default:
-        return ThemeMode.system;
+        return WidgetsBinding.instance.platformDispatcher.platformBrightness ==
+                Brightness.dark
+            ? ThemeMode.dark
+            : ThemeMode.light;
     }
   }
 }

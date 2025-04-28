@@ -4,7 +4,6 @@ import '../../../../cubits/change_theme_cubit/change_theme_cubit.dart';
 import 'widgets/home_appbar.dart';
 import 'widgets/home_body.dart';
 import 'widgets/home_drawer.dart';
-import 'dart:developer';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -18,17 +17,6 @@ class _HomeViewState extends State<HomeView> {
   Future<void> getSavedTheme() async {
     themeMode =
         await BlocProvider.of<ChangeThemeCubit>(context).getSavedTheme();
-    if (themeMode == ThemeMode.system) {
-      themeMode =
-          WidgetsBinding.instance.platformDispatcher.platformBrightness ==
-                  Brightness.dark
-              ? ThemeMode.dark
-              : ThemeMode.light;
-    }
-    // if (WidgetsBinding.instance.platformDispatcher.platformBrightness ==
-    //     Brightness.dark) {
-    //   log('getSavedTheme: $themeMode');
-    // }
     setState(() {});
   }
 

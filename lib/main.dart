@@ -51,11 +51,14 @@ class MyApp extends StatelessWidget {
             ? ThemeMode.dark
             : savedTheme == "light"
             ? ThemeMode.light
-            : ThemeMode.system;
+            : WidgetsBinding.instance.platformDispatcher.platformBrightness ==
+                  Brightness.dark
+              ? ThemeMode.dark
+              : ThemeMode.light;
+
     ThemeData setThemeData(Brightness brightness) {
       return ThemeData(brightness: brightness, useMaterial3: true);
     }
-
     return MultiBlocProvider(
       providers: [
         BlocProvider(
