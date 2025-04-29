@@ -20,6 +20,8 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
             (context) => ManageTransactionView(
               transactionTypeEnum: args['transactionTypeEnum'],
               financeItemModel: args['financeItemModel'],
+              modelDateTime: args['modelDateTime'],
+              currentDateTime: args['currentDateTime'],
             ),
       );
     case AllActivitiesView.routeName:

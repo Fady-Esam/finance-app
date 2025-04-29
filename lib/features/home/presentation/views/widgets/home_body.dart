@@ -28,9 +28,9 @@ class _HomeBodyState extends State<HomeBody> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-        BlocProvider.of<ManageFinanceCubit>(
-          context,
-        ).getFinancesByDay(DateTime.now());
+      BlocProvider.of<ManageFinanceCubit>(
+        context,
+      ).getFinancesByDay(DateTime.now());
     });
   }
 
@@ -121,7 +121,6 @@ class _HomeBodyState extends State<HomeBody> {
                       ManageTransactionView.routeName,
                       arguments: {
                         'transactionTypeEnum': TransactionTypeEnum.plus,
-                        'financeItemModel': null,
                       },
                     );
                   },
@@ -141,7 +140,6 @@ class _HomeBodyState extends State<HomeBody> {
                       ManageTransactionView.routeName,
                       arguments: {
                         'transactionTypeEnum': TransactionTypeEnum.minus,
-                        'financeItemModel': null,
                       },
                     );
                   },
@@ -192,10 +190,10 @@ class _HomeBodyState extends State<HomeBody> {
                     SnackBar(content: Text(S.of(context).somethingWentWrong)),
                   );
                   log(state.failureMessage.toString());
-                } else if (state is DeleteFinanceSuccessState) {}
+                } /*else if (state is DeleteFinanceSuccessState) {}*/
               },
               builder: (context, state) {
-                return FinanceListViewBuilder(financeItems: financeItems);
+                return FinanceListViewBuilder(financeItems: financeItems, currentDateTime: DateTime.now(),);
               },
             ),
           ],

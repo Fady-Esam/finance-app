@@ -8,8 +8,9 @@ import '../manage_transaction_view.dart';
 import 'finance_item.dart';
 
 class FinanceListViewBuilder extends StatefulWidget {
-  const FinanceListViewBuilder({super.key, required this.financeItems});
+  const FinanceListViewBuilder({super.key, required this.financeItems, required this.currentDateTime});
   final List<FinanceItemModel> financeItems;
+  final DateTime currentDateTime;
   @override
   State<FinanceListViewBuilder> createState() => _FinanceListViewBuilderState();
 }
@@ -37,6 +38,8 @@ class _FinanceListViewBuilderState extends State<FinanceListViewBuilder> {
                           ? TransactionTypeEnum.editMinus
                           : TransactionTypeEnum.editPlus,
                   'financeItemModel': financeItemModel,
+                  'modelDateTime': financeItemModel.dateTime,
+                  'currentDateTime': widget.currentDateTime
                 },
               );
               return false; // <<< DON'T dismiss the item

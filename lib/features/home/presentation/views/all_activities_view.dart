@@ -20,7 +20,7 @@ class AllActivitiesView extends StatefulWidget {
 class _AllActivitiesViewState extends State<AllActivitiesView> {
   DateTime _focusedDay = DateTime.now();
   DateTime _selectedDay = DateTime.now();
-  CalendarFormat _calendarFormat = CalendarFormat.week;
+  CalendarFormat _calendarFormat = CalendarFormat.month;
   List<FinanceItemModel> financeItems = [];
   void getFinancesByDay(DateTime day) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -82,15 +82,20 @@ class _AllActivitiesViewState extends State<AllActivitiesView> {
                     log(state.failureMessage.toString());
                   } else if (state is GetFinancesByDaySuccessState) {
                     financeItems = state.financeItems;
+                  } else if (state is GetTodayFinanceSuccessState) {
+                    financeItems = state.financeItems;
                   } else if (state is DeleteFinanceFailureState) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text(S.of(context).somethingWentWrong)),
                     );
                     log(state.failureMessage.toString());
-                  } else if (state is DeleteFinanceSuccessState) {}
+                  } /*else if (state is DeleteFinanceSuccessState) {} */
                 },
                 builder: (context, state) {
-                  return FinanceListViewBuilder(financeItems: financeItems);
+                  return FinanceListViewBuilder(
+                    financeItems: financeItems,
+                    currentDateTime: _selectedDay,
+                  );
                 },
               ),
             ],

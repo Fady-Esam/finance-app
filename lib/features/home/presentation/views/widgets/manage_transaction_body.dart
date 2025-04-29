@@ -13,6 +13,9 @@ class ManageTransactionBody extends StatefulWidget {
     required this.transactionTypeEnum,
     required this.amountController,
     required this.titleController,
+    required this.modelDateTime,
+    required this.currentDateTime,
+    
     this.financeItemModel,
   });
 
@@ -20,13 +23,23 @@ class ManageTransactionBody extends StatefulWidget {
   final TextEditingController amountController;
   final TextEditingController titleController;
   final FinanceItemModel? financeItemModel;
+  final DateTime? currentDateTime;
+  final DateTime? modelDateTime;
 
   @override
   State<ManageTransactionBody> createState() => _ManageTransactionBodyState();
 }
 
 class _ManageTransactionBodyState extends State<ManageTransactionBody> {
-  DateTime selectedDate = DateTime.now();
+  late DateTime selectedDate;
+  late DateTime currentDateTime;
+  @override
+  void initState() {
+    super.initState();
+    selectedDate = widget.modelDateTime ?? DateTime.now();
+    currentDateTime = widget.currentDateTime ?? DateTime.now();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -72,7 +85,8 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
               amountController: widget.amountController,
               titleController: widget.titleController,
               financeItemModel: widget.financeItemModel,
-              dateTime: selectedDate,
+              modelDateTime: selectedDate,
+              currentDateTime: currentDateTime,
             ),
             const SizedBox(height: 18),
           ],

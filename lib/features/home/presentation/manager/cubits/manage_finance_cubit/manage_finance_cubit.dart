@@ -14,10 +14,9 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
     var res = await homeRepo.addFinance(item);
     res.fold(
       (l) => emit(AddFinanceFailureState(failureMessage: l.technicalMessage)),
-      (r) async {
+      (r) {
+        getFinancesByDay(DateTime.now()); //! Now
         emit(AddFinanceSuccessState());
-        getFinancesByDay(item.dateTime);
-        //getAllFinances();
       },
     );
   }
@@ -29,26 +28,32 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
       (l) =>
           emit(DeleteFinanceFailureState(failureMessage: l.technicalMessage)),
       (r) {
-        emit(DeleteFinanceSuccessState());
         getFinancesByDay(item.dateTime);
+        emit(DeleteFinanceSuccessState());
       },
     );
   }
 
-  Future<void> updateFinance(FinanceItemModel item) async {
+  Future<void> updateFinance(
+    FinanceItemModel item,
+    DateTime currentDateTime,
+  ) async {
     emit(UpdateFinanceLoadingState());
     var res = await homeRepo.updateFinance(item);
     res.fold(
       (l) =>
           emit(UpdateFinanceFailureState(failureMessage: l.technicalMessage)),
       (r) {
+        if (isSameDate(item.dateTime, DateTime.now()) && isSameDate(currentDateTime, DateTime.now())) {
+          getFinancesByDay(DateTime.now());
+        } else {
+          getFinancesByDay(currentDateTime);
+        }
         emit(UpdateFinanceSuccessState());
-        getAllTotalBalance();
-        getTodayTotalBalance();
       },
     );
   }
-
+  //! Get All Func
   // void getAllFinances()  {
   //   emit(GetAllFinanceLoadingState());
   //   var res =  homeRepo.getAllFinances();
@@ -62,9 +67,11 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
   //     },
   //   );
   // }
-bool isSameDate(DateTime d1, DateTime d2) {
+
+  bool isSameDate(DateTime d1, DateTime d2) {
     return d1.year == d2.year && d1.month == d2.month && d1.day == d2.day;
   }
+
   void getFinancesByDay(DateTime dateTime) async {
     emit(GetFinancesByDayLoadingState());
     var res = homeRepo.getFinancesByDay(dateTime);
@@ -75,7 +82,6 @@ bool isSameDate(DateTime d1, DateTime d2) {
       (r) {
         if (isSameDate(dateTime, DateTime.now())) {
           emit(GetTodayFinanceSuccessState(financeItems: r));
-          emit(GetFinancesByDaySuccessState(financeItems: r));
         } else {
           emit(GetFinancesByDaySuccessState(financeItems: r));
         }

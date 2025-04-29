@@ -14,15 +14,22 @@ class ManageTransactionView extends StatefulWidget {
     super.key,
     required this.transactionTypeEnum,
     this.financeItemModel,
+    this.currentDateTime,
+    this.modelDateTime,
   });
   final TransactionTypeEnum transactionTypeEnum;
   final FinanceItemModel? financeItemModel;
+  final DateTime? currentDateTime;
+  final DateTime? modelDateTime;
   static const routeName = 'manage-transaction-view';
   @override
   State<ManageTransactionView> createState() => _ManageTransactionViewState();
 }
 
 class _ManageTransactionViewState extends State<ManageTransactionView> {
+  late DateTime currentDateTime;
+  late DateTime modelDateTime;
+
   late TextEditingController amountController;
   late TextEditingController titleController;
 
@@ -46,6 +53,8 @@ class _ManageTransactionViewState extends State<ManageTransactionView> {
     titleController = TextEditingController(
       text: widget.financeItemModel?.title.toString() ?? '',
     );
+    currentDateTime = widget.currentDateTime ?? DateTime.now();
+    modelDateTime = widget.modelDateTime ?? DateTime.now();
   }
 
   @override
@@ -82,6 +91,8 @@ class _ManageTransactionViewState extends State<ManageTransactionView> {
           amountController: amountController,
           titleController: titleController,
           financeItemModel: widget.financeItemModel,
+          modelDateTime: modelDateTime,
+          currentDateTime: currentDateTime,
         ),
       ),
     );

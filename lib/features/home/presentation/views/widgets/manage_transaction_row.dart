@@ -12,15 +12,17 @@ class ManageTransactionRow extends StatelessWidget {
     required this.transactionTypeEnum,
     required this.amountController,
     required this.titleController,
-    this.financeItemModel, 
-    required this.dateTime,
+    this.financeItemModel,
+    required this.modelDateTime,
+    required this.currentDateTime,
   });
 
   final TransactionTypeEnum transactionTypeEnum;
   final TextEditingController amountController;
   final TextEditingController titleController;
   final FinanceItemModel? financeItemModel;
-  final DateTime dateTime;
+  final DateTime modelDateTime;
+  final DateTime currentDateTime;
 
   @override
   Widget build(BuildContext context) {
@@ -50,20 +52,21 @@ class ManageTransactionRow extends StatelessWidget {
               if (financeItemModel != null) {
                 financeItemModel!.amount = amount;
                 financeItemModel!.title = titleController.text;
-                financeItemModel!.dateTime = dateTime;
+                financeItemModel!.dateTime = modelDateTime;
                 await BlocProvider.of<ManageFinanceCubit>(
                   context,
-                ).updateFinance(financeItemModel!);
-                return;
+                ).updateFinance(financeItemModel!, currentDateTime);
+                //return;
+              } else {
+                await BlocProvider.of<ManageFinanceCubit>(context).addFinance(
+                  FinanceItemModel(
+                    title: titleController.text,
+                    //! Here
+                    dateTime: modelDateTime,
+                    amount: amount,
+                  ),
+                );
               }
-              await BlocProvider.of<ManageFinanceCubit>(context).addFinance(
-                FinanceItemModel(
-                  title: titleController.text,
-                  //! Here
-                  dateTime: dateTime,
-                  amount: amount,
-                ),
-              );
             },
           ),
         ),
