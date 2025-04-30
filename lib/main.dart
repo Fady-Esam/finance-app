@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:finance_flutter_app/core/helper/on_generate_routes.dart';
+import 'package:finance_flutter_app/features/home/data/models/category_model.dart';
 import 'package:finance_flutter_app/features/home/data/repos/home_repo_impl.dart';
 import 'package:finance_flutter_app/features/home/presentation/manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
 import 'package:finance_flutter_app/generated/l10n.dart';
@@ -20,7 +21,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(FinanceItemModelAdapter());
+  Hive.registerAdapter(CategoryModelAdapter());
   await Hive.openBox<FinanceItemModel>('finance');
+  await Hive.openBox<FinanceItemModel>('category');
   final prefs = await SharedPreferences.getInstance();
   String deviceLang = PlatformDispatcher.instance.locale.languageCode;
   String defaultLangCode =

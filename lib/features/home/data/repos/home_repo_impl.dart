@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:finance_flutter_app/core/errors/failure.dart';
+import 'package:finance_flutter_app/features/home/data/models/category_model.dart';
 import 'package:finance_flutter_app/features/home/data/models/finance_item_model.dart';
 import 'package:finance_flutter_app/features/home/data/repos/home_repo.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -27,7 +28,7 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Either<Failure, List<FinanceItemModel>> getAllFinances()  {
+  Either<Failure, List<FinanceItemModel>> getAllFinances() {
     try {
       var box = Hive.box<FinanceItemModel>('finance');
       return right(box.values.toList());
@@ -64,11 +65,13 @@ class HomeRepoImpl implements HomeRepo {
   Either<Failure, List<FinanceItemModel>> getFinancesByDay(DateTime dateTime) {
     try {
       var box = Hive.box<FinanceItemModel>('finance');
-      return right(box.values.where((item) {
-            return item.dateTime.year == dateTime.year &&
-                item.dateTime.month == dateTime.month &&
-                item.dateTime.day == dateTime.day;
-          }).toList());
+      return right(
+        box.values.where((item) {
+          return item.dateTime.year == dateTime.year &&
+              item.dateTime.month == dateTime.month &&
+              item.dateTime.day == dateTime.day;
+        }).toList(),
+      );
     } catch (e) {
       return left(Failure(technicalMessage: e.toString()));
     }
@@ -88,6 +91,47 @@ class HomeRepoImpl implements HomeRepo {
         }
       }
       return right(totalBalance);
+    } catch (e) {
+      return left(Failure(technicalMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> addCategory(CategoryModel item) async {
+    try {
+      var box = Hive.box<CategoryModel>('category');
+      await box.add(item);
+      return right(null);
+    } catch (e) {
+      return left(Failure(technicalMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteCategory(CategoryModel item) async {
+    try {
+      await item.delete();
+      return right(null);
+    } catch (e) {
+      return left(Failure(technicalMessage: e.toString()));
+    }
+  }
+
+  @override
+  Either<Failure, List<CategoryModel>> getAllCategories() {
+    try {
+      var box = Hive.box<CategoryModel>('category');
+      return right(box.values.toList());
+    } catch (e) {
+      return left(Failure(technicalMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> updateCategory(CategoryModel item) async {
+    try {
+      await item.save();
+      return right(null);
     } catch (e) {
       return left(Failure(technicalMessage: e.toString()));
     }
