@@ -1,6 +1,7 @@
 
 
-import 'package:finance_flutter_app/features/home/data/models/category_model.dart';
+
+import '../../../../data/models/category_model.dart';
 
 class ManageCategoryState {}
 

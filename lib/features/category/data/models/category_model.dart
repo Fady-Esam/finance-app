@@ -8,7 +8,7 @@ class CategoryModel extends HiveObject {
   String name;
 
   @HiveField(2)
-  String icon; 
+  String icon;
 
   @HiveField(3)
   String colorHex;

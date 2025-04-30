@@ -1,6 +1,6 @@
 import 'dart:ui';
+import 'package:finance_flutter_app/bottom_nav_bar_view.dart';
 import 'package:finance_flutter_app/core/helper/on_generate_routes.dart';
-import 'package:finance_flutter_app/features/home/data/models/category_model.dart';
 import 'package:finance_flutter_app/features/home/data/repos/home_repo_impl.dart';
 import 'package:finance_flutter_app/features/home/presentation/manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
 import 'package:finance_flutter_app/generated/l10n.dart';
@@ -19,11 +19,11 @@ import 'features/home/data/models/finance_item_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
-  Hive.registerAdapter(FinanceItemModelAdapter());
-  Hive.registerAdapter(CategoryModelAdapter());
-  await Hive.openBox<FinanceItemModel>('finance');
-  await Hive.openBox<FinanceItemModel>('category');
+  //await Hive.initFlutter();
+  // Hive.registerAdapter(FinanceItemModelAdapter());
+  // Hive.registerAdapter(CategoryModelAdapter());
+  // await Hive.openBox<FinanceItemModel>('finance');
+  // await Hive.openBox<FinanceItemModel>('category');
   final prefs = await SharedPreferences.getInstance();
   String deviceLang = PlatformDispatcher.instance.locale.languageCode;
   String defaultLangCode =
@@ -67,9 +67,12 @@ class MyApp extends StatelessWidget {
           create: (context) => ChangeLanguageCubit(initialLocale: locale),
         ),
         BlocProvider(create: (context) => ChangeThemeCubit(initialTheme: mode)),
-        BlocProvider(
-          create: (context) => ManageFinanceCubit(homeRepo: HomeRepoImpl()),
-        ),
+        // BlocProvider(
+        //   create: (context) => ManageFinanceCubit(homeRepo: HomeRepoImpl()),
+        // ),
+        // BlocProvider(
+        //   create: (context) => ManageFinanceCubit(homeRepo: HomeRepoImpl()),
+        // ),
       ],
       child: BlocBuilder<ChangeThemeCubit, ChangeThemeState>(
         builder: (context, state) {
@@ -95,7 +98,7 @@ class MyApp extends StatelessWidget {
                 theme: setThemeData(Brightness.light),
                 darkTheme: setThemeData(Brightness.dark),
                 onGenerateRoute: onGenerateRoute,
-                // initialRoute: SplashView.routeName,
+                //initialRoute: BottomNavBarView.routeName,
               );
             },
           );

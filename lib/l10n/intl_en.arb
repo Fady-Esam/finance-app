@@ -26,7 +26,12 @@
     "somethingWentWrong" : "Something went wrong, Please try again",
     "pleaseEnterValidAmount": "Please enter a valid amount greater than 0",
     "closeDrawer": "Close Drawer",
-    "closeApp": "Exit App"
-
+    "closeApp": "Exit App",
+    "add" : "Add",
+    "category" : "Category",
+    "home": "Home",
+    "categories": "Categories",
+    "notifications": "Notifications",
+    "settings": "Settings"
 
 }

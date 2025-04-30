@@ -26,5 +26,11 @@
     "somethingWentWrong" : "حدث خطأ ما، يرجى المحاولة مرة أخرى",
     "pleaseEnterValidAmount": "من فضلك أدخل قيمة صحيحة أكبر من صفر",
     "closeDrawer": "إغلاق السحب",
-    "closeApp": "إغلاق التطبيق"
+    "closeApp": "إغلاق التطبيق",
+    "add" : "إضافة",
+    "category" : "فئة",
+    "home": "الرئيسية",
+    "categories": "الفئات",
+    "notifications": "الإشعارات",
+    "settings": "الإعدادات"
 }

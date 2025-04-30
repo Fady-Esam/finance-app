@@ -23,8 +23,11 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "activity": MessageLookupByLibrary.simpleMessage("Activity"),
+    "add": MessageLookupByLibrary.simpleMessage("Add"),
     "all_activities": MessageLookupByLibrary.simpleMessage("All Activities"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "categories": MessageLookupByLibrary.simpleMessage("Categories"),
+    "category": MessageLookupByLibrary.simpleMessage("Category"),
     "closeApp": MessageLookupByLibrary.simpleMessage("Exit App"),
     "closeDrawer": MessageLookupByLibrary.simpleMessage("Close Drawer"),
     "dark_mode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
@@ -32,9 +35,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "details": MessageLookupByLibrary.simpleMessage("Details here...."),
     "done": MessageLookupByLibrary.simpleMessage("Done"),
     "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+    "home": MessageLookupByLibrary.simpleMessage("Home"),
     "minus": MessageLookupByLibrary.simpleMessage("Minus"),
     "my_balance": MessageLookupByLibrary.simpleMessage("My Balance"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
     "onBoarding_subTitle_1": MessageLookupByLibrary.simpleMessage(
       "Get a clear view of where your money goes every month",
     ),
@@ -58,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "plus": MessageLookupByLibrary.simpleMessage("Plus"),
     "see_all": MessageLookupByLibrary.simpleMessage("See All"),
+    "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
     "somethingWentWrong": MessageLookupByLibrary.simpleMessage(
       "Something went wrong, Please try again",

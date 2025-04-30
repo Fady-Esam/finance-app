@@ -1,3 +1,4 @@
+import 'package:finance_flutter_app/bottom_nav_bar_view.dart';
 import 'package:finance_flutter_app/features/home/presentation/views/home_view.dart';
 import 'package:finance_flutter_app/features/on_boarding/presentation/views/on_boarding_view.dart';
 import 'package:finance_flutter_app/features/splash/presentation/views/widgets/splash_view_body.dart';
@@ -15,11 +16,11 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () async {
+    Future.delayed(const Duration(seconds: 2), () async {
       final prefs = await SharedPreferences.getInstance();
       bool isOnboardingSeen = prefs.getBool('onboarding_seen') ?? false;
       if (isOnboardingSeen) {
-        Navigator.pushReplacementNamed(context, HomeView.routeName);
+        Navigator.pushReplacementNamed(context, BottomNavBarView.routeName);
         // Navigator.pushReplacementNamed(context, 'onBoarding');
       } else {
         Navigator.pushReplacementNamed(context, OnBoardingView.routeName);

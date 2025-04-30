@@ -23,8 +23,11 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "activity": MessageLookupByLibrary.simpleMessage("النشاط"),
+    "add": MessageLookupByLibrary.simpleMessage("إضافة"),
     "all_activities": MessageLookupByLibrary.simpleMessage("جميع الأنشطة"),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "categories": MessageLookupByLibrary.simpleMessage("الفئات"),
+    "category": MessageLookupByLibrary.simpleMessage("فئة"),
     "closeApp": MessageLookupByLibrary.simpleMessage("إغلاق التطبيق"),
     "closeDrawer": MessageLookupByLibrary.simpleMessage("إغلاق السحب"),
     "dark_mode": MessageLookupByLibrary.simpleMessage("الوضع المظلم"),
@@ -32,9 +35,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "details": MessageLookupByLibrary.simpleMessage("التفاصيل هنا..."),
     "done": MessageLookupByLibrary.simpleMessage("تم"),
     "edit": MessageLookupByLibrary.simpleMessage("تعديل"),
+    "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "minus": MessageLookupByLibrary.simpleMessage("نقص"),
     "my_balance": MessageLookupByLibrary.simpleMessage("رصيدي"),
     "next": MessageLookupByLibrary.simpleMessage("التالى"),
+    "notifications": MessageLookupByLibrary.simpleMessage("الإشعارات"),
     "onBoarding_subTitle_1": MessageLookupByLibrary.simpleMessage(
       "احصل على رؤية واضحة لمصروفاتك الشهرية",
     ),
@@ -54,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "plus": MessageLookupByLibrary.simpleMessage("إضافة"),
     "see_all": MessageLookupByLibrary.simpleMessage("عرض الكل"),
+    "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "skip": MessageLookupByLibrary.simpleMessage("تخطى"),
     "somethingWentWrong": MessageLookupByLibrary.simpleMessage(
       "حدث خطأ ما، يرجى المحاولة مرة أخرى",

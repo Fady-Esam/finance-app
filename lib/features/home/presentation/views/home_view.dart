@@ -1,3 +1,5 @@
+import 'package:finance_flutter_app/features/home/data/repos/home_repo_impl.dart';
+import 'package:finance_flutter_app/features/home/presentation/manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../cubits/change_theme_cubit/change_theme_cubit.dart';
@@ -38,10 +40,13 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: HomeAppBar(themeMode: themeMode, onThemeChanged: _toggleTheme),
-      drawer: HomeDrawer(themeMode: themeMode, onThemeChanged: _toggleTheme),
-      body: HomeBody(),
+    return BlocProvider(
+      create: (context) => ManageFinanceCubit(homeRepo: HomeRepoImpl()),
+      child: Scaffold(
+        appBar: HomeAppBar(themeMode: themeMode, onThemeChanged: _toggleTheme),
+        drawer: HomeDrawer(themeMode: themeMode, onThemeChanged: _toggleTheme),
+        body: HomeBody(),
+      ),
     );
   }
 }

@@ -1,13 +1,13 @@
-import 'package:finance_flutter_app/features/home/data/models/category_model.dart';
+import 'package:finance_flutter_app/features/category/data/repos/category_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../data/repos/home_repo.dart';
+import '../../../../data/models/category_model.dart';
 import 'manage_category_state.dart';
 
-class ManageFinanceCubit extends Cubit<ManageCategoryState> {
-  ManageFinanceCubit({required this.homeRepo})
+class ManageCategoryCubit extends Cubit<ManageCategoryState> {
+  ManageCategoryCubit({required this.homeRepo})
     : super(ManageCategoryInitialState());
-  final HomeRepo homeRepo;
+  final CategoryRepo homeRepo;
 
   Future<void> addCategory(CategoryModel item) async {
     emit(AddCategoryLoadingState());
