@@ -294,6 +294,106 @@ class S {
   String get settings {
     return Intl.message('Settings', name: 'settings', desc: '', args: []);
   }
+
+  /// `This field is required`
+  String get required_field {
+    return Intl.message(
+      'This field is required',
+      name: 'required_field',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Category`
+  String get add_category {
+    return Intl.message(
+      'Add Category',
+      name: 'add_category',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message('Save', name: 'save', desc: '', args: []);
+  }
+
+  /// `Select Color`
+  String get select_color {
+    return Intl.message(
+      'Select Color',
+      name: 'select_color',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Icon`
+  String get select_icon {
+    return Intl.message('Select Icon', name: 'select_icon', desc: '', args: []);
+  }
+
+  /// `Food`
+  String get icon_food {
+    return Intl.message('Food', name: 'icon_food', desc: '', args: []);
+  }
+
+  /// `Shopping`
+  String get icon_shopping {
+    return Intl.message('Shopping', name: 'icon_shopping', desc: '', args: []);
+  }
+
+  /// `Home`
+  String get icon_home {
+    return Intl.message('Home', name: 'icon_home', desc: '', args: []);
+  }
+
+  /// `Transport`
+  String get icon_transport {
+    return Intl.message(
+      'Transport',
+      name: 'icon_transport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Salary`
+  String get icon_salary {
+    return Intl.message('Salary', name: 'icon_salary', desc: '', args: []);
+  }
+
+  /// `Entertainment`
+  String get icon_entertainment {
+    return Intl.message(
+      'Entertainment',
+      name: 'icon_entertainment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Health`
+  String get icon_health {
+    return Intl.message('Health', name: 'icon_health', desc: '', args: []);
+  }
+
+  /// `Bills`
+  String get icon_bills {
+    return Intl.message('Bills', name: 'icon_bills', desc: '', args: []);
+  }
+
+  /// `Travel`
+  String get icon_travel {
+    return Intl.message('Travel', name: 'icon_travel', desc: '', args: []);
+  }
+
+  /// `Other`
+  String get icon_category {
+    return Intl.message('Other', name: 'icon_category', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

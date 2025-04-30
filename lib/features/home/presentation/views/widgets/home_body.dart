@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'package:finance_flutter_app/features/home/data/models/finance_item_model.dart';
-import 'package:finance_flutter_app/features/home/presentation/views/add_category_view.dart';
 import 'package:finance_flutter_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -132,23 +131,6 @@ class _HomeBodyState extends State<HomeBody> {
                       color: Color.fromARGB(255, 60, 58, 58),
                     ),
                     color: Colors.green,
-                    width: MediaQuery.of(context).size.width * 0.28,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      AddCategoryView.routeName,
-                    );
-                  },
-                  child: TransactionButton(
-                    title: S.of(context).add,
-                    icon: const Icon(
-                      Icons.category,
-                      color: Color.fromARGB(255, 60, 58, 58),
-                    ),
-                    color: const Color.fromARGB(255, 212, 33, 243),
                   ),
                 ),
                 GestureDetector(
@@ -168,7 +150,6 @@ class _HomeBodyState extends State<HomeBody> {
                       color: Color.fromARGB(255, 60, 58, 58),
                     ),
                     color: Colors.blue,
-                    width: MediaQuery.of(context).size.width * 0.28,
                   ),
                 ),
               ],

@@ -9,12 +9,12 @@ class FinanceItemModel extends HiveObject {
   @HiveField(2)
   double amount;
   @HiveField(3)
-  String categoryId; // Reference to CategoryModel
+  String? categoryId; // Reference to CategoryModel
 
   FinanceItemModel({
     required this.title,
     required this.dateTime,
     required this.amount,
-    required this.categoryId,
+    this.categoryId,
   });
 }

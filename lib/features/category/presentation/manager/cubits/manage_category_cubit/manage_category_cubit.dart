@@ -21,7 +21,7 @@ class ManageCategoryCubit extends Cubit<ManageCategoryState> {
     );
   }
 
-  Future<void> deleteFinance(CategoryModel item) async {
+  Future<void> deleteCategory(CategoryModel item) async {
     emit(DeleteCategoryLoadingState());
     var res = await homeRepo.deleteCategory(item);
     res.fold(
@@ -34,14 +34,14 @@ class ManageCategoryCubit extends Cubit<ManageCategoryState> {
     );
   }
 
-  Future<void> updateFinance(CategoryModel item) async {
+  Future<void> updateCategory(CategoryModel item) async {
     emit(UpdateCategoryLoadingState());
     var res = await homeRepo.updateCategory(item);
     res.fold(
       (l) =>
           emit(UpdateCategoryFailureState(failureMessage: l.technicalMessage)),
       (r) {
-        getAllCategories();
+        // getAllCategories();
         emit(UpdateCategorySuccessState());
       },
     );

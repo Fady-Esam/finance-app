@@ -63,6 +63,7 @@ class _BottomNavBarViewState extends State<BottomNavBarView> {
           topLeft: Radius.circular(30.0), // You can change this value
           topRight: Radius.circular(30.0), // You can change this value
         ),
+
         child: BottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: _onTabTapped,
@@ -89,17 +90,14 @@ class _BottomNavBarViewState extends State<BottomNavBarView> {
               label: S.of(context).home,
             ),
             BottomNavigationBarItem(
-              backgroundColor: Colors.deepPurple,
               icon: const Icon(Icons.category),
               label: S.of(context).categories,
             ),
             BottomNavigationBarItem(
-              backgroundColor: Colors.orange,
               icon: const Icon(Icons.notifications),
               label: S.of(context).notifications,
             ),
             BottomNavigationBarItem(
-              backgroundColor: Colors.teal,
               icon: const Icon(Icons.settings),
               label: S.of(context).settings,
             ),

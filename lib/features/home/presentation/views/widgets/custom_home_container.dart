@@ -23,7 +23,7 @@ class CustomHomeContainer extends StatelessWidget {
             Expanded(
               flex: 7,
               child: Container(
-                color: Colors.black,
+                color: Color(0xFF262626),
                 child: Padding(
                   padding: const EdgeInsetsDirectional.only(start: 20),
                   child: Column(
@@ -36,9 +36,17 @@ class CustomHomeContainer extends StatelessWidget {
                       ),
                       Directionality(
                         textDirection: TextDirection.ltr,
-                        child: Text(
-                          balance,
-                          style: TextStyle(fontSize: 32, color: Colors.white),
+                        child: AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 300),
+                          child: Text(
+                            balance,
+                            key: ValueKey(balance),
+                            style: const TextStyle(
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
                     ],

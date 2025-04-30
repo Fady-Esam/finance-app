@@ -29,7 +29,7 @@ class FinanceItem extends StatelessWidget {
               ? '-${financeItemModel.amount.abs()}'
               : '+${financeItemModel.amount}',
           style: const TextStyle(
-            fontSize: 18,
+            fontSize: 16,
           ), // Optional: adjust style if needed
         ),
       ),

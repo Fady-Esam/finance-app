@@ -1,5 +1,4 @@
 import 'package:finance_flutter_app/bottom_nav_bar_view.dart';
-import 'package:finance_flutter_app/features/home/presentation/views/home_view.dart';
 import 'package:finance_flutter_app/features/on_boarding/presentation/views/on_boarding_view.dart';
 import 'package:finance_flutter_app/features/splash/presentation/views/widgets/splash_view_body.dart';
 import 'package:flutter/material.dart';

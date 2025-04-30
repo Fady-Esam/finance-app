@@ -1,4 +1,4 @@
-import 'package:finance_flutter_app/features/home/presentation/views/home_view.dart';
+import 'package:finance_flutter_app/bottom_nav_bar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -99,7 +99,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
                   if (_currentPage == 2) {
                     final prefs = await SharedPreferences.getInstance();
                     await prefs.setBool('onboarding_seen', true);
-                    Navigator.pushReplacementNamed(context, HomeView.routeName);
+                    Navigator.pushReplacementNamed(context, BottomNavBarView.routeName);
                   } else {
                     _pageController.nextPage(
                       duration: Duration(milliseconds: 300),

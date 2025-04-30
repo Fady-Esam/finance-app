@@ -32,6 +32,22 @@
     "home": "Home",
     "categories": "Categories",
     "notifications": "Notifications",
-    "settings": "Settings"
+    "settings": "Settings",
+    "required_field": "This field is required",
+    "add_category": "Add Category",
+    "save": "Save",
+    "select_color": "Select Color",
+    "select_icon": "Select Icon",
+    "icon_food": "Food",
+    "icon_shopping": "Shopping",
+    "icon_home": "Home",
+    "icon_transport": "Transport",
+    "icon_salary": "Salary",
+    "icon_entertainment": "Entertainment",
+    "icon_health": "Health",
+    "icon_bills": "Bills",
+    "icon_travel": "Travel",
+    "icon_category": "Other"
+
 
 }

@@ -64,7 +64,7 @@ class ManageTransactionRow extends StatelessWidget {
                     //! Here
                     dateTime: modelDateTime,
                     amount: amount,
-                    categoryId: "",
+                    categoryId: "1",
                   ),
                 );
               }

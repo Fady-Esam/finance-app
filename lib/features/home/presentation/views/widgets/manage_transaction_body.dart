@@ -15,7 +15,7 @@ class ManageTransactionBody extends StatefulWidget {
     required this.titleController,
     required this.modelDateTime,
     required this.currentDateTime,
-    
+
     this.financeItemModel,
   });
 
@@ -79,7 +79,7 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
                 amountController: widget.amountController,
               ),
             ),
-            const SizedBox(height: 16),
+            //const SizedBox(height: 8),
             ManageTransactionRow(
               transactionTypeEnum: widget.transactionTypeEnum,
               amountController: widget.amountController,

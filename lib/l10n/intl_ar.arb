@@ -32,5 +32,20 @@
     "home": "الرئيسية",
     "categories": "الفئات",
     "notifications": "الإشعارات",
-    "settings": "الإعدادات"
+    "settings": "الإعدادات",
+    "required_field": "هذا الحقل مطلوب",
+    "add_category": "إضافة فئة",
+    "save": "حفظ",
+    "select_color": "اختر لون",
+    "select_icon": "اختر أيقونة",
+    "icon_food": "طعام",
+    "icon_shopping": "تسوق",
+    "icon_home": "منزل",
+    "icon_transport": "مواصلات",
+    "icon_salary": "راتب",
+    "icon_entertainment": "ترفيه",
+    "icon_health": "صحة",
+    "icon_bills": "فواتير",
+    "icon_travel": "سفر",
+    "icon_category": "أخرى"
 }

@@ -8,14 +8,14 @@ class CategoryModel extends HiveObject {
   String name;
 
   @HiveField(2)
-  String icon;
+  String? icon;
 
   @HiveField(3)
-  String colorHex;
+  String? colorHex;
 
   CategoryModel({
     required this.name,
-    required this.icon,
-    required this.colorHex,
+    this.icon,
+    this.colorHex,
   });
 }
