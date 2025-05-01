@@ -41,7 +41,18 @@ class _AllActivitiesViewState extends State<AllActivitiesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(S.of(context).all_activities)),
+      appBar: AppBar(title: Text(S.of(context).all_activities, ),
+        automaticallyImplyLeading: false,
+          leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+          ), // or any color you prefer
+          onPressed: () {
+            Navigator.pop(context, _selectedDay); 
+            // log(_selectedDay.toString());
+          },
+        ),
+      ),
       body: RefreshIndicator(
         onRefresh: _onRefresh,
         child: SingleChildScrollView(
@@ -77,19 +88,16 @@ class _AllActivitiesViewState extends State<AllActivitiesView> {
                 listener: (context, state) {
                   if (state is GetFinancesByDayFailureState) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(S.of(context).somethingWentWrong)),
+                      SnackBar(
+                        content: Text(S.of(context).somethingWentWrong),
+                      ),
                     );
                     log(state.failureMessage.toString());
                   } else if (state is GetFinancesByDaySuccessState) {
                     financeItems = state.financeItems;
-                  } else if (state is GetTodayFinanceSuccessState) {
+                  } /*else if (state is GetTodayFinanceSuccessState) {
                     financeItems = state.financeItems;
-                  } else if (state is DeleteFinanceFailureState) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(S.of(context).somethingWentWrong)),
-                    );
-                    log(state.failureMessage.toString());
-                  } /*else if (state is DeleteFinanceSuccessState) {} */
+                  }*/
                 },
                 builder: (context, state) {
                   return FinanceListViewBuilder(

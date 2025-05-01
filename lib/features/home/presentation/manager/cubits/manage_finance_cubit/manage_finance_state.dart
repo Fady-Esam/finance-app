@@ -15,44 +15,6 @@ class AddFinanceFailureState extends ManageFinanceState {
 
 class AddFinanceSuccessState extends ManageFinanceState {}
 
-//! Delete
-class DeleteFinanceLoadingState extends ManageFinanceState {}
-
-class DeleteFinanceFailureState extends ManageFinanceState {
-  final String? failureMessage;
-
-  DeleteFinanceFailureState({required this.failureMessage});
-}
-
-class DeleteFinanceSuccessState extends ManageFinanceState {}
-
-//! Update
-class UpdateFinanceLoadingState extends ManageFinanceState {}
-
-class UpdateFinanceFailureState extends ManageFinanceState {
-  final String? failureMessage;
-
-  UpdateFinanceFailureState({required this.failureMessage});
-}
-
-class UpdateFinanceSuccessState extends ManageFinanceState {}
-
-//! Get All
-
-class GetAllFinanceLoadingState extends ManageFinanceState {}
-
-class GetAllFinanceFailureState extends ManageFinanceState {
-  final String? failureMessage;
-
-  GetAllFinanceFailureState({required this.failureMessage});
-}
-
-class GetAllFinanceSuccessState extends ManageFinanceState {
-  final List<FinanceItemModel> financeItems;
-
-  GetAllFinanceSuccessState({required this.financeItems});
-}
-
 
 //! Get By Day
 
@@ -69,11 +31,12 @@ class GetFinancesByDaySuccessState extends ManageFinanceState {
 
   GetFinancesByDaySuccessState({required this.financeItems});
 }
-class GetTodayFinanceSuccessState extends ManageFinanceState {
-  final List<FinanceItemModel> financeItems;
 
-  GetTodayFinanceSuccessState({required this.financeItems});
-}
+// class GetTodayFinanceSuccessState extends ManageFinanceState {
+//   final List<FinanceItemModel> financeItems;
+
+//   GetTodayFinanceSuccessState({required this.financeItems});
+// }
 
 //! Get Today Total Balance
 
@@ -105,8 +68,16 @@ class GetAllTotalBalanceSuccessState extends ManageFinanceState {
 
   GetAllTotalBalanceSuccessState({required this.totalBalance});
 }
+//! Clear All Finances With Category Id
 
+class SetAllFinancesWithCategoryIdNulloadingState extends ManageFinanceState {}
 
+class SetAllFinancesWithCategoryIdNullFailureState extends ManageFinanceState {
+  final String? failureMessage;
 
+  SetAllFinancesWithCategoryIdNullFailureState({required this.failureMessage});
+}
 
-
+class SetAllFinancesWithCategoryIdNullSuccessState extends ManageFinanceState {
+  SetAllFinancesWithCategoryIdNullSuccessState();
+}

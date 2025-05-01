@@ -4,11 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/models/finance_item_model.dart';
 import '../../manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
-import '../manage_transaction_view.dart';
+import '../manage_finance_view.dart';
 import 'finance_item.dart';
 
 class FinanceListViewBuilder extends StatefulWidget {
-  const FinanceListViewBuilder({super.key, required this.financeItems, required this.currentDateTime});
+  const FinanceListViewBuilder({
+    super.key,
+    required this.financeItems,
+    required this.currentDateTime,
+  });
   final List<FinanceItemModel> financeItems;
   final DateTime currentDateTime;
   @override
@@ -39,15 +43,21 @@ class _FinanceListViewBuilderState extends State<FinanceListViewBuilder> {
                           : TransactionTypeEnum.editPlus,
                   'financeItemModel': financeItemModel,
                   'modelDateTime': financeItemModel.dateTime,
-                  'currentDateTime': widget.currentDateTime
+                  'currentDateTime': widget.currentDateTime,
+                  "categoryId": financeItemModel.categoryId,
                 },
               );
               return false; // <<< DON'T dismiss the item
             } else if (direction == DismissDirection.endToStart) {
               // Swipe from right to left --> DELETE
+              await financeItemModel.delete();
               BlocProvider.of<ManageFinanceCubit>(
                 context,
-              ).deleteFinance(financeItemModel);
+              ).getFinancesByDay(widget.currentDateTime);
+              // BlocProvider.of<ManageFinanceCubit>(
+              //   context,
+              // ).deleteFinance(financeItemModel);
+
               return true; // <<< Allow dismiss
             }
             return false;

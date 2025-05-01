@@ -1,11 +1,12 @@
 import 'package:finance_flutter_app/features/category/data/models/category_model.dart';
-import 'package:finance_flutter_app/features/category/presentation/manager/cubits/manage_category_cubit/manage_category_cubit.dart';
 import 'package:finance_flutter_app/features/category/presentation/views/manage_category_view.dart';
+import 'package:finance_flutter_app/features/home/presentation/manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
+import 'package:finance_flutter_app/features/home/presentation/manager/cubits/manage_finance_cubit/manage_finance_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/utils/color_utils.dart';
-import '../../../../../core/utils/icon_utils.dart';
+import '../../../../../generated/l10n.dart';
+import 'category_item.dart';
 
 class CategoryListView extends StatefulWidget {
   const CategoryListView({super.key, required this.categories});
@@ -35,9 +36,14 @@ class _CategoryListViewState extends State<CategoryListView> {
               return false; // <<< DON'T dismiss the item
             } else if (direction == DismissDirection.endToStart) {
               // Swipe from right to left --> DELETE
-              await BlocProvider.of<ManageCategoryCubit>(
+              await BlocProvider.of<ManageFinanceCubit>(
                 context,
-              ).deleteCategory(categoryItemModel);
+              ).setAllFinancesWithCategoryIdNull(
+                categoryItemModel.key.toString(),
+              );
+              await categoryItemModel.delete();
+              // BlocProvider.of<ManageCategoryCubit>(context)
+              //     .getAllCategories();
               return true; // <<< Allow dismiss
             }
             return false;
@@ -62,35 +68,20 @@ class _CategoryListViewState extends State<CategoryListView> {
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 6),
-            child: CategoryItem(categoryItem: categoryItemModel),
+            child: BlocListener<ManageFinanceCubit, ManageFinanceState>(
+              listener: (context, state) async {
+                if (state is SetAllFinancesWithCategoryIdNullFailureState) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(S.of(context).somethingWentWrong)),
+                  );
+                } /* else if (state
+                    is SetAllFinancesWithCategoryIdNullSuccessState) {} */
+              },
+              child: CategoryItem(categoryItem: categoryItemModel),
+            ),
           ),
         );
       },
-    );
-  }
-}
-
-class CategoryItem extends StatelessWidget {
-  const CategoryItem({super.key, required this.categoryItem});
-  final CategoryModel categoryItem;
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: CircleAvatar(
-        radius: 30,
-        backgroundColor:
-            categoryItem.colorHex == null
-                ? Colors.transparent
-                : getColorfromHex(categoryItem.colorHex!),
-        child:
-            categoryItem.icon == null
-                ? const SizedBox()
-                : Icon(
-                  getIconFromName(categoryItem.icon!),
-                  color: Colors.black,
-                ),
-      ),
-      title: Text(categoryItem.name, style: TextStyle(fontSize: 16)),
     );
   }
 }

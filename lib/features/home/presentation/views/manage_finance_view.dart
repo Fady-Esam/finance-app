@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../generated/l10n.dart';
 import '../manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
-import 'widgets/manage_transaction_body.dart';
+import 'widgets/manage_finance_body.dart';
 
 class ManageTransactionView extends StatefulWidget {
   const ManageTransactionView({
@@ -16,11 +16,13 @@ class ManageTransactionView extends StatefulWidget {
     this.financeItemModel,
     this.currentDateTime,
     this.modelDateTime,
+    this.categoryId,
   });
   final TransactionTypeEnum transactionTypeEnum;
   final FinanceItemModel? financeItemModel;
   final DateTime? currentDateTime;
   final DateTime? modelDateTime;
+  final String? categoryId;
   static const routeName = 'manage-transaction-view';
   @override
   State<ManageTransactionView> createState() => _ManageTransactionViewState();
@@ -55,6 +57,7 @@ class _ManageTransactionViewState extends State<ManageTransactionView> {
     );
     currentDateTime = widget.currentDateTime ?? DateTime.now();
     modelDateTime = widget.modelDateTime ?? DateTime.now();
+
   }
 
   @override
@@ -69,20 +72,14 @@ class _ManageTransactionViewState extends State<ManageTransactionView> {
     return BlocListener<ManageFinanceCubit, ManageFinanceState>(
       listener: (context, state) async {
         if (state is AddFinanceSuccessState) {
+          //BlocProvider.of<ManageFinanceCubit>(context).getFinancesByDay(DateTime.now());
           Navigator.pop(context);
         } else if (state is AddFinanceFailureState) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(S.of(context).somethingWentWrong)),
           );
           log(state.failureMessage.toString());
-        } else if (state is UpdateFinanceFailureState) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(S.of(context).somethingWentWrong)),
-          );
-          log(state.failureMessage.toString());
-        } else if (state is UpdateFinanceSuccessState) {
-          Navigator.pop(context);
-        }
+        } 
       },
       child: Scaffold(
         appBar: AppBar(title: Text(appBarTitle)),
@@ -93,6 +90,7 @@ class _ManageTransactionViewState extends State<ManageTransactionView> {
           financeItemModel: widget.financeItemModel,
           modelDateTime: modelDateTime,
           currentDateTime: currentDateTime,
+          categoryId: widget.categoryId,
         ),
       ),
     );

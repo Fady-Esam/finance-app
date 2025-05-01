@@ -394,6 +394,16 @@ class S {
   String get icon_category {
     return Intl.message('Other', name: 'icon_category', desc: '', args: []);
   }
+
+  /// `Select Category`
+  String get select_category {
+    return Intl.message(
+      'Select Category',
+      name: 'select_category',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

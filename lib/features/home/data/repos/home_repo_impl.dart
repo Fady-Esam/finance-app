@@ -95,6 +95,22 @@ class HomeRepoImpl implements HomeRepo {
       return left(Failure(technicalMessage: e.toString()));
     }
   }
+  
+  @override
+  Future<Either<Failure, void>> setAllFinancesWithCategoryIdNull(String categoryId) async{
+    try {
+      var box = Hive.box<FinanceItemModel>('finance');
+      for (var item in box.values) {
+        if (item.categoryId == categoryId) {
+          item.categoryId = null;
+          await item.save();
+        }
+      }
+      return right(null);
+    } catch (e) {
+      return left(Failure(technicalMessage: e.toString()));
+    }
+  }
 
 
 }

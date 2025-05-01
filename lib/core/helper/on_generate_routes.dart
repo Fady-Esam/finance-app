@@ -1,5 +1,5 @@
 import 'package:finance_flutter_app/bottom_nav_bar_view.dart';
-import 'package:finance_flutter_app/features/home/presentation/views/manage_transaction_view.dart';
+import 'package:finance_flutter_app/features/home/presentation/views/manage_finance_view.dart';
 import 'package:finance_flutter_app/features/on_boarding/presentation/views/on_boarding_view.dart';
 import 'package:finance_flutter_app/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +23,7 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
               financeItemModel: args['financeItemModel'],
               modelDateTime: args['modelDateTime'],
               currentDateTime: args['currentDateTime'],
+              categoryId: args['categoryId'],
             ),
       );
     case AllActivitiesView.routeName:

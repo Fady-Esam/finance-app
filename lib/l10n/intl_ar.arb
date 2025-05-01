@@ -47,5 +47,6 @@
     "icon_health": "صحة",
     "icon_bills": "فواتير",
     "icon_travel": "سفر",
-    "icon_category": "أخرى"
+    "icon_category": "أخرى",
+    "select_category": "اختر فئة"
 }

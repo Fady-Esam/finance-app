@@ -78,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "see_all": MessageLookupByLibrary.simpleMessage("See All"),
+    "select_category": MessageLookupByLibrary.simpleMessage("Select Category"),
     "select_color": MessageLookupByLibrary.simpleMessage("Select Color"),
     "select_icon": MessageLookupByLibrary.simpleMessage("Select Icon"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),

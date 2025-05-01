@@ -1,5 +1,4 @@
-import 'package:finance_flutter_app/features/home/data/repos/home_repo_impl.dart';
-import 'package:finance_flutter_app/features/home/presentation/manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../cubits/change_theme_cubit/change_theme_cubit.dart';
@@ -14,7 +13,11 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _HomeViewState extends State<HomeView>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   ThemeMode themeMode = ThemeMode.system;
   Future<void> getSavedTheme() async {
     themeMode =
@@ -40,13 +43,11 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ManageFinanceCubit(homeRepo: HomeRepoImpl()),
-      child: Scaffold(
-        appBar: HomeAppBar(themeMode: themeMode, onThemeChanged: _toggleTheme),
-        drawer: HomeDrawer(themeMode: themeMode, onThemeChanged: _toggleTheme),
-        body: HomeBody(),
-      ),
+    super.build(context);
+    return Scaffold(
+      appBar: HomeAppBar(themeMode: themeMode, onThemeChanged: _toggleTheme),
+      drawer: HomeDrawer(themeMode: themeMode, onThemeChanged: _toggleTheme),
+      body: HomeBody(),
     );
   }
 }

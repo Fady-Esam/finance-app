@@ -1,13 +1,14 @@
+import 'package:finance_flutter_app/features/category/data/models/category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../data/enums/transaction_type_enum.dart';
 import '../../../data/models/finance_item_model.dart';
 import '../../manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
-import 'custom_manage_transaction_button.dart';
+import 'custom_manage_finance_button.dart';
 
-class ManageTransactionRow extends StatelessWidget {
-  const ManageTransactionRow({
+class ManageFinanceButtons extends StatelessWidget {
+  const ManageFinanceButtons({
     super.key,
     required this.transactionTypeEnum,
     required this.amountController,
@@ -15,6 +16,7 @@ class ManageTransactionRow extends StatelessWidget {
     this.financeItemModel,
     required this.modelDateTime,
     required this.currentDateTime,
+    this.selectedCategory,
   });
 
   final TransactionTypeEnum transactionTypeEnum;
@@ -23,6 +25,7 @@ class ManageTransactionRow extends StatelessWidget {
   final FinanceItemModel? financeItemModel;
   final DateTime modelDateTime;
   final DateTime currentDateTime;
+  final CategoryModel? selectedCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,7 @@ class ManageTransactionRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          child: CustomManageTransactionButton(
+          child: CustomManageFinanceButton(
             text: S.of(context).done,
             color: const Color.fromARGB(255, 159, 210, 252),
             onPressed: () async {
@@ -53,9 +56,13 @@ class ManageTransactionRow extends StatelessWidget {
                 financeItemModel!.amount = amount;
                 financeItemModel!.title = titleController.text;
                 financeItemModel!.dateTime = modelDateTime;
-                await BlocProvider.of<ManageFinanceCubit>(
-                  context,
-                ).updateFinance(financeItemModel!, currentDateTime);
+                financeItemModel!.categoryId = selectedCategory?.key.toString();
+                await financeItemModel!.save();
+                BlocProvider.of<ManageFinanceCubit>(context).getFinancesByDay(currentDateTime);
+                Navigator.pop(context);
+                // await BlocProvider.of<ManageFinanceCubit>(
+                //   context,
+                // ).updateFinance(financeItemModel!, currentDateTime);
                 //return;
               } else {
                 await BlocProvider.of<ManageFinanceCubit>(context).addFinance(
@@ -64,7 +71,7 @@ class ManageTransactionRow extends StatelessWidget {
                     //! Here
                     dateTime: modelDateTime,
                     amount: amount,
-                    categoryId: "1",
+                    categoryId: selectedCategory?.key.toString(),
                   ),
                 );
               }
@@ -73,7 +80,7 @@ class ManageTransactionRow extends StatelessWidget {
         ),
         const SizedBox(width: 16),
         Expanded(
-          child: CustomManageTransactionButton(
+          child: CustomManageFinanceButton(
             text: S.of(context).cancel,
             color: const Color.fromARGB(255, 244, 119, 161),
             onPressed: () {

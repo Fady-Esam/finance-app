@@ -21,58 +21,13 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
     );
   }
 
-  Future<void> deleteFinance(FinanceItemModel item) async {
-    emit(DeleteFinanceLoadingState());
-    var res = await homeRepo.deleteFinance(item);
-    res.fold(
-      (l) =>
-          emit(DeleteFinanceFailureState(failureMessage: l.technicalMessage)),
-      (r) {
-        getFinancesByDay(item.dateTime);
-        emit(DeleteFinanceSuccessState());
-      },
-    );
-  }
 
-  Future<void> updateFinance(
-    FinanceItemModel item,
-    DateTime currentDateTime,
-  ) async {
-    emit(UpdateFinanceLoadingState());
-    var res = await homeRepo.updateFinance(item);
-    res.fold(
-      (l) =>
-          emit(UpdateFinanceFailureState(failureMessage: l.technicalMessage)),
-      (r) {
-        if (isSameDate(item.dateTime, DateTime.now()) && isSameDate(currentDateTime, DateTime.now())) {
-          getFinancesByDay(DateTime.now());
-        } else {
-          getFinancesByDay(currentDateTime);
-        }
-        emit(UpdateFinanceSuccessState());
-      },
-    );
-  }
-  //! Get All Func
-  // void getAllFinances()  {
-  //   emit(GetAllFinanceLoadingState());
-  //   var res =  homeRepo.getAllFinances();
-  //   res.fold(
-  //     (l) =>
-  //         emit(GetAllFinanceFailureState(failureMessage: l.technicalMessage)),
-  //     (r) {
-  //       emit(GetAllFinanceSuccessState(financeItems: r));
-  //       getAllTotalBalance();
-  //       getTodayTotalBalance();
-  //     },
-  //   );
+
+  // bool isSameDate(DateTime d1, DateTime d2) {
+  //   return d1.year == d2.year && d1.month == d2.month && d1.day == d2.day;
   // }
 
-  bool isSameDate(DateTime d1, DateTime d2) {
-    return d1.year == d2.year && d1.month == d2.month && d1.day == d2.day;
-  }
-
-  void getFinancesByDay(DateTime dateTime) async {
+  void getFinancesByDay(DateTime dateTime) {
     emit(GetFinancesByDayLoadingState());
     var res = homeRepo.getFinancesByDay(dateTime);
     res.fold(
@@ -80,11 +35,12 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
         GetFinancesByDayFailureState(failureMessage: l.technicalMessage),
       ),
       (r) {
-        if (isSameDate(dateTime, DateTime.now())) {
-          emit(GetTodayFinanceSuccessState(financeItems: r));
-        } else {
-          emit(GetFinancesByDaySuccessState(financeItems: r));
-        }
+        // if (isSameDate(dateTime, DateTime.now())) {
+        //   emit(GetTodayFinanceSuccessState(financeItems: r));
+        // } else {
+        //   emit(GetFinancesByDaySuccessState(financeItems: r));
+        // }
+        emit(GetFinancesByDaySuccessState(financeItems: r));
         getAllTotalBalance();
         getTodayTotalBalance();
       },
@@ -112,4 +68,20 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
       (r) => emit(GetTodayTotalBalanceSuccessState(totalBalance: r)),
     );
   }
+
+  Future<void> setAllFinancesWithCategoryIdNull(String categoryId) async {
+    emit(SetAllFinancesWithCategoryIdNulloadingState());
+    var res = await homeRepo.setAllFinancesWithCategoryIdNull(categoryId);
+    res.fold(
+      (l) => emit(
+        SetAllFinancesWithCategoryIdNullFailureState(failureMessage: l.technicalMessage),
+      ),
+      (r) {
+        emit(SetAllFinancesWithCategoryIdNullSuccessState());
+      },
+    );
+  }
 }
+
+
+

@@ -205,13 +205,6 @@ class _ManageCategoryViewState extends State<ManageCategoryView> {
                       SnackBar(content: Text(S.of(context).somethingWentWrong)),
                     );
                     log(state.failureMessage.toString());
-                  } else if (state is UpdateCategorySuccessState) {
-                    Navigator.pop(context);
-                  } else if (state is UpdateCategoryFailureState) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(S.of(context).somethingWentWrong)),
-                    );
-                    log(state.failureMessage.toString());
                   }
                 },
                 child: ElevatedButton(
@@ -226,9 +219,11 @@ class _ManageCategoryViewState extends State<ManageCategoryView> {
                         widget.categoryModel!.name = _nameController.text;
                         widget.categoryModel!.icon = selectedIcon;
                         widget.categoryModel!.colorHex = selectedColorHex;
-                        await BlocProvider.of<ManageCategoryCubit>(
+                        widget.categoryModel!.save();
+                        BlocProvider.of<ManageCategoryCubit>(
                           context,
-                        ).updateCategory(widget.categoryModel!);
+                        ).getAllCategories();
+                        Navigator.pop(context);
                         return;
                       }
                       await BlocProvider.of<ManageCategoryCubit>(

@@ -18,27 +18,6 @@ class AddCategoryFailureState extends ManageCategoryState {
 
 class AddCategorySuccessState extends ManageCategoryState {}
 
-//! Delete
-class DeleteCategoryLoadingState extends ManageCategoryState {}
-
-class DeleteCategoryFailureState extends ManageCategoryState {
-  final String? failureMessage;
-
-  DeleteCategoryFailureState({required this.failureMessage});
-}
-
-class DeleteCategorySuccessState extends ManageCategoryState {}
-
-//! Update
-class UpdateCategoryLoadingState extends ManageCategoryState {}
-
-class UpdateCategoryFailureState extends ManageCategoryState {
-  final String? failureMessage;
-
-  UpdateCategoryFailureState({required this.failureMessage});
-}
-
-class UpdateCategorySuccessState extends ManageCategoryState {}
 
 //! Get All
 

@@ -47,7 +47,8 @@
     "icon_health": "Health",
     "icon_bills": "Bills",
     "icon_travel": "Travel",
-    "icon_category": "Other"
+    "icon_category": "Other",
+    "select_category": "Select Category"
 
 
 }

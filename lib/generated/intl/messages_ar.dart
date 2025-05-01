@@ -72,6 +72,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "required_field": MessageLookupByLibrary.simpleMessage("هذا الحقل مطلوب"),
     "save": MessageLookupByLibrary.simpleMessage("حفظ"),
     "see_all": MessageLookupByLibrary.simpleMessage("عرض الكل"),
+    "select_category": MessageLookupByLibrary.simpleMessage("اختر فئة"),
     "select_color": MessageLookupByLibrary.simpleMessage("اختر لون"),
     "select_icon": MessageLookupByLibrary.simpleMessage("اختر أيقونة"),
     "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),

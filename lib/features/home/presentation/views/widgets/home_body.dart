@@ -7,7 +7,7 @@ import '../../../data/enums/transaction_type_enum.dart';
 import '../../manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
 import '../../manager/cubits/manage_finance_cubit/manage_finance_state.dart';
 import '../all_activities_view.dart';
-import '../manage_transaction_view.dart';
+import '../manage_finance_view.dart';
 import 'custom_home_container.dart';
 import 'finance_list_view_builder.dart';
 import 'transaction_button.dart';
@@ -23,14 +23,17 @@ class _HomeBodyState extends State<HomeBody> {
   List<FinanceItemModel> financeItems = [];
   double allTotalBalance = 0.0;
   double todayTotalBalance = 0.0;
+  void getFinancesByDay() {
+    BlocProvider.of<ManageFinanceCubit>(
+      context,
+    ).getFinancesByDay(DateTime.now());
+  }
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      BlocProvider.of<ManageFinanceCubit>(
-        context,
-      ).getFinancesByDay(DateTime.now());
+      getFinancesByDay();
     });
   }
 
@@ -165,8 +168,19 @@ class _HomeBodyState extends State<HomeBody> {
                     style: const TextStyle(fontSize: 22),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, AllActivitiesView.routeName);
+                    onTap: () async {
+                      final result = await Navigator.pushNamed(
+                        context,
+                        AllActivitiesView.routeName,
+                      );
+                      //log(result.toString());
+                      if (result != null &&
+                          result is DateTime &&
+                          !(result.day == DateTime.now().day &&
+                          result.month == DateTime.now().month &&
+                          result.year == DateTime.now().year)) {
+                        getFinancesByDay();
+                      }
                     },
                     child: Text(
                       S.of(context).see_all,
@@ -183,14 +197,11 @@ class _HomeBodyState extends State<HomeBody> {
                     SnackBar(content: Text(S.of(context).somethingWentWrong)),
                   );
                   log(state.failureMessage.toString());
-                } else if (state is GetTodayFinanceSuccessState) {
+                } /* else if (state is GetTodayFinanceSuccessState) {
                   financeItems = state.financeItems;
-                } else if (state is DeleteFinanceFailureState) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(S.of(context).somethingWentWrong)),
-                  );
-                  log(state.failureMessage.toString());
-                } /*else if (state is DeleteFinanceSuccessState) {}*/
+                }*/ else if (state is GetFinancesByDaySuccessState) {
+                  financeItems = state.financeItems;
+                }
               },
               builder: (context, state) {
                 return FinanceListViewBuilder(

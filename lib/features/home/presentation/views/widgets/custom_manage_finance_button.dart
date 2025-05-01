@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustomManageTransactionButton extends StatelessWidget {
-  const CustomManageTransactionButton({
+class CustomManageFinanceButton extends StatelessWidget {
+  const CustomManageFinanceButton({
     super.key,
     required this.text,
     required this.color,
