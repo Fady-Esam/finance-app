@@ -1,10 +1,18 @@
+import 'package:finance_flutter_app/core/utils/icon_utils.dart';
+import 'package:finance_flutter_app/features/category/data/models/category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' show DateFormat;
+import '../../../../../core/utils/color_utils.dart';
 import '../../../data/models/finance_item_model.dart';
 
 class FinanceItem extends StatelessWidget {
-  const FinanceItem({super.key, required this.financeItemModel});
+  const FinanceItem({
+    super.key,
+    required this.financeItemModel,
+    this.categoryItem,
+  });
   final FinanceItemModel financeItemModel;
+  final CategoryModel? categoryItem;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +20,14 @@ class FinanceItem extends StatelessWidget {
       leading: CircleAvatar(
         radius: 30,
         backgroundColor:
-            financeItemModel.amount > 0 ? Colors.green : Colors.blue,
+            categoryItem != null
+                ? getColorfromHex(categoryItem!.colorHex ?? "#00FFFFFF")
+                : Colors.transparent,
+        child: categoryItem != null && categoryItem!.icon != null ?  Icon(
+          getIconFromName(categoryItem!.icon!),
+          color: Colors.white,
+          size: 30,
+        ) : null,
       ),
       title: Text(
         financeItemModel.title,

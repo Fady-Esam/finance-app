@@ -13,6 +13,7 @@ abstract class HomeRepo {
   Either<Failure, List<FinanceItemModel>> getAllFinances();
   // Either<Failure, List<FinanceItemModel>> ();
   Either<Failure, List<FinanceItemModel>> getFinancesByDay(DateTime dateTime);
+
   Either<Failure, double> getTodayTotalBalance();
   Either<Failure, double> getAllTotalBalance();
   Future<Either<Failure, void>> setAllFinancesWithCategoryIdNull(String categoryId);

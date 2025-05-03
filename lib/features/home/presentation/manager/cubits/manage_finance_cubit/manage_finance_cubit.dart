@@ -9,6 +9,7 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
     : super(ManageFinanceInitialState());
   final HomeRepo homeRepo;
 
+
   Future<void> addFinance(FinanceItemModel item) async {
     emit(AddFinanceLoadingState());
     var res = await homeRepo.addFinance(item);
@@ -20,8 +21,6 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
       },
     );
   }
-
-
 
   // bool isSameDate(DateTime d1, DateTime d2) {
   //   return d1.year == d2.year && d1.month == d2.month && d1.day == d2.day;
@@ -68,13 +67,16 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
       (r) => emit(GetTodayTotalBalanceSuccessState(totalBalance: r)),
     );
   }
+  
 
   Future<void> setAllFinancesWithCategoryIdNull(String categoryId) async {
     emit(SetAllFinancesWithCategoryIdNulloadingState());
     var res = await homeRepo.setAllFinancesWithCategoryIdNull(categoryId);
     res.fold(
       (l) => emit(
-        SetAllFinancesWithCategoryIdNullFailureState(failureMessage: l.technicalMessage),
+        SetAllFinancesWithCategoryIdNullFailureState(
+          failureMessage: l.technicalMessage,
+        ),
       ),
       (r) {
         emit(SetAllFinancesWithCategoryIdNullSuccessState());
@@ -82,6 +84,3 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
     );
   }
 }
-
-
-

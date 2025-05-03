@@ -35,4 +35,20 @@ class GetAllCategorySuccessState extends ManageCategoryState {
   GetAllCategorySuccessState({required this.categoryItems});
 }
 
+//! Get By Id
+
+class GetCategoryByIdLoadingState extends ManageCategoryState {}
+
+class GetCategoryByIdFailureState extends ManageCategoryState {
+  final String? failureMessage;
+
+  GetCategoryByIdFailureState({required this.failureMessage});
+}
+
+class GetCategoryByIdSuccessState extends ManageCategoryState {
+  final CategoryModel? categoryItem;
+
+  GetCategoryByIdSuccessState({required this.categoryItem});
+}
+
 

@@ -3,6 +3,9 @@ import 'package:finance_flutter_app/features/home/data/models/finance_item_model
 import 'package:finance_flutter_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../category/data/models/category_model.dart';
+import '../../../../category/presentation/manager/cubits/manage_category_cubit/manage_category_cubit.dart';
+import '../../../../category/presentation/views/widgets/category_item.dart';
 import '../../../data/enums/transaction_type_enum.dart';
 import '../../manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
 import '../../manager/cubits/manage_finance_cubit/manage_finance_state.dart';
@@ -23,6 +26,7 @@ class _HomeBodyState extends State<HomeBody> {
   List<FinanceItemModel> financeItems = [];
   double allTotalBalance = 0.0;
   double todayTotalBalance = 0.0;
+  Map<int, CategoryModel> categoryMap = {};
   void getFinancesByDay() {
     BlocProvider.of<ManageFinanceCubit>(
       context,
@@ -35,6 +39,12 @@ class _HomeBodyState extends State<HomeBody> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       getFinancesByDay();
     });
+    // final categoryIds = financeItems.map((e) => e.categoryId).toSet();
+    // categoryMap = BlocProvider.of<ManageCategoryCubit>(
+    //   context,
+    // ).getCategoriesByIds(categoryIds);
+    // setState(() {});
+    // log(categoryMap.toString());
   }
 
   String formatAmount(double value) {
@@ -113,6 +123,7 @@ class _HomeBodyState extends State<HomeBody> {
                 );
               },
             ),
+
             const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -177,8 +188,8 @@ class _HomeBodyState extends State<HomeBody> {
                       if (result != null &&
                           result is DateTime &&
                           !(result.day == DateTime.now().day &&
-                          result.month == DateTime.now().month &&
-                          result.year == DateTime.now().year)) {
+                              result.month == DateTime.now().month &&
+                              result.year == DateTime.now().year)) {
                         getFinancesByDay();
                       }
                     },
@@ -197,10 +208,19 @@ class _HomeBodyState extends State<HomeBody> {
                     SnackBar(content: Text(S.of(context).somethingWentWrong)),
                   );
                   log(state.failureMessage.toString());
-                } /* else if (state is GetTodayFinanceSuccessState) {
+                } else if (state is GetFinancesByDaySuccessState) {
                   financeItems = state.financeItems;
-                }*/ else if (state is GetFinancesByDaySuccessState) {
-                  financeItems = state.financeItems;
+                  final categoryCubit = BlocProvider.of<ManageCategoryCubit>(
+                    context,
+                  );
+                  final categoryIds =
+                      state.financeItems
+                          .map((item) => item.categoryId)
+                          .toSet()
+                          .toList();
+                  for (final categoryId in categoryIds) {
+                    categoryCubit.getCategoryById(categoryId);
+                  }
                 }
               },
               builder: (context, state) {

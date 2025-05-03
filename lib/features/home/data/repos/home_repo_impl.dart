@@ -4,7 +4,6 @@ import 'package:finance_flutter_app/features/home/data/models/finance_item_model
 import 'package:finance_flutter_app/features/home/data/repos/home_repo.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-
 class HomeRepoImpl implements HomeRepo {
   @override
   Future<Either<Failure, void>> addFinance(FinanceItemModel item) async {
@@ -48,20 +47,6 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Either<Failure, double> getAllTotalBalance() {
-    try {
-      var box = Hive.box<FinanceItemModel>('finance');
-      double totalBalance = 0.0;
-      for (var item in box.values) {
-        totalBalance += item.amount;
-      }
-      return right(totalBalance);
-    } catch (e) {
-      return left(Failure(technicalMessage: e.toString()));
-    }
-  }
-
-  @override
   Either<Failure, List<FinanceItemModel>> getFinancesByDay(DateTime dateTime) {
     try {
       var box = Hive.box<FinanceItemModel>('finance');
@@ -77,6 +62,19 @@ class HomeRepoImpl implements HomeRepo {
     }
   }
 
+  @override
+  Either<Failure, double> getAllTotalBalance() {
+    try {
+      var box = Hive.box<FinanceItemModel>('finance');
+      double totalBalance = 0.0;
+      for (var item in box.values) {
+        totalBalance += item.amount;
+      }
+      return right(totalBalance);
+    } catch (e) {
+      return left(Failure(technicalMessage: e.toString()));
+    }
+  }
   @override
   Either<Failure, double> getTodayTotalBalance() {
     try {
@@ -95,9 +93,12 @@ class HomeRepoImpl implements HomeRepo {
       return left(Failure(technicalMessage: e.toString()));
     }
   }
-  
+
+
   @override
-  Future<Either<Failure, void>> setAllFinancesWithCategoryIdNull(String categoryId) async{
+  Future<Either<Failure, void>> setAllFinancesWithCategoryIdNull(
+    String categoryId,
+  ) async {
     try {
       var box = Hive.box<FinanceItemModel>('finance');
       for (var item in box.values) {
@@ -111,6 +112,4 @@ class HomeRepoImpl implements HomeRepo {
       return left(Failure(technicalMessage: e.toString()));
     }
   }
-
-
 }

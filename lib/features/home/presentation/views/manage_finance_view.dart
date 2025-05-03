@@ -22,7 +22,7 @@ class ManageTransactionView extends StatefulWidget {
   final FinanceItemModel? financeItemModel;
   final DateTime? currentDateTime;
   final DateTime? modelDateTime;
-  final String? categoryId;
+  final int? categoryId;
   static const routeName = 'manage-transaction-view';
   @override
   State<ManageTransactionView> createState() => _ManageTransactionViewState();
@@ -70,9 +70,9 @@ class _ManageTransactionViewState extends State<ManageTransactionView> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<ManageFinanceCubit, ManageFinanceState>(
-      listener: (context, state) async {
+      listener: (context, state) {
         if (state is AddFinanceSuccessState) {
-          //BlocProvider.of<ManageFinanceCubit>(context).getFinancesByDay(DateTime.now());
+          // BlocProvider.of<ManageFinanceCubit>(context).getFinancesByDay(DateTime.now());
           Navigator.pop(context);
         } else if (state is AddFinanceFailureState) {
           ScaffoldMessenger.of(context).showSnackBar(

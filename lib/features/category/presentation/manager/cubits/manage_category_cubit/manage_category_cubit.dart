@@ -21,7 +21,6 @@ class ManageCategoryCubit extends Cubit<ManageCategoryState> {
     );
   }
 
-
   void getAllCategories() {
     emit(GetAllCategoryLoadingState());
     var res = homeRepo.getAllCategories();
@@ -32,5 +31,21 @@ class ManageCategoryCubit extends Cubit<ManageCategoryState> {
         emit(GetAllCategorySuccessState(categoryItems: r));
       },
     );
+  }
+
+
+  void getCategoryById(int? categoryId) {
+    emit(GetCategoryByIdLoadingState());
+    var res = homeRepo.getCategoryById(categoryId);
+    res.fold(
+      (l) =>
+          emit(GetCategoryByIdFailureState(failureMessage: l.technicalMessage)),
+      (r) {
+        emit(GetCategoryByIdSuccessState(categoryItem: r));
+      },
+    );
+  }
+  Map<int, CategoryModel> getCategoriesByIds(Set<int?> categoryIds) {
+    return homeRepo.getCategoriesByIds(categoryIds);
   }
 }

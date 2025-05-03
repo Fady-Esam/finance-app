@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:finance_flutter_app/features/category/data/models/category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,7 +58,8 @@ class ManageFinanceButtons extends StatelessWidget {
                 financeItemModel!.amount = amount;
                 financeItemModel!.title = titleController.text;
                 financeItemModel!.dateTime = modelDateTime;
-                financeItemModel!.categoryId = selectedCategory?.key.toString();
+                financeItemModel!.categoryId = selectedCategory?.key;
+                // log("categoryId: ${financeItemModel!.categoryId}");
                 await financeItemModel!.save();
                 BlocProvider.of<ManageFinanceCubit>(context).getFinancesByDay(currentDateTime);
                 Navigator.pop(context);
@@ -71,7 +74,7 @@ class ManageFinanceButtons extends StatelessWidget {
                     //! Here
                     dateTime: modelDateTime,
                     amount: amount,
-                    categoryId: selectedCategory?.key.toString(),
+                    categoryId: selectedCategory?.key,
                   ),
                 );
               }

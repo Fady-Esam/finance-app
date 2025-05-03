@@ -20,7 +20,7 @@ class FinanceItemModelAdapter extends TypeAdapter<FinanceItemModel> {
       title: fields[0] as String,
       dateTime: fields[1] as DateTime,
       amount: fields[2] as double,
-      categoryId: fields[3] as String?,
+      categoryId: fields[3] as int?,
     );
   }
 

@@ -19,13 +19,12 @@ class CategoryRepoImpl implements CategoryRepo {
     }
   }
 
-
   @override
   Either<Failure, List<CategoryModel>> getAllCategories() {
     try {
       var box = Hive.box<CategoryModel>('category');
       List<CategoryModel> categories = box.values.toList();
-      for(var c in categories){
+      for (var c in categories) {
         log(c.name);
       }
       return right(box.values.toList());
@@ -34,5 +33,32 @@ class CategoryRepoImpl implements CategoryRepo {
     }
   }
 
+  @override
+  Either<Failure, CategoryModel?> getCategoryById(int? categoryId) {
+    try {
+      var box = Hive.box<CategoryModel>('category');
+      return right(box.get(categoryId));
+    } catch (e) {
+      return left(Failure(technicalMessage: e.toString()));
+    }
+  }
 
+  @override
+  Map<int, CategoryModel> getCategoriesByIds(Set<int?> categoryIds) {
+    try {
+      final box = Hive.box<CategoryModel>('category');
+      final Map<int, CategoryModel> categories = {};
+      for (final id in categoryIds) {
+        if (id != null) {
+          final category = box.get(id);
+          if (category != null) {
+            categories[id] = category;
+          }
+        }
+      }
+      return categories;
+    } catch (e) {
+      return {};
+    }
+  }
 }

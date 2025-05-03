@@ -14,9 +14,9 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView>
-    with AutomaticKeepAliveClientMixin {
-  @override
-  bool get wantKeepAlive => true;
+    /*with AutomaticKeepAliveClientMixin*/ {
+  // @override
+  // bool get wantKeepAlive => true;
 
   ThemeMode themeMode = ThemeMode.system;
   Future<void> getSavedTheme() async {
@@ -43,7 +43,7 @@ class _HomeViewState extends State<HomeView>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
+    // super.build(context);
     return Scaffold(
       appBar: HomeAppBar(themeMode: themeMode, onThemeChanged: _toggleTheme),
       drawer: HomeDrawer(themeMode: themeMode, onThemeChanged: _toggleTheme),

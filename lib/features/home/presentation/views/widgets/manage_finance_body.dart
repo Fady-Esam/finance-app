@@ -1,5 +1,6 @@
 import 'package:finance_flutter_app/core/utils/color_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/utils/icon_utils.dart';
 import '../../../../../generated/l10n.dart';
@@ -32,7 +33,7 @@ class ManageTransactionBody extends StatefulWidget {
   final FinanceItemModel? financeItemModel;
   final DateTime? currentDateTime;
   final DateTime? modelDateTime;
-  final String? categoryId;
+  final int? categoryId;
 
   @override
   State<ManageTransactionBody> createState() => _ManageTransactionBodyState();
@@ -42,12 +43,15 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
   late DateTime selectedDate;
   late DateTime currentDateTime;
   CategoryModel? selectedCategory;
-
   @override
   void initState() {
     super.initState();
     selectedDate = widget.modelDateTime ?? DateTime.now();
     currentDateTime = widget.currentDateTime ?? DateTime.now();
+    // setState(() {
+    //   categoryList = BlocProvider.of<ManageCategoryCubit>(context)
+    //       .getAllCategories();
+    // });
     BlocProvider.of<ManageCategoryCubit>(context).getAllCategories();
   }
 
@@ -73,8 +77,7 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
                     value:
                         widget.categoryId != null
                             ? categoryList.firstWhere(
-                              (category) =>
-                                  category.key.toString() == widget.categoryId,
+                              (category) => category.key == widget.categoryId,
                               //orElse: () => null,
                             )
                             : selectedCategory,
@@ -114,7 +117,7 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
                     },
                   );
                 } else {
-                  return Text(S.of(context).somethingWentWrong);
+                  return const SizedBox();
                 }
               },
             ),
