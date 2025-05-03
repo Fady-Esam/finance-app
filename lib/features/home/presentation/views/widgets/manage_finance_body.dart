@@ -1,8 +1,7 @@
-import 'package:finance_flutter_app/core/utils/color_utils.dart';
+import 'package:finance_flutter_app/features/transaction/data/models/filter_transaction_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/utils/icon_utils.dart';
+import '../../../../../core/widgets/drop_down_button_form_field_category_items.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../category/data/models/category_model.dart';
 import '../../../../category/presentation/manager/cubits/manage_category_cubit/manage_category_cubit.dart';
@@ -25,6 +24,8 @@ class ManageTransactionBody extends StatefulWidget {
     required this.currentDateTime,
     this.financeItemModel,
     this.categoryId,
+    this.filterTransactionModel,
+
   });
 
   final TransactionTypeEnum transactionTypeEnum;
@@ -34,6 +35,7 @@ class ManageTransactionBody extends StatefulWidget {
   final DateTime? currentDateTime;
   final DateTime? modelDateTime;
   final int? categoryId;
+  final FilterTransactionModel? filterTransactionModel;
 
   @override
   State<ManageTransactionBody> createState() => _ManageTransactionBodyState();
@@ -48,10 +50,6 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
     super.initState();
     selectedDate = widget.modelDateTime ?? DateTime.now();
     currentDateTime = widget.currentDateTime ?? DateTime.now();
-    // setState(() {
-    //   categoryList = BlocProvider.of<ManageCategoryCubit>(context)
-    //       .getAllCategories();
-    // });
     BlocProvider.of<ManageCategoryCubit>(context).getAllCategories();
   }
 
@@ -73,44 +71,21 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
               builder: (context, state) {
                 if (state is GetAllCategorySuccessState) {
                   final categoryList = state.categoryItems;
-                  return DropdownButtonFormField<CategoryModel>(
-                    value:
-                        widget.categoryId != null
-                            ? categoryList.firstWhere(
-                              (category) => category.key == widget.categoryId,
-                              //orElse: () => null,
-                            )
-                            : selectedCategory,
-                    hint: Text(S.of(context).select_category),
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 8,
-                      ),
-                    ),
-                    icon: Icon(Icons.arrow_drop_down),
-                    items:
-                        categoryList.map((category) {
-                          return DropdownMenuItem<CategoryModel>(
-                            value: category,
-                            child: Row(
-                              children: [
-                                Icon(
-                                  getIconFromName(category.icon ?? ''),
-                                  color: getColorfromHex(
-                                    category.colorHex ?? "#000000",
-                                  ),
-                                ),
-                                const SizedBox(width: 8),
-                                Text(category.name),
-                              ],
-                            ),
-                          );
-                        }).toList(),
-                    onChanged: (value) {
+                  CategoryModel? initialCategory;
+                  if (widget.categoryId != null) {
+                    try {
+                      initialCategory = categoryList.firstWhere(
+                        (category) => category.key == widget.categoryId,
+                      );
+                    } catch (e) {
+                      initialCategory = null;
+                    }
+                  }
+                  return DropdownButtonFormFieldCategoryItems(
+                    categories: categoryList,
+                    noTitle: S.of(context).none,
+                    selectedCategory: selectedCategory ?? initialCategory,
+                    onCategoryChanged: (value) {
                       setState(() {
                         selectedCategory = value;
                       });
@@ -156,6 +131,7 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
               modelDateTime: selectedDate,
               currentDateTime: currentDateTime,
               selectedCategory: selectedCategory,
+              filterTransactionModel: widget.filterTransactionModel ,
             ),
             const SizedBox(height: 18),
           ],

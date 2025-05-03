@@ -21,12 +21,7 @@ class _CategoryViewState extends State<CategoryView> {
   @override
   void initState() {
     super.initState();
-    // final box = Hive.box<CategoryModel>('category');
-    // var data = box.values.toList();
-    // for(var item in data) {
-    //   log("Key ${item.key.toString()}");
-    //   log(widget.key.runtimeType.toString());
-    // }
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       BlocProvider.of<ManageCategoryCubit>(context).getAllCategories();
     });

@@ -39,7 +39,7 @@ class _CategoryListViewState extends State<CategoryListView> {
               await BlocProvider.of<ManageFinanceCubit>(
                 context,
               ).setAllFinancesWithCategoryIdNull(
-                categoryItemModel.key.toString(),
+                categoryItemModel.key,
               );
               await categoryItemModel.delete();
               // BlocProvider.of<ManageCategoryCubit>(context)

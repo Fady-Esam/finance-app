@@ -46,7 +46,7 @@ class HomeDrawer extends StatelessWidget {
             title: Text(S.of(context).all_activities),
             trailing: const Icon(Icons.local_activity),
             onTap: () {
-              Navigator.pushNamed(context, AllActivitiesView.routeName);
+              //Navigator.pushNamed(context, AllActivitiesView.routeName);
             },
           ),
           ListTile(

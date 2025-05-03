@@ -220,6 +220,16 @@ class S {
     return Intl.message('Activity', name: 'activity', desc: '', args: []);
   }
 
+  /// `Today's Activity`
+  String get todya_activity {
+    return Intl.message(
+      'Today\'s Activity',
+      name: 'todya_activity',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `See All`
   String get see_all {
     return Intl.message('See All', name: 'see_all', desc: '', args: []);
@@ -403,6 +413,46 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `Transactions`
+  String get transactions {
+    return Intl.message(
+      'Transactions',
+      name: 'transactions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get all {
+    return Intl.message('All', name: 'all', desc: '', args: []);
+  }
+
+  /// `Income`
+  String get income {
+    return Intl.message('Income', name: 'income', desc: '', args: []);
+  }
+
+  /// `Expense`
+  String get expense {
+    return Intl.message('Expense', name: 'expense', desc: '', args: []);
+  }
+
+  /// `No Category Filter`
+  String get no_category_filter {
+    return Intl.message(
+      'No Category Filter',
+      name: 'no_category_filter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `None`
+  String get none {
+    return Intl.message('None', name: 'none', desc: '', args: []);
   }
 }
 

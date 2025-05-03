@@ -1,4 +1,5 @@
 import 'package:finance_flutter_app/features/home/presentation/views/home_view.dart';
+import 'package:finance_flutter_app/features/transaction/presentation/views/transaction_view.dart';
 import 'package:finance_flutter_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
@@ -17,8 +18,9 @@ class _BottomNavBarViewState extends State<BottomNavBarView> {
 
   final List<Widget> _screens = const [
     HomeView(),
+    TransactionView(),
     CategoryView(),
-    Placeholder(),
+    //Placeholder(),
     Placeholder(),
   ];
 
@@ -90,12 +92,12 @@ class _BottomNavBarViewState extends State<BottomNavBarView> {
               label: S.of(context).home,
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.category),
-              label: S.of(context).categories,
+              icon: const Icon(Icons.receipt_long),
+              label: S.of(context).transactions,
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.notifications),
-              label: S.of(context).notifications,
+              icon: const Icon(Icons.category),
+              label: S.of(context).categories,
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.settings),

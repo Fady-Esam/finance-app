@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "activity": MessageLookupByLibrary.simpleMessage("النشاط"),
     "add": MessageLookupByLibrary.simpleMessage("إضافة"),
     "add_category": MessageLookupByLibrary.simpleMessage("إضافة فئة"),
+    "all": MessageLookupByLibrary.simpleMessage("الكل"),
     "all_activities": MessageLookupByLibrary.simpleMessage("جميع الأنشطة"),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "categories": MessageLookupByLibrary.simpleMessage("الفئات"),
@@ -36,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "details": MessageLookupByLibrary.simpleMessage("التفاصيل هنا..."),
     "done": MessageLookupByLibrary.simpleMessage("تم"),
     "edit": MessageLookupByLibrary.simpleMessage("تعديل"),
+    "expense": MessageLookupByLibrary.simpleMessage("مصروفات"),
     "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "icon_bills": MessageLookupByLibrary.simpleMessage("فواتير"),
     "icon_category": MessageLookupByLibrary.simpleMessage("أخرى"),
@@ -47,9 +49,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "icon_shopping": MessageLookupByLibrary.simpleMessage("تسوق"),
     "icon_transport": MessageLookupByLibrary.simpleMessage("مواصلات"),
     "icon_travel": MessageLookupByLibrary.simpleMessage("سفر"),
+    "income": MessageLookupByLibrary.simpleMessage("دخل"),
     "minus": MessageLookupByLibrary.simpleMessage("نقص"),
     "my_balance": MessageLookupByLibrary.simpleMessage("رصيدي"),
     "next": MessageLookupByLibrary.simpleMessage("التالى"),
+    "no_category_filter": MessageLookupByLibrary.simpleMessage(
+      "بدون تصفية فئة",
+    ),
+    "none": MessageLookupByLibrary.simpleMessage("لا شيء"),
     "notifications": MessageLookupByLibrary.simpleMessage("الإشعارات"),
     "onBoarding_subTitle_1": MessageLookupByLibrary.simpleMessage(
       "احصل على رؤية واضحة لمصروفاتك الشهرية",
@@ -85,6 +92,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "today_total_balance": MessageLookupByLibrary.simpleMessage(
       " إجمالي الرصيد اليومي",
     ),
+    "todya_activity": MessageLookupByLibrary.simpleMessage("نشاط اليوم"),
+    "transactions": MessageLookupByLibrary.simpleMessage("المعاملات"),
     "welcome_title": MessageLookupByLibrary.simpleMessage("مرحبًا بك "),
   };
 }

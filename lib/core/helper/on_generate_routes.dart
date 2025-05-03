@@ -24,10 +24,11 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
               modelDateTime: args['modelDateTime'],
               currentDateTime: args['currentDateTime'],
               categoryId: args['categoryId'],
+              filterTransactionModel: args['filterTransactionModel'],
             ),
       );
-    case AllActivitiesView.routeName:
-      return MaterialPageRoute(builder: (context) => const AllActivitiesView());
+    // case AllActivitiesView.routeName:
+    //   return MaterialPageRoute(builder: (context) => const AllActivitiesView());
     case ManageCategoryView.routeName:
       final args = settings.arguments as Map<String, dynamic>;
       return MaterialPageRoute(

@@ -4,8 +4,6 @@ import 'package:finance_flutter_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../category/data/models/category_model.dart';
-import '../../../../category/presentation/manager/cubits/manage_category_cubit/manage_category_cubit.dart';
-import '../../../../category/presentation/views/widgets/category_item.dart';
 import '../../../data/enums/transaction_type_enum.dart';
 import '../../manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
 import '../../manager/cubits/manage_finance_cubit/manage_finance_state.dart';
@@ -30,7 +28,7 @@ class _HomeBodyState extends State<HomeBody> {
   void getFinancesByDay() {
     BlocProvider.of<ManageFinanceCubit>(
       context,
-    ).getFinancesByDay(DateTime.now());
+    ).getFinancesByDate(DateTime.now());
   }
 
   @override
@@ -39,12 +37,6 @@ class _HomeBodyState extends State<HomeBody> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       getFinancesByDay();
     });
-    // final categoryIds = financeItems.map((e) => e.categoryId).toSet();
-    // categoryMap = BlocProvider.of<ManageCategoryCubit>(
-    //   context,
-    // ).getCategoriesByIds(categoryIds);
-    // setState(() {});
-    // log(categoryMap.toString());
   }
 
   String formatAmount(double value) {
@@ -55,7 +47,6 @@ class _HomeBodyState extends State<HomeBody> {
       if (formattedValue.endsWith('.00')) {
         formattedValue = formattedValue.substring(0, formattedValue.length - 3);
       }
-      //log((formattedValue + suffix).toString());
       return formattedValue + suffix;
     }
 
@@ -71,9 +62,7 @@ class _HomeBodyState extends State<HomeBody> {
   }
 
   Future<void> _onRefresh() async {
-    BlocProvider.of<ManageFinanceCubit>(
-      context,
-    ).getFinancesByDay(DateTime.now());
+    getFinancesByDay();
   }
 
   @override
@@ -123,7 +112,6 @@ class _HomeBodyState extends State<HomeBody> {
                 );
               },
             ),
-
             const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -170,63 +158,57 @@ class _HomeBodyState extends State<HomeBody> {
             ),
             const SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    S.of(context).activity,
-                    style: const TextStyle(fontSize: 22),
-                  ),
-                  GestureDetector(
-                    onTap: () async {
-                      final result = await Navigator.pushNamed(
-                        context,
-                        AllActivitiesView.routeName,
-                      );
-                      //log(result.toString());
-                      if (result != null &&
-                          result is DateTime &&
-                          !(result.day == DateTime.now().day &&
-                              result.month == DateTime.now().month &&
-                              result.year == DateTime.now().year)) {
-                        getFinancesByDay();
-                      }
-                    },
-                    child: Text(
-                      S.of(context).see_all,
-                      style: const TextStyle(fontSize: 19),
-                    ),
-                  ),
-                ],
+              padding: const EdgeInsetsDirectional.only(start: 16),
+              child: Align(
+                alignment:
+                    Directionality.of(context) == TextDirection.ltr
+                        ? Alignment.centerLeft
+                        : Alignment.centerRight,
+                child: Text(
+                  S.of(context).todya_activity,
+                  style: const TextStyle(fontSize: 18),
+                ),
               ),
             ),
+
             BlocConsumer<ManageFinanceCubit, ManageFinanceState>(
               listener: (context, state) {
-                if (state is GetFinancesByDayFailureState) {
+                if (state is GetFinancesByDateFailureState) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text(S.of(context).somethingWentWrong)),
                   );
                   log(state.failureMessage.toString());
-                } else if (state is GetFinancesByDaySuccessState) {
+                } else if (state is GetFinancesByDateSuccessState) {
                   financeItems = state.financeItems;
-                  final categoryCubit = BlocProvider.of<ManageCategoryCubit>(
-                    context,
-                  );
-                  final categoryIds =
-                      state.financeItems
-                          .map((item) => item.categoryId)
-                          .toSet()
-                          .toList();
-                  for (final categoryId in categoryIds) {
-                    categoryCubit.getCategoryById(categoryId);
-                  }
                 }
               },
               builder: (context, state) {
                 return FinanceListViewBuilder(
                   financeItems: financeItems,
-                  currentDateTime: DateTime.now(),
+                  onEdit: (financeItemModel) {
+                    // Swipe from left to right --> EDIT
+                    Navigator.pushNamed(
+                      context,
+                      ManageTransactionView.routeName,
+                      arguments: {
+                        'transactionTypeEnum':
+                            financeItemModel.amount < 0
+                                ? TransactionTypeEnum.editMinus
+                                : TransactionTypeEnum.editPlus,
+                        'financeItemModel': financeItemModel,
+                        'modelDateTime': financeItemModel.dateTime,
+                        'currentDateTime': DateTime.now(),
+                        "categoryId": financeItemModel.categoryId,
+                        'filterTransactionModel' : null,
+                      },
+                    );
+                  },
+                  onDelete: (financeItemModel) async {
+                    await financeItemModel.delete();
+                    BlocProvider.of<ManageFinanceCubit>(
+                      context,
+                    ).getFinancesByDate(DateTime.now());
+                  },
                 );
               },
             ),

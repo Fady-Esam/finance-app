@@ -16,27 +16,37 @@ class AddFinanceFailureState extends ManageFinanceState {
 class AddFinanceSuccessState extends ManageFinanceState {}
 
 
-//! Get By Day
+//! Get Filtered Finances
 
-class GetFinancesByDayLoadingState extends ManageFinanceState {}
+class GetFilteredFinancesLoadingState extends ManageFinanceState {}
 
-class GetFinancesByDayFailureState extends ManageFinanceState {
+class GetFilteredFinancesFailureState extends ManageFinanceState {
   final String? failureMessage;
 
-  GetFinancesByDayFailureState({required this.failureMessage});
+  GetFilteredFinancesFailureState({required this.failureMessage});
 }
 
-class GetFinancesByDaySuccessState extends ManageFinanceState {
+class GetFilteredFinancesSuccessState extends ManageFinanceState {
   final List<FinanceItemModel> financeItems;
 
-  GetFinancesByDaySuccessState({required this.financeItems});
+  GetFilteredFinancesSuccessState({required this.financeItems});
+}
+//! Get Finances By Date
+
+class GetFinancesByDateLoadingState extends ManageFinanceState {}
+
+class GetFinancesByDateFailureState extends ManageFinanceState {
+  final String? failureMessage;
+
+  GetFinancesByDateFailureState({required this.failureMessage});
 }
 
-// class GetTodayFinanceSuccessState extends ManageFinanceState {
-//   final List<FinanceItemModel> financeItems;
+class GetFinancesByDateSuccessState extends ManageFinanceState {
+  final List<FinanceItemModel> financeItems;
 
-//   GetTodayFinanceSuccessState({required this.financeItems});
-// }
+  GetFinancesByDateSuccessState({required this.financeItems});
+}
+
 
 //! Get Today Total Balance
 

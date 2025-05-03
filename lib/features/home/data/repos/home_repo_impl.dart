@@ -45,18 +45,46 @@ class HomeRepoImpl implements HomeRepo {
       return left(Failure(technicalMessage: e.toString()));
     }
   }
-
-  @override
-  Either<Failure, List<FinanceItemModel>> getFinancesByDay(DateTime dateTime) {
+    @override
+  Either<Failure, List<FinanceItemModel>> getFinancesByDate(DateTime dateTime) {
     try {
       var box = Hive.box<FinanceItemModel>('finance');
-      return right(
-        box.values.where((item) {
-          return item.dateTime.year == dateTime.year &&
-              item.dateTime.month == dateTime.month &&
-              item.dateTime.day == dateTime.day;
-        }).toList(),
-      );
+      final filteredItems = box.values.where((item) {
+        return item.dateTime.year == dateTime.year &&
+            item.dateTime.month == dateTime.month &&
+            item.dateTime.day == dateTime.day;
+      }).toList();
+      return right(filteredItems);
+    } catch (e) {
+      return left(Failure(technicalMessage: e.toString()));
+    }
+  }
+
+  @override
+  Either<Failure, List<FinanceItemModel>> getFilteredFinances(
+    DateTime dateTime, {
+    int? categoryId,
+    bool? isAmountPositive,
+  }) {
+    try {
+      final box = Hive.box<FinanceItemModel>('finance');
+      final filteredItems =
+          box.values.where((item) {
+            final isSameDate =
+                item.dateTime.year == dateTime.year &&
+                item.dateTime.month == dateTime.month &&
+                item.dateTime.day == dateTime.day;
+            final isMatchingCategory =
+                categoryId == null || item.categoryId == categoryId;
+            final isMatchingAmountSign =
+                isAmountPositive == null
+                    ? true
+                    : isAmountPositive
+                    ? item.amount >= 0
+                    : item.amount < 0;
+            return isSameDate && isMatchingCategory && isMatchingAmountSign;
+          }).toList();
+      return right(filteredItems);
     } catch (e) {
       return left(Failure(technicalMessage: e.toString()));
     }
@@ -75,6 +103,7 @@ class HomeRepoImpl implements HomeRepo {
       return left(Failure(technicalMessage: e.toString()));
     }
   }
+
   @override
   Either<Failure, double> getTodayTotalBalance() {
     try {
@@ -94,10 +123,9 @@ class HomeRepoImpl implements HomeRepo {
     }
   }
 
-
   @override
   Future<Either<Failure, void>> setAllFinancesWithCategoryIdNull(
-    String categoryId,
+    int categoryId,
   ) async {
     try {
       var box = Hive.box<FinanceItemModel>('finance');
@@ -112,4 +140,8 @@ class HomeRepoImpl implements HomeRepo {
       return left(Failure(technicalMessage: e.toString()));
     }
   }
+  
+
+
+
 }

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../generated/l10n.dart';
+import '../../../transaction/data/models/filter_transaction_model.dart';
 import '../manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
 import 'widgets/manage_finance_body.dart';
 
@@ -17,12 +18,16 @@ class ManageTransactionView extends StatefulWidget {
     this.currentDateTime,
     this.modelDateTime,
     this.categoryId,
+    this.filterTransactionModel,
+
   });
   final TransactionTypeEnum transactionTypeEnum;
   final FinanceItemModel? financeItemModel;
   final DateTime? currentDateTime;
   final DateTime? modelDateTime;
   final int? categoryId;
+  final FilterTransactionModel? filterTransactionModel;
+
   static const routeName = 'manage-transaction-view';
   @override
   State<ManageTransactionView> createState() => _ManageTransactionViewState();
@@ -57,7 +62,6 @@ class _ManageTransactionViewState extends State<ManageTransactionView> {
     );
     currentDateTime = widget.currentDateTime ?? DateTime.now();
     modelDateTime = widget.modelDateTime ?? DateTime.now();
-
   }
 
   @override
@@ -72,14 +76,13 @@ class _ManageTransactionViewState extends State<ManageTransactionView> {
     return BlocListener<ManageFinanceCubit, ManageFinanceState>(
       listener: (context, state) {
         if (state is AddFinanceSuccessState) {
-          // BlocProvider.of<ManageFinanceCubit>(context).getFinancesByDay(DateTime.now());
           Navigator.pop(context);
         } else if (state is AddFinanceFailureState) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(S.of(context).somethingWentWrong)),
           );
           log(state.failureMessage.toString());
-        } 
+        }
       },
       child: Scaffold(
         appBar: AppBar(title: Text(appBarTitle)),
@@ -91,6 +94,7 @@ class _ManageTransactionViewState extends State<ManageTransactionView> {
           modelDateTime: modelDateTime,
           currentDateTime: currentDateTime,
           categoryId: widget.categoryId,
+          filterTransactionModel: widget.filterTransactionModel,
         ),
       ),
     );

@@ -1,15 +1,10 @@
-import 'dart:developer';
-
 import 'package:finance_flutter_app/features/home/data/enums/transaction_type_enum.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../generated/l10n.dart';
-import '../../../../category/data/models/category_model.dart';
 import '../../../../category/presentation/manager/cubits/manage_category_cubit/manage_category_cubit.dart';
 import '../../../../category/presentation/manager/cubits/manage_category_cubit/manage_category_state.dart';
-import '../../../../category/presentation/views/widgets/category_item.dart';
 import '../../../data/models/finance_item_model.dart';
 import '../../manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
 import '../manage_finance_view.dart';
@@ -19,17 +14,17 @@ class FinanceListViewBuilder extends StatefulWidget {
   const FinanceListViewBuilder({
     super.key,
     required this.financeItems,
-    required this.currentDateTime,
+    required this.onDelete,
+    required this.onEdit,
   });
   final List<FinanceItemModel> financeItems;
-  final DateTime currentDateTime;
+  final Future<void> Function(FinanceItemModel financeItemModel) onDelete;
+  final void Function(FinanceItemModel financeItemModel) onEdit;
   @override
   State<FinanceListViewBuilder> createState() => _FinanceListViewBuilderState();
 }
 
 class _FinanceListViewBuilderState extends State<FinanceListViewBuilder> {
-
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ManageCategoryCubit, ManageCategoryState>(
@@ -41,38 +36,22 @@ class _FinanceListViewBuilderState extends State<FinanceListViewBuilder> {
           itemBuilder: (context, index) {
             final financeItemModel =
                 widget.financeItems.reversed.toList()[index];
-            final categoryIds = widget.financeItems.map((e) => e.categoryId).toSet();
-            final category = BlocProvider.of<ManageCategoryCubit>(context).getCategoriesByIds(categoryIds)[financeItemModel.categoryId];
+            final categoryIds =
+                widget.financeItems.map((e) => e.categoryId).toSet();
+            final category =
+                BlocProvider.of<ManageCategoryCubit>(
+                  context,
+                ).getCategoriesByIds(categoryIds)[financeItemModel.categoryId];
             return Dismissible(
               key: ValueKey(financeItemModel.key),
               confirmDismiss: (DismissDirection direction) async {
                 if (direction == DismissDirection.startToEnd) {
                   // Swipe from left to right --> EDIT
-                  Navigator.pushNamed(
-                    context,
-                    ManageTransactionView.routeName,
-                    arguments: {
-                      'transactionTypeEnum':
-                          financeItemModel.amount < 0
-                              ? TransactionTypeEnum.editMinus
-                              : TransactionTypeEnum.editPlus,
-                      'financeItemModel': financeItemModel,
-                      'modelDateTime': financeItemModel.dateTime,
-                      'currentDateTime': widget.currentDateTime,
-                      "categoryId": financeItemModel.categoryId,
-                    },
-                  );
+                  widget.onEdit(financeItemModel);
                   return false; // <<< DON'T dismiss the item
                 } else if (direction == DismissDirection.endToStart) {
                   // Swipe from right to left --> DELETE
-                  await financeItemModel.delete();
-                  BlocProvider.of<ManageFinanceCubit>(
-                    context,
-                  ).getFinancesByDay(widget.currentDateTime);
-                  // BlocProvider.of<ManageFinanceCubit>(
-                  //   context,
-                  // ).deleteFinance(financeItemModel);
-
+                  await widget.onDelete(financeItemModel);
                   return true; // <<< Allow dismiss
                 }
                 return false;

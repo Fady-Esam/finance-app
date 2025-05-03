@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "activity": MessageLookupByLibrary.simpleMessage("Activity"),
     "add": MessageLookupByLibrary.simpleMessage("Add"),
     "add_category": MessageLookupByLibrary.simpleMessage("Add Category"),
+    "all": MessageLookupByLibrary.simpleMessage("All"),
     "all_activities": MessageLookupByLibrary.simpleMessage("All Activities"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "categories": MessageLookupByLibrary.simpleMessage("Categories"),
@@ -36,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "details": MessageLookupByLibrary.simpleMessage("Details here...."),
     "done": MessageLookupByLibrary.simpleMessage("Done"),
     "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+    "expense": MessageLookupByLibrary.simpleMessage("Expense"),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
     "icon_bills": MessageLookupByLibrary.simpleMessage("Bills"),
     "icon_category": MessageLookupByLibrary.simpleMessage("Other"),
@@ -47,9 +49,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "icon_shopping": MessageLookupByLibrary.simpleMessage("Shopping"),
     "icon_transport": MessageLookupByLibrary.simpleMessage("Transport"),
     "icon_travel": MessageLookupByLibrary.simpleMessage("Travel"),
+    "income": MessageLookupByLibrary.simpleMessage("Income"),
     "minus": MessageLookupByLibrary.simpleMessage("Minus"),
     "my_balance": MessageLookupByLibrary.simpleMessage("My Balance"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "no_category_filter": MessageLookupByLibrary.simpleMessage(
+      "No Category Filter",
+    ),
+    "none": MessageLookupByLibrary.simpleMessage("None"),
     "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
     "onBoarding_subTitle_1": MessageLookupByLibrary.simpleMessage(
       "Get a clear view of where your money goes every month",
@@ -91,6 +98,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "today_total_balance": MessageLookupByLibrary.simpleMessage(
       "Today Total Balance",
     ),
+    "todya_activity": MessageLookupByLibrary.simpleMessage("Today\'s Activity"),
+    "transactions": MessageLookupByLibrary.simpleMessage("Transactions"),
     "welcome_title": MessageLookupByLibrary.simpleMessage("Welcome"),
   };
 }

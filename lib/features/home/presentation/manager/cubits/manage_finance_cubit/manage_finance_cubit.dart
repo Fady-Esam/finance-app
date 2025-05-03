@@ -9,37 +9,45 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
     : super(ManageFinanceInitialState());
   final HomeRepo homeRepo;
 
-
   Future<void> addFinance(FinanceItemModel item) async {
     emit(AddFinanceLoadingState());
     var res = await homeRepo.addFinance(item);
     res.fold(
       (l) => emit(AddFinanceFailureState(failureMessage: l.technicalMessage)),
       (r) {
-        getFinancesByDay(DateTime.now()); //! Now
+        getFinancesByDate(DateTime.now()); //! Now
         emit(AddFinanceSuccessState());
       },
     );
   }
 
-  // bool isSameDate(DateTime d1, DateTime d2) {
-  //   return d1.year == d2.year && d1.month == d2.month && d1.day == d2.day;
-  // }
 
-  void getFinancesByDay(DateTime dateTime) {
-    emit(GetFinancesByDayLoadingState());
-    var res = homeRepo.getFinancesByDay(dateTime);
+  void getFilteredFinances(
+    DateTime dateTime, {
+    int? categoryId,
+    bool? isAmountPositive,
+  }) {
+    emit(GetFilteredFinancesLoadingState());
+    var res = homeRepo.getFilteredFinances(
+      dateTime,
+      categoryId: categoryId,
+      isAmountPositive: isAmountPositive,
+    );
     res.fold(
-      (l) => emit(
-        GetFinancesByDayFailureState(failureMessage: l.technicalMessage),
-      ),
+      (l) => emit(GetFilteredFinancesFailureState(failureMessage: l.technicalMessage)),
       (r) {
-        // if (isSameDate(dateTime, DateTime.now())) {
-        //   emit(GetTodayFinanceSuccessState(financeItems: r));
-        // } else {
-        //   emit(GetFinancesByDaySuccessState(financeItems: r));
-        // }
-        emit(GetFinancesByDaySuccessState(financeItems: r));
+        emit(GetFilteredFinancesSuccessState(financeItems: r));
+      },
+    );
+  }
+
+  void getFinancesByDate(DateTime dateTime) {
+    emit(GetFinancesByDateLoadingState());
+    var res = homeRepo.getFinancesByDate(dateTime);
+    res.fold(
+      (l) => emit(GetFinancesByDateFailureState(failureMessage: l.technicalMessage)),
+      (r) {
+        emit(GetFinancesByDateSuccessState(financeItems: r));
         getAllTotalBalance();
         getTodayTotalBalance();
       },
@@ -67,9 +75,8 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
       (r) => emit(GetTodayTotalBalanceSuccessState(totalBalance: r)),
     );
   }
-  
 
-  Future<void> setAllFinancesWithCategoryIdNull(String categoryId) async {
+  Future<void> setAllFinancesWithCategoryIdNull(int categoryId) async {
     emit(SetAllFinancesWithCategoryIdNulloadingState());
     var res = await homeRepo.setAllFinancesWithCategoryIdNull(categoryId);
     res.fold(

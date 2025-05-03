@@ -22,6 +22,7 @@
     "my_balance": "رصيدي",
     "today_total_balance": " إجمالي الرصيد اليومي",
     "activity": "النشاط",
+    "todya_activity": "نشاط اليوم",
     "see_all" : "عرض الكل",
     "somethingWentWrong" : "حدث خطأ ما، يرجى المحاولة مرة أخرى",
     "pleaseEnterValidAmount": "من فضلك أدخل قيمة صحيحة أكبر من صفر",
@@ -48,5 +49,11 @@
     "icon_bills": "فواتير",
     "icon_travel": "سفر",
     "icon_category": "أخرى",
-    "select_category": "اختر فئة"
+    "select_category": "اختر فئة",
+    "transactions": "المعاملات",
+    "all": "الكل",
+    "income": "دخل",
+    "expense": "مصروفات",
+    "no_category_filter" : "بدون تصفية فئة",
+    "none": "لا شيء"
 }
