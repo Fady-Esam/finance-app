@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../generated/l10n.dart';
-import '../../../transaction/data/models/filter_transaction_model.dart';
 import '../manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
 import 'widgets/manage_finance_body.dart';
 
@@ -18,7 +17,6 @@ class ManageTransactionView extends StatefulWidget {
     this.currentDateTime,
     this.modelDateTime,
     this.categoryId,
-    this.filterTransactionModel,
 
   });
   final TransactionTypeEnum transactionTypeEnum;
@@ -26,7 +24,6 @@ class ManageTransactionView extends StatefulWidget {
   final DateTime? currentDateTime;
   final DateTime? modelDateTime;
   final int? categoryId;
-  final FilterTransactionModel? filterTransactionModel;
 
   static const routeName = 'manage-transaction-view';
   @override
@@ -94,7 +91,6 @@ class _ManageTransactionViewState extends State<ManageTransactionView> {
           modelDateTime: modelDateTime,
           currentDateTime: currentDateTime,
           categoryId: widget.categoryId,
-          filterTransactionModel: widget.filterTransactionModel,
         ),
       ),
     );

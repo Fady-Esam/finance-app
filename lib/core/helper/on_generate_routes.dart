@@ -4,7 +4,6 @@ import 'package:finance_flutter_app/features/on_boarding/presentation/views/on_b
 import 'package:finance_flutter_app/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
 import '../../features/category/presentation/views/manage_category_view.dart';
-import '../../features/home/presentation/views/all_activities_view.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -24,7 +23,6 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
               modelDateTime: args['modelDateTime'],
               currentDateTime: args['currentDateTime'],
               categoryId: args['categoryId'],
-              filterTransactionModel: args['filterTransactionModel'],
             ),
       );
     // case AllActivitiesView.routeName:

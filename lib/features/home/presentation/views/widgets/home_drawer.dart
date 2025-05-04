@@ -3,7 +3,6 @@ import 'package:finance_flutter_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../all_activities_view.dart';
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({

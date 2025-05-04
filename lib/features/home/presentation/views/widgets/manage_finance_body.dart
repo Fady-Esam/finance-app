@@ -1,4 +1,3 @@
-import 'package:finance_flutter_app/features/transaction/data/models/filter_transaction_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/widgets/drop_down_button_form_field_category_items.dart';
@@ -24,7 +23,6 @@ class ManageTransactionBody extends StatefulWidget {
     required this.currentDateTime,
     this.financeItemModel,
     this.categoryId,
-    this.filterTransactionModel,
 
   });
 
@@ -35,12 +33,11 @@ class ManageTransactionBody extends StatefulWidget {
   final DateTime? currentDateTime;
   final DateTime? modelDateTime;
   final int? categoryId;
-  final FilterTransactionModel? filterTransactionModel;
 
   @override
   State<ManageTransactionBody> createState() => _ManageTransactionBodyState();
 }
-
+//! Here to make Edit Function OnTap
 class _ManageTransactionBodyState extends State<ManageTransactionBody> {
   late DateTime selectedDate;
   late DateTime currentDateTime;
@@ -131,7 +128,6 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
               modelDateTime: selectedDate,
               currentDateTime: currentDateTime,
               selectedCategory: selectedCategory,
-              filterTransactionModel: widget.filterTransactionModel ,
             ),
             const SizedBox(height: 18),
           ],

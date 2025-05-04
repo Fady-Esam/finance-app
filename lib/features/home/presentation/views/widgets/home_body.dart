@@ -7,7 +7,6 @@ import '../../../../category/data/models/category_model.dart';
 import '../../../data/enums/transaction_type_enum.dart';
 import '../../manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
 import '../../manager/cubits/manage_finance_cubit/manage_finance_state.dart';
-import '../all_activities_view.dart';
 import '../manage_finance_view.dart';
 import 'custom_home_container.dart';
 import 'finance_list_view_builder.dart';

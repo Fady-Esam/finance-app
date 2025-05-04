@@ -1,4 +1,3 @@
-import 'package:finance_flutter_app/features/home/data/enums/transaction_type_enum.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,8 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../category/presentation/manager/cubits/manage_category_cubit/manage_category_cubit.dart';
 import '../../../../category/presentation/manager/cubits/manage_category_cubit/manage_category_state.dart';
 import '../../../data/models/finance_item_model.dart';
-import '../../manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
-import '../manage_finance_view.dart';
 import 'finance_item.dart';
 
 class FinanceListViewBuilder extends StatefulWidget {

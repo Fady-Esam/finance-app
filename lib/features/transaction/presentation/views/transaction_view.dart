@@ -5,7 +5,6 @@ import 'package:finance_flutter_app/features/category/data/models/category_model
 import 'package:finance_flutter_app/features/category/presentation/manager/cubits/manage_category_cubit/manage_category_cubit.dart';
 import 'package:finance_flutter_app/features/category/presentation/manager/cubits/manage_category_cubit/manage_category_state.dart';
 import 'package:finance_flutter_app/features/home/presentation/views/widgets/finance_list_view_builder.dart';
-import 'package:finance_flutter_app/features/transaction/data/models/filter_transaction_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../generated/l10n.dart';
@@ -171,11 +170,6 @@ class _FilterBarState extends State<FilterBar> {
                       'modelDateTime': financeItemModel.dateTime,
                       'currentDateTime': selectedDate,
                       "categoryId": financeItemModel.categoryId,
-                      "filterTransactionModel": FilterTransactionModel(
-                        dateTime: selectedDate,
-                        categoryId: selectedCategory?.key,
-                        isAmountPositive: selectedtransactiontypeValue,
-                      ),
                     },
                   );
                 },
