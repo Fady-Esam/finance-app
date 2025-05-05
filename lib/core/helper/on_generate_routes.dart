@@ -35,7 +35,7 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder:
             (context) =>
-                ManageCategoryView(categoryModel: args['categoryModel']),
+                ManageCategoryView(categoryModel: args['categoryModel'], categories: args['categories'],),
       );
     default:
       return MaterialPageRoute(builder: (context) => const SplashView());

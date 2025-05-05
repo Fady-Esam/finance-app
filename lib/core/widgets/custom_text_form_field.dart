@@ -11,6 +11,8 @@ class CustomTextFormField extends StatelessWidget {
     this.focusedBorder,
     this.enabledBorder,
     this.errorBorder,
+    this.focusNode,
+    this.suffixIcon,
   });
   final TextEditingController? controller;
   final String hintText;
@@ -20,13 +22,18 @@ class CustomTextFormField extends StatelessWidget {
   final InputBorder? focusedBorder;
   final InputBorder? enabledBorder;
   final InputBorder? errorBorder;
+  final FocusNode? focusNode;
+  final Widget? suffixIcon;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      focusNode: focusNode,
       onChanged: onChanged,
+      
       decoration: InputDecoration(
+        suffixIcon: suffixIcon,
         hintText: hintText,
         filled: true,
         //fillColor: Colors.white,

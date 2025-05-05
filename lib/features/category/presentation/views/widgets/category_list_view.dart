@@ -31,7 +31,7 @@ class _CategoryListViewState extends State<CategoryListView> {
               Navigator.pushNamed(
                 context,
                 ManageCategoryView.routeName,
-                arguments: {'categoryModel': categoryItemModel},
+                arguments: {'categoryModel': categoryItemModel, 'categories' : widget.categories},
               );
               return false; // <<< DON'T dismiss the item
             } else if (direction == DismissDirection.endToStart) {

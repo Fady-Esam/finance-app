@@ -10,6 +10,7 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
     : super(ManageFinanceInitialState());
   final HomeRepo homeRepo;
 
+
   Future<void> addFinance(FinanceItemModel item) async {
     emit(AddFinanceLoadingState());
     var res = await homeRepo.addFinance(item);

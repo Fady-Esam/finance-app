@@ -28,12 +28,12 @@ class CategoryRepoImpl implements CategoryRepo {
   }
 
   @override
-  Either<Failure, CategoryModel?> getCategoryById(int? categoryId) {
+  CategoryModel? getCategoryById(int? categoryId) {
     try {
       var box = Hive.box<CategoryModel>('category');
-      return right(box.get(categoryId));
+      return box.get(categoryId);
     } catch (e) {
-      return left(Failure(technicalMessage: e.toString()));
+      return null;
     }
   }
 

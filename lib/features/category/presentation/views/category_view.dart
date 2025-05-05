@@ -21,7 +21,6 @@ class _CategoryViewState extends State<CategoryView> {
   @override
   void initState() {
     super.initState();
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       BlocProvider.of<ManageCategoryCubit>(context).getAllCategories();
     });
@@ -62,7 +61,7 @@ class _CategoryViewState extends State<CategoryView> {
             Navigator.pushNamed(
               context,
               ManageCategoryView.routeName,
-              arguments: {'categoryModel': null},
+              arguments: {'categoryModel': null, 'categories' : categories},
             );
           },
           child: const Icon(Icons.add, size: 32, color: Color(0xFF262626)),

@@ -18,8 +18,8 @@ class CategoryModelAdapter extends TypeAdapter<CategoryModel> {
     };
     return CategoryModel(
       name: fields[1] as String,
-      icon: fields[2] as String?,
-      colorHex: fields[3] as String?,
+      icon: fields[2] as String,
+      colorHex: fields[3] as String,
     );
   }
 

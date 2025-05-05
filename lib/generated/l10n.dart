@@ -459,6 +459,91 @@ class S {
   String get search {
     return Intl.message('Search', name: 'search', desc: '', args: []);
   }
+
+  /// `Jan`
+  String get jan {
+    return Intl.message('Jan', name: 'jan', desc: '', args: []);
+  }
+
+  /// `Feb`
+  String get feb {
+    return Intl.message('Feb', name: 'feb', desc: '', args: []);
+  }
+
+  /// `Mar`
+  String get mar {
+    return Intl.message('Mar', name: 'mar', desc: '', args: []);
+  }
+
+  /// `Apr`
+  String get apr {
+    return Intl.message('Apr', name: 'apr', desc: '', args: []);
+  }
+
+  /// `May`
+  String get may {
+    return Intl.message('May', name: 'may', desc: '', args: []);
+  }
+
+  /// `Jun`
+  String get jun {
+    return Intl.message('Jun', name: 'jun', desc: '', args: []);
+  }
+
+  /// `Jul`
+  String get jul {
+    return Intl.message('Jul', name: 'jul', desc: '', args: []);
+  }
+
+  /// `Aug`
+  String get aug {
+    return Intl.message('Aug', name: 'aug', desc: '', args: []);
+  }
+
+  /// `Sep`
+  String get sep {
+    return Intl.message('Sep', name: 'sep', desc: '', args: []);
+  }
+
+  /// `Oct`
+  String get oct {
+    return Intl.message('Oct', name: 'oct', desc: '', args: []);
+  }
+
+  /// `Nov`
+  String get nov {
+    return Intl.message('Nov', name: 'nov', desc: '', args: []);
+  }
+
+  /// `Dec`
+  String get dec {
+    return Intl.message('Dec', name: 'dec', desc: '', args: []);
+  }
+
+  /// `Analytics`
+  String get analytics {
+    return Intl.message('Analytics', name: 'analytics', desc: '', args: []);
+  }
+
+  /// `Monthly`
+  String get monthly {
+    return Intl.message('Monthly', name: 'monthly', desc: '', args: []);
+  }
+
+  /// `Cash Flow`
+  String get cashflow {
+    return Intl.message('Cash Flow', name: 'cashflow', desc: '', args: []);
+  }
+
+  /// `This category already exists`
+  String get duplicate_category_error {
+    return Intl.message(
+      'This category already exists',
+      name: 'duplicate_category_error',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

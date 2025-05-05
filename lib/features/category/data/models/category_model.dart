@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 
+
 part 'category_model.g.dart';
 
 @HiveType(typeId: 1)
@@ -8,14 +9,16 @@ class CategoryModel extends HiveObject {
   String name;
 
   @HiveField(2)
-  String? icon;
+  String icon;
 
   @HiveField(3)
-  String? colorHex;
+  String colorHex;
+
 
   CategoryModel({
     required this.name,
-    this.icon,
-    this.colorHex,
+    this.icon = 'category',
+    this.colorHex = "ff9e9e9e",
   });
+
 }

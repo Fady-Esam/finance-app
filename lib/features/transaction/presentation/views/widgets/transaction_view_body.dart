@@ -14,7 +14,7 @@ import 'category_filter.dart';
 import 'transaction_type_toggle.dart';
 
 class TransactionViewBody extends StatefulWidget {
-  const TransactionViewBody({super.key,  this.searchedText});
+  const TransactionViewBody({super.key, this.searchedText});
   final String? searchedText;
   @override
   State<TransactionViewBody> createState() => _TransactionViewBodyState();
@@ -62,18 +62,10 @@ class _TransactionViewBodyState extends State<TransactionViewBody> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: 8),
               Row(
                 children: [
                   Expanded(
-                    // child: DateFilter(
-                    //   selectedDate: selectedDate,
-                    //   onDateChanged: (pickedDate) {
-                    //     setState(() {
-                    //       selectedDate = pickedDate;
-                    //     });
-                    //     getFilteredFinances();
-                    //   },
-                    // ),
                     child: DateRangeFilter(
                       onTap: () async {
                         final now = DateTime.now();
@@ -148,22 +140,21 @@ class _TransactionViewBodyState extends State<TransactionViewBody> {
                     log(state.failureMessage.toString());
                   } else if (state is GetFilteredFinancesSuccessState) {
                     financeItems = state.financeItems;
-                    final searchText = widget.searchedText?.trim();
-                    if (searchText != null && searchText.isNotEmpty) {
-                      final query = searchText.toLowerCase();
-                      financeItems =
-                          financeItems.where((item) {
-                            return item.title.toLowerCase().contains(query);
-                          }).toList();
-                    }
-                    setState(() {
-                      
-                    });
                   }
                 },
                 builder: (context, state) {
+                  final filteredItems =
+                      widget.searchedText == null
+                          ? financeItems
+                          : financeItems.where((item) {
+                            if (widget.searchedText!.trim().isEmpty) {
+                              return item.title.isEmpty;
+                            }
+                            final query = widget.searchedText!.toLowerCase();
+                            return item.title.toLowerCase().contains(query);
+                          }).toList();
                   return FinanceListViewBuilder(
-                    financeItems: financeItems,
+                    financeItems: filteredItems,
                     isFromHomePage: false,
                     currentDateTime: selectedDate,
                     categoryFilterId: selectedCategory?.key,

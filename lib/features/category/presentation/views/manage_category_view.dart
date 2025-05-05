@@ -12,9 +12,14 @@ import '../manager/cubits/manage_category_cubit/manage_category_cubit.dart';
 import '../manager/cubits/manage_category_cubit/manage_category_state.dart';
 
 class ManageCategoryView extends StatefulWidget {
-  const ManageCategoryView({super.key, this.categoryModel});
+  const ManageCategoryView({
+    super.key,
+    this.categoryModel,
+    required this.categories,
+  });
   static const routeName = 'manage-category-view';
   final CategoryModel? categoryModel;
+  final List<CategoryModel> categories;
   @override
   State<ManageCategoryView> createState() => _ManageCategoryViewState();
 }
@@ -23,16 +28,16 @@ class _ManageCategoryViewState extends State<ManageCategoryView> {
   final formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   late TextEditingController _nameController;
-  String? selectedIcon;
-  String? selectedColorHex;
+  late String selectedIcon;
+  late String selectedColorHex;
   @override
   void initState() {
     super.initState();
     _nameController = TextEditingController(
       text: widget.categoryModel?.name ?? '',
     );
-    selectedIcon = widget.categoryModel?.icon;
-    selectedColorHex = widget.categoryModel?.colorHex;
+    selectedIcon = widget.categoryModel?.icon ?? 'category';
+    selectedColorHex = widget.categoryModel?.colorHex ?? 'ff9e9e9e';
   }
 
   @override
@@ -53,6 +58,7 @@ class _ManageCategoryViewState extends State<ManageCategoryView> {
             children: [
               CustomTextFormField(
                 hintText: S.of(context).category,
+                controller: _nameController,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: const BorderSide(
@@ -84,10 +90,19 @@ class _ManageCategoryViewState extends State<ManageCategoryView> {
                   if (value == null || value.trim().isEmpty) {
                     return S.of(context).required_field;
                   }
+                  bool isDuplicate = widget.categories.any(
+                    (category) =>
+                        category.name.toLowerCase() ==
+                        value.trim().toLowerCase(),
+                  );
+                  if (isDuplicate) {
+                    return S
+                        .of(context)
+                        .duplicate_category_error; // Custom error message for duplicates
+                  }
                   return null;
                 },
               ),
-
               const SizedBox(height: 24),
               Text(S.of(context).select_icon, style: TextStyle(fontSize: 16)),
               const SizedBox(height: 12),
@@ -100,15 +115,9 @@ class _ManageCategoryViewState extends State<ManageCategoryView> {
                     String iconData = iconList[index];
                     return GestureDetector(
                       onTap: () {
-                        if (selectedIcon == iconData) {
-                          setState(() {
-                            selectedIcon = null;
-                          });
-                        } else {
-                          setState(() {
-                            selectedIcon = iconData;
-                          });
-                        }
+                        setState(() {
+                          selectedIcon = iconData;
+                        });
                       },
                       child: Column(
                         children: [
@@ -153,18 +162,9 @@ class _ManageCategoryViewState extends State<ManageCategoryView> {
                     Color color = colorList[index];
                     return GestureDetector(
                       onTap: () {
-                        if (selectedColorHex ==
-                            color.toARGB32().toRadixString(16)) {
-                          setState(() {
-                            selectedColorHex = null;
-                          });
-                        } else {
-                          setState(() {
-                            selectedColorHex = color.toARGB32().toRadixString(
-                              16,
-                            );
-                          });
-                        }
+                        setState(() {
+                          selectedColorHex = color.toARGB32().toRadixString(16);
+                        });
                       },
                       child: Container(
                         margin: EdgeInsets.symmetric(horizontal: 4),

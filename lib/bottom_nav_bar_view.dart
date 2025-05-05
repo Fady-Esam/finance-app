@@ -3,6 +3,7 @@ import 'package:finance_flutter_app/features/transaction/presentation/views/tran
 import 'package:finance_flutter_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
+import 'features/analytic/presentation/views/analytic_view.dart';
 import 'features/category/presentation/views/category_view.dart';
 
 class BottomNavBarView extends StatefulWidget {
@@ -20,7 +21,7 @@ class _BottomNavBarViewState extends State<BottomNavBarView> {
     HomeView(),
     TransactionView(),
     CategoryView(),
-    //Placeholder(),
+    AnalyticView(),
     Placeholder(),
   ];
 
@@ -98,6 +99,10 @@ class _BottomNavBarViewState extends State<BottomNavBarView> {
             BottomNavigationBarItem(
               icon: const Icon(Icons.category),
               label: S.of(context).categories,
+            ),
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.analytics),
+              label: S.of(context).analytics,
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.settings),

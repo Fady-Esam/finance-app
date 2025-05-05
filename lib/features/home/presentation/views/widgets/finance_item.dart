@@ -19,15 +19,12 @@ class FinanceItem extends StatelessWidget {
     return ListTile(
       leading: CircleAvatar(
         radius: 30,
-        backgroundColor:
-            categoryItem != null
-                ? getColorfromHex(categoryItem!.colorHex ?? "#00FFFFFF")
-                : Colors.transparent,
-        child: categoryItem != null && categoryItem!.icon != null ?  Icon(
-          getIconFromName(categoryItem!.icon!),
+        backgroundColor: getColorfromHex(categoryItem?.colorHex),
+        child: Icon(
+          getIconFromName(categoryItem?.icon),
           color: Colors.white,
           size: 30,
-        ) : null,
+        ),
       ),
       title: Text(
         financeItemModel.title,

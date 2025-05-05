@@ -1,5 +1,7 @@
+import 'dart:developer';
 import 'dart:ui';
 import 'package:finance_flutter_app/core/helper/on_generate_routes.dart';
+import 'package:finance_flutter_app/core/utils/color_utils.dart';
 import 'package:finance_flutter_app/features/category/data/models/category_model.dart';
 import 'package:finance_flutter_app/features/home/data/repos/home_repo_impl.dart';
 import 'package:finance_flutter_app/features/home/presentation/manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
@@ -21,6 +23,8 @@ import 'features/home/data/models/finance_item_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // log("getHexStringFromColor ${getHexStringFromColor(Colors.grey)}");
+  // log("getColorfromHex ${getColorfromHex('#9E9E9E').toARGB32().toRadixString(16)}");
   await Hive.initFlutter();
   Hive.registerAdapter(FinanceItemModelAdapter());
   Hive.registerAdapter(CategoryModelAdapter());
@@ -29,9 +33,9 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
   String deviceLang = PlatformDispatcher.instance.locale.languageCode;
   String defaultLangCode =
-      deviceLang == "ar" || deviceLang == "en" ? deviceLang : "en"; 
+      deviceLang == "ar" || deviceLang == "en" ? deviceLang : "en";
   final savedLanguage = prefs.getString("language") ?? defaultLangCode;
-  final savedTheme = prefs.getString("theme") ?? "system";  
+  final savedTheme = prefs.getString("theme") ?? "system";
   runApp(
     //MyApp(),
     MyApp(savedLanguage: savedLanguage, savedTheme: savedTheme),
@@ -56,13 +60,14 @@ class MyApp extends StatelessWidget {
             : savedTheme == "light"
             ? ThemeMode.light
             : WidgetsBinding.instance.platformDispatcher.platformBrightness ==
-                  Brightness.dark
-              ? ThemeMode.dark
-              : ThemeMode.light;
+                Brightness.dark
+            ? ThemeMode.dark
+            : ThemeMode.light;
 
     ThemeData setThemeData(Brightness brightness) {
       return ThemeData(brightness: brightness, useMaterial3: true);
     }
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -72,7 +77,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => ManageFinanceCubit(homeRepo: HomeRepoImpl()),
         ),
-        BlocProvider(create: (context) => ManageCategoryCubit(homeRepo: CategoryRepoImpl()),
+        BlocProvider(
+          create:
+              (context) => ManageCategoryCubit(homeRepo: CategoryRepoImpl()),
         ),
       ],
       child: BlocBuilder<ChangeThemeCubit, ChangeThemeState>(

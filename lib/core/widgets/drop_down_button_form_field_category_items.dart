@@ -40,8 +40,8 @@ class DropdownButtonFormFieldCategoryItems extends StatelessWidget {
             child: Row(
               children: [
                 Icon(
-                  getIconFromName(category.icon ?? ''),
-                  color: getColorfromHex(category.colorHex ?? "#000000"),
+                  getIconFromName(category.icon),
+                  color: getColorfromHex(category.colorHex),
                 ),
                 const SizedBox(width: 8),
                 Text(category.name),

@@ -56,5 +56,21 @@
     "expense": "Expense",
     "no_category_filter": "No Category Filter",
     "none": "None",
-    "search": "Search"
+    "search": "Search",
+    "jan": "Jan",
+    "feb": "Feb",
+    "mar": "Mar",
+    "apr": "Apr",
+    "may": "May",
+    "jun": "Jun",
+    "jul": "Jul",
+    "aug": "Aug",
+    "sep": "Sep",
+    "oct": "Oct",
+    "nov": "Nov",
+    "dec": "Dec",
+    "analytics": "Analytics",
+    "monthly": "Monthly",
+    "cashflow": "Cash Flow",
+    "duplicate_category_error": "This category already exists"
 }
