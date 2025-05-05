@@ -55,5 +55,6 @@
     "income": "دخل",
     "expense": "مصروفات",
     "no_category_filter" : "بدون تصفية فئة",
-    "none": "لا شيء"
+    "none": "لا شيء",
+    "search": "بحث"
 }

@@ -22,8 +22,10 @@ class ManageTransactionBody extends StatefulWidget {
     required this.modelDateTime,
     required this.currentDateTime,
     this.financeItemModel,
-    this.categoryId,
-
+    this.isFromHomePage = true,
+    this.isAmountPositive,
+    this.categoryFilteredId,
+    this.dateTimeRange,
   });
 
   final TransactionTypeEnum transactionTypeEnum;
@@ -32,11 +34,14 @@ class ManageTransactionBody extends StatefulWidget {
   final FinanceItemModel? financeItemModel;
   final DateTime? currentDateTime;
   final DateTime? modelDateTime;
-  final int? categoryId;
-
+  final bool isFromHomePage;
+  final bool? isAmountPositive;
+  final int? categoryFilteredId;
+  final DateTimeRange? dateTimeRange;
   @override
   State<ManageTransactionBody> createState() => _ManageTransactionBodyState();
 }
+
 //! Here to make Edit Function OnTap
 class _ManageTransactionBodyState extends State<ManageTransactionBody> {
   late DateTime selectedDate;
@@ -69,10 +74,10 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
                 if (state is GetAllCategorySuccessState) {
                   final categoryList = state.categoryItems;
                   CategoryModel? initialCategory;
-                  if (widget.categoryId != null) {
+                  if (widget.financeItemModel?.categoryId != null) {
                     try {
                       initialCategory = categoryList.firstWhere(
-                        (category) => category.key == widget.categoryId,
+                        (category) => category.key == widget.financeItemModel?.categoryId,
                       );
                     } catch (e) {
                       initialCategory = null;
@@ -128,6 +133,10 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
               modelDateTime: selectedDate,
               currentDateTime: currentDateTime,
               selectedCategory: selectedCategory,
+              isFromHomePage: widget.isFromHomePage,
+              categoryFilteredId: widget.categoryFilteredId,
+              isAmountPositive: widget.isAmountPositive,
+              dateTimeRange: widget.dateTimeRange,
             ),
             const SizedBox(height: 18),
           ],

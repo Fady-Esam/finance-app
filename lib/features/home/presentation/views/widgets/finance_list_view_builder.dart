@@ -1,22 +1,31 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../category/presentation/manager/cubits/manage_category_cubit/manage_category_cubit.dart';
 import '../../../../category/presentation/manager/cubits/manage_category_cubit/manage_category_state.dart';
+import '../../../data/enums/transaction_type_enum.dart';
 import '../../../data/models/finance_item_model.dart';
+import '../../manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
+import '../manage_finance_view.dart';
 import 'finance_item.dart';
 
 class FinanceListViewBuilder extends StatefulWidget {
   const FinanceListViewBuilder({
     super.key,
     required this.financeItems,
-    required this.onDelete,
-    required this.onEdit,
+    this.isFromHomePage = true,
+    required this.currentDateTime,
+    this.categoryFilterId,
+    this.isAmountPositive,
+    this.dateTimeRange,
   });
   final List<FinanceItemModel> financeItems;
-  final Future<void> Function(FinanceItemModel financeItemModel) onDelete;
-  final void Function(FinanceItemModel financeItemModel) onEdit;
+  final bool isFromHomePage;
+  final DateTime currentDateTime;
+  final int? categoryFilterId;
+  final bool? isAmountPositive;
+  final DateTimeRange? dateTimeRange;
+
   @override
   State<FinanceListViewBuilder> createState() => _FinanceListViewBuilderState();
 }
@@ -44,11 +53,40 @@ class _FinanceListViewBuilderState extends State<FinanceListViewBuilder> {
               confirmDismiss: (DismissDirection direction) async {
                 if (direction == DismissDirection.startToEnd) {
                   // Swipe from left to right --> EDIT
-                  widget.onEdit(financeItemModel);
+                  Navigator.pushNamed(
+                    context,
+                    ManageTransactionView.routeName,
+                    arguments: {
+                      'transactionTypeEnum':
+                          financeItemModel.amount < 0
+                              ? TransactionTypeEnum.editMinus
+                              : TransactionTypeEnum.editPlus,
+                      'financeItemModel': financeItemModel,
+                      'modelDateTime': financeItemModel.dateTime,
+                      'currentDateTime': widget.currentDateTime,
+                      'isFromHomePage': widget.isFromHomePage,
+                      'categoryFilteredId': widget.categoryFilterId,
+                      'isAmountPositive': widget.isAmountPositive,
+                      'dateTimeRange': widget.dateTimeRange,
+                    },
+                  );
                   return false; // <<< DON'T dismiss the item
                 } else if (direction == DismissDirection.endToStart) {
                   // Swipe from right to left --> DELETE
-                  await widget.onDelete(financeItemModel);
+                  await financeItemModel.delete();
+                  if (widget.isFromHomePage) {
+                    BlocProvider.of<ManageFinanceCubit>(
+                      context,
+                    ).getFinancesByDate(DateTime.now());
+                  }else{
+                    BlocProvider.of<ManageFinanceCubit>(
+                      context,
+                    ).getFilteredFinances(
+                      widget.dateTimeRange!,
+                      categoryId: widget.categoryFilterId,
+                      isAmountPositive: widget.isAmountPositive,
+                    );
+                  }
                   return true; // <<< Allow dismiss
                 }
                 return false;

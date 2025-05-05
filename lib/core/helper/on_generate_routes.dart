@@ -22,7 +22,10 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
               financeItemModel: args['financeItemModel'],
               modelDateTime: args['modelDateTime'],
               currentDateTime: args['currentDateTime'],
-              categoryId: args['categoryId'],
+              isFromHomePage: args['isFromHomePage'],
+              categoryFilteredId: args['categoryFilteredId'],
+              isAmountPositive: args['isAmountPositive'],
+              dateTimeRange: args['dateTimeRange'],
             ),
       );
     // case AllActivitiesView.routeName:

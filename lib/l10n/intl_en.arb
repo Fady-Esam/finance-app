@@ -55,7 +55,6 @@
     "income": "Income",
     "expense": "Expense",
     "no_category_filter": "No Category Filter",
-    "none": "None"
-
-
+    "none": "None",
+    "search": "Search"
 }

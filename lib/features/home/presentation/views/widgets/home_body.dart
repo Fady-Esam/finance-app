@@ -122,6 +122,7 @@ class _HomeBodyState extends State<HomeBody> {
                       ManageTransactionView.routeName,
                       arguments: {
                         'transactionTypeEnum': TransactionTypeEnum.plus,
+                        'isFromHomePage' : true,
                       },
                     );
                   },
@@ -141,6 +142,7 @@ class _HomeBodyState extends State<HomeBody> {
                       ManageTransactionView.routeName,
                       arguments: {
                         'transactionTypeEnum': TransactionTypeEnum.minus,
+                        'isFromHomePage' : true,
                       },
                     );
                   },
@@ -184,30 +186,8 @@ class _HomeBodyState extends State<HomeBody> {
               builder: (context, state) {
                 return FinanceListViewBuilder(
                   financeItems: financeItems,
-                  onEdit: (financeItemModel) {
-                    // Swipe from left to right --> EDIT
-                    Navigator.pushNamed(
-                      context,
-                      ManageTransactionView.routeName,
-                      arguments: {
-                        'transactionTypeEnum':
-                            financeItemModel.amount < 0
-                                ? TransactionTypeEnum.editMinus
-                                : TransactionTypeEnum.editPlus,
-                        'financeItemModel': financeItemModel,
-                        'modelDateTime': financeItemModel.dateTime,
-                        'currentDateTime': DateTime.now(),
-                        "categoryId": financeItemModel.categoryId,
-                        'filterTransactionModel' : null,
-                      },
-                    );
-                  },
-                  onDelete: (financeItemModel) async {
-                    await financeItemModel.delete();
-                    BlocProvider.of<ManageFinanceCubit>(
-                      context,
-                    ).getFinancesByDate(DateTime.now());
-                  },
+                  currentDateTime: DateTime.now(),
+                  
                 );
               },
             ),

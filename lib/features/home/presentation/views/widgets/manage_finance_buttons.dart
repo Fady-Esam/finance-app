@@ -1,7 +1,6 @@
 import 'package:finance_flutter_app/features/category/data/models/category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:table_calendar/table_calendar.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../data/enums/transaction_type_enum.dart';
 import '../../../data/models/finance_item_model.dart';
@@ -18,6 +17,10 @@ class ManageFinanceButtons extends StatelessWidget {
     required this.modelDateTime,
     required this.currentDateTime,
     this.selectedCategory,
+    this.isFromHomePage = true,
+    this.categoryFilteredId,
+    this.isAmountPositive,
+    this.dateTimeRange,
   });
 
   final TransactionTypeEnum transactionTypeEnum;
@@ -27,7 +30,10 @@ class ManageFinanceButtons extends StatelessWidget {
   final DateTime modelDateTime;
   final DateTime currentDateTime;
   final CategoryModel? selectedCategory;
-
+  final bool isFromHomePage;
+  final int? categoryFilteredId;
+  final bool? isAmountPositive;
+  final DateTimeRange? dateTimeRange;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -59,34 +65,19 @@ class ManageFinanceButtons extends StatelessWidget {
                 financeItemModel!.dateTime = modelDateTime;
                 financeItemModel!.categoryId = selectedCategory?.key;
                 await financeItemModel!.save();
-                // if (filterTransactionModel != null) {
-                //   BlocProvider.of<ManageFinanceCubit>(
-                //     context,
-                //   ).getFilteredFinances(
-                //     currentDateTime,
-                //     categoryId: filterTransactionModel!.categoryId,
-                //     isAmountPositive: filterTransactionModel!.isAmountPositive,
-                //   );
-                //   if(isSameDay(DateTime.now(), financeItemModel!.dateTime)) { 
-                //     BlocProvider.of<ManageFinanceCubit>(
-                //       context,
-                //     ).getFinancesByDate(DateTime.now());
-                //   }
-                // } else {
-                //   BlocProvider.of<ManageFinanceCubit>(
-                //     context,
-                //   ).getFinancesByDate(currentDateTime);
-                //   if(isSameDay(currentDateTime, financeItemModel!.dateTime)) { 
-                //     BlocProvider.of<ManageFinanceCubit>(
-                //       context,
-                //     ).getFilteredFinances(
-                //       currentDateTime,
-                //       categoryId: filterTransactionModel!.categoryId,
-                //       isAmountPositive:
-                //           filterTransactionModel!.isAmountPositive,
-                //     );
-                //   }
-                // }
+                if (isFromHomePage) {
+                  BlocProvider.of<ManageFinanceCubit>(
+                    context,
+                  ).getFinancesByDate(DateTime.now());
+                } else {
+                  BlocProvider.of<ManageFinanceCubit>(
+                    context,
+                  ).getFilteredFinances(
+                    dateTimeRange!,
+                    categoryId: categoryFilteredId,
+                    isAmountPositive: isAmountPositive,
+                  );
+                }
                 Navigator.pop(context);
               } else {
                 await BlocProvider.of<ManageFinanceCubit>(context).addFinance(

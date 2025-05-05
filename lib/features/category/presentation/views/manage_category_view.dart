@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:finance_flutter_app/core/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -50,41 +51,34 @@ class _ManageCategoryViewState extends State<ManageCategoryView> {
           key: formKey,
           child: ListView(
             children: [
-              TextFormField(
-                controller: _nameController,
-                decoration: InputDecoration(
-                  hintText: S.of(context).category,
-                  filled: true,
-                  //fillColor: Colors.white,
-                  hintStyle: TextStyle(fontSize: 16),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(
-                      color: Color(
-                        0xFFB0BEC5,
-                      ), // Blue-grey 100: good neutral tone
-                      width: 1.2,
-                    ),
+              CustomTextFormField(
+                hintText: S.of(context).category,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(
+                    color: Color(
+                      0xFFB0BEC5,
+                    ), // Blue-grey 100: good neutral tone
+                    width: 1.2,
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(
-                      color: Color(0xFF6200EE),
-                      width: 1.2,
-                    ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(
+                    color: Color(0xFF6200EE),
+                    width: 1.2,
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(
-                      color:
-                          Colors.greenAccent, // Deep purple: primary highlight
-                      width: 1.8,
-                    ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(
+                    color: Colors.greenAccent, // Deep purple: primary highlight
+                    width: 1.8,
                   ),
-                  errorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.red),
-                  ),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: Colors.red),
                 ),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
@@ -93,6 +87,7 @@ class _ManageCategoryViewState extends State<ManageCategoryView> {
                   return null;
                 },
               ),
+
               const SizedBox(height: 24),
               Text(S.of(context).select_icon, style: TextStyle(fontSize: 16)),
               const SizedBox(height: 12),

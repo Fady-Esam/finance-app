@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:finance_flutter_app/core/errors/failure.dart';
 import 'package:finance_flutter_app/features/home/data/models/finance_item_model.dart';
 import 'package:finance_flutter_app/features/home/data/repos/home_repo.dart';
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class HomeRepoImpl implements HomeRepo {
@@ -45,15 +46,17 @@ class HomeRepoImpl implements HomeRepo {
       return left(Failure(technicalMessage: e.toString()));
     }
   }
-    @override
+
+  @override
   Either<Failure, List<FinanceItemModel>> getFinancesByDate(DateTime dateTime) {
     try {
       var box = Hive.box<FinanceItemModel>('finance');
-      final filteredItems = box.values.where((item) {
-        return item.dateTime.year == dateTime.year &&
-            item.dateTime.month == dateTime.month &&
-            item.dateTime.day == dateTime.day;
-      }).toList();
+      final filteredItems =
+          box.values.where((item) {
+            return item.dateTime.year == dateTime.year &&
+                item.dateTime.month == dateTime.month &&
+                item.dateTime.day == dateTime.day;
+          }).toList();
       return right(filteredItems);
     } catch (e) {
       return left(Failure(technicalMessage: e.toString()));
@@ -62,28 +65,57 @@ class HomeRepoImpl implements HomeRepo {
 
   @override
   Either<Failure, List<FinanceItemModel>> getFilteredFinances(
-    DateTime dateTime, {
+    DateTimeRange dateRange, {
     int? categoryId,
     bool? isAmountPositive,
   }) {
     try {
       final box = Hive.box<FinanceItemModel>('finance');
+
+      final start = DateTime(
+        dateRange.start.year,
+        dateRange.start.month,
+        dateRange.start.day,
+      );
+
+      final end = DateTime(
+        dateRange.end.year,
+        dateRange.end.month,
+        dateRange.end.day,
+        23,
+        59,
+        59,
+        999,
+      );
+
+      final isSingleDay =
+          start.year == end.year &&
+          start.month == end.month &&
+          start.day == end.day;
+
       final filteredItems =
           box.values.where((item) {
-            final isSameDate =
-                item.dateTime.year == dateTime.year &&
-                item.dateTime.month == dateTime.month &&
-                item.dateTime.day == dateTime.day;
-            final isMatchingCategory =
+            final date = item.dateTime;
+
+            // Handle date filtering
+            final matchesDate =
+                isSingleDay
+                    ? date.year == start.year &&
+                        date.month == start.month &&
+                        date.day == start.day
+                    : !date.isBefore(start) && !date.isAfter(end);
+            final matchesCategory =
                 categoryId == null || item.categoryId == categoryId;
-            final isMatchingAmountSign =
+            final matchesAmountSign =
                 isAmountPositive == null
                     ? true
                     : isAmountPositive
                     ? item.amount >= 0
                     : item.amount < 0;
-            return isSameDate && isMatchingCategory && isMatchingAmountSign;
+
+            return matchesDate && matchesCategory && matchesAmountSign;
           }).toList();
+
       return right(filteredItems);
     } catch (e) {
       return left(Failure(technicalMessage: e.toString()));
@@ -140,8 +172,4 @@ class HomeRepoImpl implements HomeRepo {
       return left(Failure(technicalMessage: e.toString()));
     }
   }
-  
-
-
-
 }

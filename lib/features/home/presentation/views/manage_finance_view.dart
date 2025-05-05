@@ -16,15 +16,20 @@ class ManageTransactionView extends StatefulWidget {
     this.financeItemModel,
     this.currentDateTime,
     this.modelDateTime,
-    this.categoryId,
-
+    this.isFromHomePage = true,
+    this.categoryFilteredId,
+    this.isAmountPositive,
+    this.dateTimeRange,
+  
   });
   final TransactionTypeEnum transactionTypeEnum;
   final FinanceItemModel? financeItemModel;
   final DateTime? currentDateTime;
   final DateTime? modelDateTime;
-  final int? categoryId;
-
+  final bool isFromHomePage;
+  final int? categoryFilteredId;
+  final bool? isAmountPositive;
+  final DateTimeRange? dateTimeRange;
   static const routeName = 'manage-transaction-view';
   @override
   State<ManageTransactionView> createState() => _ManageTransactionViewState();
@@ -90,7 +95,10 @@ class _ManageTransactionViewState extends State<ManageTransactionView> {
           financeItemModel: widget.financeItemModel,
           modelDateTime: modelDateTime,
           currentDateTime: currentDateTime,
-          categoryId: widget.categoryId,
+          isFromHomePage: widget.isFromHomePage,
+          categoryFilteredId: widget.categoryFilteredId,
+          isAmountPositive: widget.isAmountPositive,
+          dateTimeRange: widget.dateTimeRange,
         ),
       ),
     );

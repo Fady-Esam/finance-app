@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:finance_flutter_app/features/home/data/models/finance_item_model.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../core/errors/failure.dart';
 
@@ -9,7 +10,7 @@ abstract class HomeRepo {
   Future<Either<Failure, void>> updateFinance(FinanceItemModel item);
   Either<Failure, List<FinanceItemModel>> getAllFinances();
   Either<Failure, List<FinanceItemModel>> getFilteredFinances(
-    DateTime dateTime, {
+    DateTimeRange dateRange, {
     int? categoryId,
     bool? isAmountPositive,
   });

@@ -53,6 +53,7 @@ class _CategoryViewState extends State<CategoryView> {
           },
         ),
         floatingActionButton: FloatingActionButton(
+          heroTag: 'addCategory',
           backgroundColor: Colors.greenAccent,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(50),
@@ -64,7 +65,7 @@ class _CategoryViewState extends State<CategoryView> {
               arguments: {'categoryModel': null},
             );
           },
-          child: const Icon(Icons.add, color: Color(0xFF262626)),
+          child: const Icon(Icons.add, size: 32, color: Color(0xFF262626)),
         ),
       ),
     );

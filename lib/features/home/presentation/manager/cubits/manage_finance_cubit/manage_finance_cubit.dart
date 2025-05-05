@@ -1,4 +1,5 @@
 import 'package:finance_flutter_app/features/home/data/repos/home_repo.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../data/models/finance_item_model.dart';
@@ -23,13 +24,13 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
 
 
   void getFilteredFinances(
-    DateTime dateTime, {
+    DateTimeRange dateRange, {
     int? categoryId,
     bool? isAmountPositive,
   }) {
     emit(GetFilteredFinancesLoadingState());
     var res = homeRepo.getFilteredFinances(
-      dateTime,
+      dateRange,
       categoryId: categoryId,
       isAmountPositive: isAmountPositive,
     );

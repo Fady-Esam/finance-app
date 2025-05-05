@@ -84,6 +84,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "This field is required",
     ),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
+    "search": MessageLookupByLibrary.simpleMessage("Search"),
     "see_all": MessageLookupByLibrary.simpleMessage("See All"),
     "select_category": MessageLookupByLibrary.simpleMessage("Select Category"),
     "select_color": MessageLookupByLibrary.simpleMessage("Select Color"),
