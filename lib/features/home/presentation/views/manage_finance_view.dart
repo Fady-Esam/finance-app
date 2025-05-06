@@ -99,6 +99,7 @@ class _ManageTransactionViewState extends State<ManageTransactionView> {
           categoryFilteredId: widget.categoryFilteredId,
           isAmountPositive: widget.isAmountPositive,
           dateTimeRange: widget.dateTimeRange,
+          
         ),
       ),
     );

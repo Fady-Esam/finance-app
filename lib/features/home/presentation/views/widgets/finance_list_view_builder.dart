@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/funcs/is_same_date.dart';
 import '../../../../category/presentation/manager/cubits/manage_category_cubit/manage_category_cubit.dart';
 import '../../../../category/presentation/manager/cubits/manage_category_cubit/manage_category_state.dart';
 import '../../../data/enums/transaction_type_enum.dart';
@@ -78,7 +80,7 @@ class _FinanceListViewBuilderState extends State<FinanceListViewBuilder> {
                     BlocProvider.of<ManageFinanceCubit>(
                       context,
                     ).getFinancesByDate(DateTime.now());
-                  }else{
+                  } else {
                     BlocProvider.of<ManageFinanceCubit>(
                       context,
                     ).getFilteredFinances(
@@ -86,7 +88,19 @@ class _FinanceListViewBuilderState extends State<FinanceListViewBuilder> {
                       categoryId: widget.categoryFilterId,
                       isAmountPositive: widget.isAmountPositive,
                     );
+                    if (isSameDate(financeItemModel.dateTime, DateTime.now())) {
+                      BlocProvider.of<ManageFinanceCubit>(
+                        context,
+                      ).getFinancesByDate(DateTime.now());
+                    } else {
+                      BlocProvider.of<ManageFinanceCubit>(
+                        context,
+                      ).getAllTotalBalance();
+                    }
                   }
+                  BlocProvider.of<ManageFinanceCubit>(
+                    context,
+                  ).getChartsFinances();
                   return true; // <<< Allow dismiss
                 }
                 return false;

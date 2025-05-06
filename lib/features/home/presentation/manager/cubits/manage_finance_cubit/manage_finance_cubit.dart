@@ -10,7 +10,6 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
     : super(ManageFinanceInitialState());
   final HomeRepo homeRepo;
 
-
   Future<void> addFinance(FinanceItemModel item) async {
     emit(AddFinanceLoadingState());
     var res = await homeRepo.addFinance(item);
@@ -18,11 +17,11 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
       (l) => emit(AddFinanceFailureState(failureMessage: l.technicalMessage)),
       (r) {
         getFinancesByDate(DateTime.now()); //! Now
+        getChartsFinances();
         emit(AddFinanceSuccessState());
       },
     );
   }
-
 
   void getFilteredFinances(
     DateTimeRange dateRange, {
@@ -36,9 +35,24 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
       isAmountPositive: isAmountPositive,
     );
     res.fold(
-      (l) => emit(GetFilteredFinancesFailureState(failureMessage: l.technicalMessage)),
+      (l) => emit(
+        GetFilteredFinancesFailureState(failureMessage: l.technicalMessage),
+      ),
       (r) {
         emit(GetFilteredFinancesSuccessState(financeItems: r));
+      },
+    );
+  }
+
+  void getChartsFinances() {
+    emit(GetChartsFinancesLoadingState());
+    var res = homeRepo.getChartsFinances();
+    res.fold(
+      (l) => emit(
+        GetChartsFinancesFailureState(failureMessage: l.technicalMessage),
+      ),
+      (r) {
+        emit(GetChartsFinancesSuccessState(financeItems: r));
       },
     );
   }
@@ -47,7 +61,9 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
     emit(GetFinancesByDateLoadingState());
     var res = homeRepo.getFinancesByDate(dateTime);
     res.fold(
-      (l) => emit(GetFinancesByDateFailureState(failureMessage: l.technicalMessage)),
+      (l) => emit(
+        GetFinancesByDateFailureState(failureMessage: l.technicalMessage),
+      ),
       (r) {
         emit(GetFinancesByDateSuccessState(financeItems: r));
         getAllTotalBalance();

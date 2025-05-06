@@ -172,4 +172,44 @@ class HomeRepoImpl implements HomeRepo {
       return left(Failure(technicalMessage: e.toString()));
     }
   }
+
+  @override
+  Either<Failure, List<FinanceItemModel>> getChartsFinances() {
+    try {
+      final box = Hive.box<FinanceItemModel>('finance');
+      final DateTimeRange dateRange = DateTimeRange(
+        start: DateTime(2025, 1, 1),
+        end: DateTime(2025, 5, 6),
+      );
+
+      final start = DateTime(
+        dateRange.start.year,
+        dateRange.start.month,
+        dateRange.start.day,
+      );
+
+      final end = DateTime(
+        dateRange.end.year,
+        dateRange.end.month,
+        dateRange.end.day,
+        23,
+        59,
+        59,
+        999,
+      );
+
+      final filteredItems =
+          box.values.where((item) {
+            final date = item.dateTime;
+            // Handle date filtering
+
+            final matchesDate = !date.isBefore(start) && !date.isAfter(end);
+            return matchesDate;
+          }).toList();
+      filteredItems.sort((a, b) => a.dateTime.compareTo(b.dateTime));
+      return right(filteredItems);
+    } catch (e) {
+      return left(Failure(technicalMessage: e.toString()));
+    }
+  }
 }

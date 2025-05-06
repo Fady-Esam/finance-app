@@ -35,15 +35,7 @@ class ManageCategoryCubit extends Cubit<ManageCategoryState> {
 
   CategoryModel? getCategoryById(int? categoryId) {
     return homeRepo.getCategoryById(categoryId);
-    // emit(GetCategoryByIdLoadingState());
-    // var res = homeRepo.getCategoryById(categoryId);
-    // res.fold(
-    //   (l) =>
-    //       emit(GetCategoryByIdFailureState(failureMessage: l.technicalMessage)),
-    //   (r) {
-    //     emit(GetCategoryByIdSuccessState(categoryItem: r));
-    //   },
-    // );
+
   }
 
   Map<int, CategoryModel> getCategoriesByIds(Set<int?> categoryIds) {

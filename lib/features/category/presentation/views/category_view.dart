@@ -16,7 +16,10 @@ class CategoryView extends StatefulWidget {
   State<CategoryView> createState() => _CategoryViewState();
 }
 
-class _CategoryViewState extends State<CategoryView> {
+class _CategoryViewState extends State<CategoryView> with 
+    AutomaticKeepAliveClientMixin {
+    @override
+  bool get wantKeepAlive => true;
   List<CategoryModel> categories = [];
   @override
   void initState() {
@@ -32,6 +35,7 @@ class _CategoryViewState extends State<CategoryView> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return RefreshIndicator(
       onRefresh: _onRefresh,
       child: Scaffold(
@@ -69,4 +73,6 @@ class _CategoryViewState extends State<CategoryView> {
       ),
     );
   }
+  
+
 }

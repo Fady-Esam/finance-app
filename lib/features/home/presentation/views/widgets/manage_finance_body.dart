@@ -42,7 +42,6 @@ class ManageTransactionBody extends StatefulWidget {
   State<ManageTransactionBody> createState() => _ManageTransactionBodyState();
 }
 
-//! Here to make Edit Function OnTap
 class _ManageTransactionBodyState extends State<ManageTransactionBody> {
   late DateTime selectedDate;
   late DateTime currentDateTime;
@@ -53,6 +52,10 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
     selectedDate = widget.modelDateTime ?? DateTime.now();
     currentDateTime = widget.currentDateTime ?? DateTime.now();
     BlocProvider.of<ManageCategoryCubit>(context).getAllCategories();
+    selectedCategory = BlocProvider.of<ManageCategoryCubit>(
+      context,
+    ).getCategoryById(widget.financeItemModel?.categoryId);
+    setState(() {});
   }
 
   @override
@@ -73,20 +76,10 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
               builder: (context, state) {
                 if (state is GetAllCategorySuccessState) {
                   final categoryList = state.categoryItems;
-                  CategoryModel? initialCategory;
-                  if (widget.financeItemModel?.categoryId != null) {
-                    try {
-                      initialCategory = categoryList.firstWhere(
-                        (category) => category.key == widget.financeItemModel?.categoryId,
-                      );
-                    } catch (e) {
-                      initialCategory = null;
-                    }
-                  }
                   return DropdownButtonFormFieldCategoryItems(
                     categories: categoryList,
                     noTitle: S.of(context).none,
-                    selectedCategory: selectedCategory ?? initialCategory,
+                    selectedCategory: selectedCategory,
                     onCategoryChanged: (value) {
                       setState(() {
                         selectedCategory = value;
@@ -106,7 +99,7 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
                   context: context,
                   initialDate: selectedDate,
                   firstDate: now.subtract(Duration(days: 10)),
-                  lastDate: now.add(Duration(days: 2)),
+                  lastDate: now.add(Duration(days: 35)),
                   // lastDate: now,
                 );
                 if (pickedDate != null) {
@@ -124,7 +117,7 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
                 amountController: widget.amountController,
               ),
             ),
-            //const SizedBox(height: 8),
+            const SizedBox(height: 8),
             ManageFinanceButtons(
               transactionTypeEnum: widget.transactionTypeEnum,
               amountController: widget.amountController,

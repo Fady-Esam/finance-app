@@ -1,3 +1,5 @@
+
+import 'package:finance_flutter_app/core/funcs/is_same_date.dart';
 import 'package:finance_flutter_app/features/category/data/models/category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -60,6 +62,7 @@ class ManageFinanceButtons extends StatelessWidget {
                 amount = -amount;
               }
               if (financeItemModel != null) {
+                double copyAmount = financeItemModel!.amount;
                 financeItemModel!.amount = amount;
                 financeItemModel!.title = titleController.text;
                 financeItemModel!.dateTime = modelDateTime;
@@ -77,7 +80,21 @@ class ManageFinanceButtons extends StatelessWidget {
                     categoryId: categoryFilteredId,
                     isAmountPositive: isAmountPositive,
                   );
+                  if (isSameDate(modelDateTime, DateTime.now())) {
+                    BlocProvider.of<ManageFinanceCubit>(
+                      context,
+                    ).getFinancesByDate(DateTime.now());
+                  } else {
+                    if (amount != copyAmount) {
+                      BlocProvider.of<ManageFinanceCubit>(
+                        context,
+                      ).getAllTotalBalance();
+                    }
+                  }
                 }
+                BlocProvider.of<ManageFinanceCubit>(
+                  context,
+                ).getChartsFinances();
                 Navigator.pop(context);
               } else {
                 await BlocProvider.of<ManageFinanceCubit>(context).addFinance(

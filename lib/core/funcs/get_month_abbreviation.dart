@@ -1,5 +1,6 @@
-import 'package:finance_flutter_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
+
+import '../../generated/l10n.dart';
 
 String getMonthAbbreviation(BuildContext context, int month) {
   final months = [

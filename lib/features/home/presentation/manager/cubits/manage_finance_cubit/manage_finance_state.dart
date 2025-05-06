@@ -47,6 +47,21 @@ class GetFinancesByDateSuccessState extends ManageFinanceState {
   GetFinancesByDateSuccessState({required this.financeItems});
 }
 
+//! Get Charts Finances
+class GetChartsFinancesLoadingState extends ManageFinanceState {}
+
+class GetChartsFinancesFailureState extends ManageFinanceState {
+  final String? failureMessage;
+
+  GetChartsFinancesFailureState({required this.failureMessage});
+}
+
+class GetChartsFinancesSuccessState extends ManageFinanceState {
+  final List<FinanceItemModel> financeItems;
+
+  GetChartsFinancesSuccessState({required this.financeItems});
+}
+
 
 //! Get Today Total Balance
 

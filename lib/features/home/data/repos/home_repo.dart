@@ -15,6 +15,9 @@ abstract class HomeRepo {
     bool? isAmountPositive,
   });
   Either<Failure, List<FinanceItemModel>> getFinancesByDate(DateTime dateTime);
+  Either<Failure, List<FinanceItemModel>> getChartsFinances(
+
+  );
 
   Either<Failure, double> getTodayTotalBalance();
   Either<Failure, double> getAllTotalBalance();
