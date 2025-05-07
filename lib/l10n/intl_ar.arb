@@ -72,6 +72,7 @@
     "analytics": "تحليلات",
     "monthly": "شهري",
     "cashflow": "التدفق النقدي",
-    "duplicate_category_error": "هذه الفئة موجودة بالفعل"
-    
+    "duplicate_category_error": "هذه الفئة موجودة بالفعل",
+    "tooltipBalanceLabel": "{month}\nالرصيد: {balance}",
+    "value" : "القيمة: "
 }

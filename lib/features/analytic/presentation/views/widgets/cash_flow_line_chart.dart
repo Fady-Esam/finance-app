@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/funcs/get_month_abbreviation.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../home/data/models/finance_item_model.dart';
 import '../../manager/cubits/manage_line_cubit/manage_line_chart_cubit.dart';
 
@@ -26,7 +27,12 @@ class CashFlowLineChart extends StatelessWidget {
             getTooltipItems: (touchedSpots) {
               return touchedSpots.map((touchedSpot) {
                 return LineTooltipItem(
-                  'Month ${touchedSpot.x.toInt()}\nBalance: ${touchedSpot.y.toStringAsFixed(2)}',
+                  S
+                      .of(context)
+                      .tooltipBalanceLabel(
+                        touchedSpot.x.toInt(),
+                        touchedSpot.y.toStringAsFixed(2),
+                      ),
                   const TextStyle(color: Colors.white),
                 );
               }).toList();
@@ -35,11 +41,11 @@ class CashFlowLineChart extends StatelessWidget {
         ),
         minX: 1,
         maxX: 13,
-        minY:
-            spots.isEmpty
-                ? 0
-                : spots.map((spot) => spot.y).reduce((a, b) => a < b ? a : b) -
-                    50, // Add margin below the minimum value
+        // minY:
+        //     spots.isEmpty
+        //         ? 0
+        //         : spots.map((spot) => spot.y).reduce((a, b) => a < b ? a : b) -
+        //             50, // Add margin below the minimum value
         maxY:
             spots.isEmpty
                 ? 1000
@@ -55,6 +61,23 @@ class CashFlowLineChart extends StatelessWidget {
         gridData: FlGridData(show: true),
         borderData: FlBorderData(show: true),
         titlesData: FlTitlesData(
+          leftTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: true,
+              reservedSize: 50,
+              // getTitlesWidget: (value, meta) {
+              //   return Padding(
+              //     padding: const EdgeInsets.only(
+              //       right: 6.0,
+              //     ), // 👈 spacing from axis line
+              //     child: Text(
+              //       formatNumberAsK(value), // optional: format 1000 -> 1k
+              //       style: const TextStyle(fontSize: 10),
+              //     ),
+              //   );
+              // },
+            ),
+          ),
           bottomTitles: AxisTitles(
             sideTitles: SideTitles(
               showTitles: true,

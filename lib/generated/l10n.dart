@@ -544,6 +544,21 @@ class S {
       args: [],
     );
   }
+
+  /// `Month {month}\nBalance: {balance}`
+  String tooltipBalanceLabel(Object month, Object balance) {
+    return Intl.message(
+      'Month $month\nBalance: $balance',
+      name: 'tooltipBalanceLabel',
+      desc: '',
+      args: [month, balance],
+    );
+  }
+
+  /// `Value: `
+  String get value {
+    return Intl.message('Value: ', name: 'value', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

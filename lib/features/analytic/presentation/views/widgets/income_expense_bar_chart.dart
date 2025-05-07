@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/funcs/get_month_abbreviation.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../home/data/models/finance_item_model.dart';
 import '../../manager/cubits/manage_bar_chart_cubit/manage_bar_chart_cubit.dart';
 
@@ -25,24 +26,13 @@ class IncomeExpenseBarChart extends StatelessWidget {
         Expanded(
           child: BarChart(
             BarChartData(
-              // barTouchData: BarTouchData(
-              //   enabled: true,
-              //   touchTooltipData: BarTouchTooltipData(
-              //     tooltipRoundedRadius: 12,
-              //     fitInsideHorizontally: true,
-              //     fitInsideVertically: true,
-              //     getTooltipItem: (group, groupIndex, rod, rodIndex) {
-              //       final label = rod.toY.toStringAsFixed(2);
-              //       return BarTooltipItem(
-              //         'Expensed: $label',
-              //         const TextStyle(
-              //           color: Colors.white,
-              //           fontWeight: FontWeight.bold,
-              //         ),
-              //       );
-              //     },
-              //   ),
-              // ),
+              barTouchData: BarTouchData(
+                enabled: true,
+                touchTooltipData: BarTouchTooltipData(
+                  fitInsideHorizontally: true,
+                  fitInsideVertically: true,
+                ),
+              ),
               barGroups:
                   grouped.entries.map((entry) {
                     return BarChartGroupData(
@@ -69,6 +59,23 @@ class IncomeExpenseBarChart extends StatelessWidget {
                 rightTitles: AxisTitles(
                   sideTitles: SideTitles(showTitles: false),
                 ),
+                leftTitles: AxisTitles(
+                  sideTitles: SideTitles(
+                    showTitles: true,
+                    reservedSize: 50,
+                    // getTitlesWidget: (value, meta) {
+                    //   return Padding(
+                    //     padding: const EdgeInsets.only(
+                    //       right: 6.0,
+                    //     ), // 👈 spacing from axis line
+                    //     child: Text(
+                    //       formatNumberAsK(value), // optional: format 1000 -> 1k
+                    //       style: const TextStyle(fontSize: 10),
+                    //     ),
+                    //   );
+                    // },
+                  ),
+                ),
                 topTitles: AxisTitles(
                   sideTitles: SideTitles(showTitles: false),
                 ),
@@ -90,16 +97,32 @@ class IncomeExpenseBarChart extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _buildLegendItem(Colors.green, 'Income'),
+            BuildLegendItemCustomWidget(
+              color: Colors.green,
+              label: S.of(context).income,
+            ),
             const SizedBox(width: 16),
-            _buildLegendItem(Colors.red, 'Expense'),
+            BuildLegendItemCustomWidget(
+              color: Colors.red,
+              label: S.of(context).expense,
+            ),
           ],
         ),
       ],
     );
   }
+}
 
-  Widget _buildLegendItem(Color color, String label) {
+class BuildLegendItemCustomWidget extends StatelessWidget {
+  const BuildLegendItemCustomWidget({
+    super.key,
+    required this.color,
+    required this.label,
+  });
+  final Color color;
+  final String label;
+  @override
+  Widget build(BuildContext context) {
     return Row(
       children: [
         Container(

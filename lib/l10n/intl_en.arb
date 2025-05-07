@@ -72,5 +72,7 @@
     "analytics": "Analytics",
     "monthly": "Monthly",
     "cashflow": "Cash Flow",
-    "duplicate_category_error": "This category already exists"
+    "duplicate_category_error": "This category already exists",
+    "tooltipBalanceLabel": "Month {month}\nBalance: {balance}",
+    "value" : "Value: "
 }

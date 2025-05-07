@@ -179,7 +179,7 @@ class HomeRepoImpl implements HomeRepo {
       final box = Hive.box<FinanceItemModel>('finance');
       final DateTimeRange dateRange = DateTimeRange(
         start: DateTime(2025, 1, 1),
-        end: DateTime(2025, 5, 6),
+        end: DateTime(2025, 12, 31),
       );
 
       final start = DateTime(
@@ -202,7 +202,6 @@ class HomeRepoImpl implements HomeRepo {
           box.values.where((item) {
             final date = item.dateTime;
             // Handle date filtering
-
             final matchesDate = !date.isBefore(start) && !date.isAfter(end);
             return matchesDate;
           }).toList();
