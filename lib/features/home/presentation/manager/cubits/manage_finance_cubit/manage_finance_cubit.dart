@@ -40,6 +40,7 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
       ),
       (r) {
         emit(GetFilteredFinancesSuccessState(financeItems: r));
+        getTotalBalance(dateRange, items: r);
       },
     );
   }
@@ -91,6 +92,18 @@ class ManageFinanceCubit extends Cubit<ManageFinanceState> {
         GetTodayTotalBalanceFailureState(failureMessage: l.technicalMessage),
       ),
       (r) => emit(GetTodayTotalBalanceSuccessState(totalBalance: r)),
+    );
+  }
+
+  void getTotalBalance(DateTimeRange dateRange, {int? categoryId,
+    bool? isAmountPositive, List<FinanceItemModel>? items}) {
+    emit(GetTotalBalanceLoadingState());
+    var res = homeRepo.getTotalBalance(dateRange, categoryId: categoryId, items: items, isAmountPositive: isAmountPositive);
+    res.fold(
+      (l) => emit(
+        GetTotalBalanceFailureState(failureMessage: l.technicalMessage),
+      ),
+      (r) => emit(GetTotalBalanceSuccessState(balanceSummary: r)),
     );
   }
 

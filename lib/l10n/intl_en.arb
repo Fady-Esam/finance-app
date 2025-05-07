@@ -74,5 +74,8 @@
     "cashflow": "Cash Flow",
     "duplicate_category_error": "This category already exists",
     "tooltipBalanceLabel": "Month {month}\nBalance: {balance}",
-    "value" : "Value: "
+    "value" : "Value: ",
+    "total_income" : "Total Income",
+    "total_expense" : "Total Expense",
+    "net_balance" : "Net Balance"
 }

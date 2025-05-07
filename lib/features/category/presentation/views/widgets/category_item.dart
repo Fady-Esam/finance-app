@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/color_utils.dart';
@@ -14,7 +13,11 @@ class CategoryItem extends StatelessWidget {
       leading: CircleAvatar(
         radius: 30,
         backgroundColor: getColorfromHex(categoryItem.colorHex),
-        child: Icon(getIconFromName(categoryItem.icon), color: Colors.black),
+        child: Icon(
+          getIconFromName(categoryItem.icon),
+          color: Colors.black,
+          size: 28,
+        ),
       ),
       title: Text(categoryItem.name, style: TextStyle(fontSize: 16)),
     );

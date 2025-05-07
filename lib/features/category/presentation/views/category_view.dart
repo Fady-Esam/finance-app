@@ -73,6 +73,4 @@ class _CategoryViewState extends State<CategoryView> with
       ),
     );
   }
-  
-
 }

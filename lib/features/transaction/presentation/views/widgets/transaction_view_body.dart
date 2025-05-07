@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:finance_flutter_app/features/category/data/models/category_model.dart';
 import 'package:finance_flutter_app/features/category/presentation/manager/cubits/manage_category_cubit/manage_category_cubit.dart';
 import 'package:finance_flutter_app/features/category/presentation/manager/cubits/manage_category_cubit/manage_category_state.dart';
+import 'package:finance_flutter_app/features/home/data/models/balance_summary.dart';
 import 'package:finance_flutter_app/features/home/presentation/views/widgets/finance_list_view_builder.dart';
 import 'package:finance_flutter_app/features/transaction/presentation/views/widgets/date_range_filter.dart';
 import 'package:flutter/material.dart';
@@ -10,12 +11,18 @@ import '../../../../../generated/l10n.dart';
 import '../../../../home/data/models/finance_item_model.dart';
 import '../../../../home/presentation/manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
 import '../../../../home/presentation/manager/cubits/manage_finance_cubit/manage_finance_state.dart';
+import 'build_summary_item_custom_widget.dart';
 import 'category_filter.dart';
 import 'transaction_type_toggle.dart';
 
 class TransactionViewBody extends StatefulWidget {
-  const TransactionViewBody({super.key, this.searchedText});
+  const TransactionViewBody({
+    super.key,
+    this.searchedText,
+    this.isSearching = false,
+  });
   final String? searchedText;
+  final bool isSearching;
   @override
   State<TransactionViewBody> createState() => _TransactionViewBodyState();
 }
@@ -26,6 +33,7 @@ class _TransactionViewBodyState extends State<TransactionViewBody> {
   List<FinanceItemModel> financeItems = [];
   List<CategoryModel> categories = [];
   bool? selectedtransactiontypeValue;
+  var balSum = BalanceSummary();
   DateTimeRange selectedDateRange = DateTimeRange(
     start: DateTime.now().subtract(const Duration(days: 7)),
     end: DateTime.now(),
@@ -130,7 +138,60 @@ class _TransactionViewBodyState extends State<TransactionViewBody> {
                 },
                 selectedTransactionType: selectedtransactiontypeValue,
               ),
-              const SizedBox(height: 8),
+              //const SizedBox(height: 8),
+              BlocConsumer<ManageFinanceCubit, ManageFinanceState>(
+                listener: (context, state) {
+                  if (state is GetTotalBalanceFailureState) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(S.of(context).somethingWentWrong)),
+                    );
+                  }
+                  if (state is GetTotalBalanceSuccessState) {
+                    balSum = state.balanceSummary;
+                    setState(() {});
+                  }
+                },
+                builder: (context, state) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 12.0,
+                      horizontal: 8,
+                    ),
+                    child: Card(
+                      elevation: 2,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 16.0,
+                          horizontal: 12,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            BuildSummaryItemCustomWidget(
+                              label: S.of(context).total_income,
+                              value: balSum.totalIncome,
+                              color: Colors.green,
+                            ),
+                            BuildSummaryItemCustomWidget(
+                              label: S.of(context).total_expense,
+                              value: balSum.totalExpense,
+                              color: Colors.red,
+                            ),
+                            BuildSummaryItemCustomWidget(
+                              label: S.of(context).net_balance,
+                              value: balSum.netBalance,
+                              color: Colors.blueAccent,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
               BlocConsumer<ManageFinanceCubit, ManageFinanceState>(
                 listener: (context, state) {
                   if (state is GetFilteredFinancesFailureState) {
@@ -153,6 +214,11 @@ class _TransactionViewBodyState extends State<TransactionViewBody> {
                             final query = widget.searchedText!.toLowerCase();
                             return item.title.toLowerCase().contains(query);
                           }).toList();
+                  if (widget.isSearching) {
+                    BlocProvider.of<ManageFinanceCubit>(
+                      context,
+                    ).getTotalBalance(selectedDateRange, items: filteredItems);
+                  }
                   return FinanceListViewBuilder(
                     financeItems: filteredItems,
                     isFromHomePage: false,

@@ -92,11 +92,7 @@ class _FinanceListViewBuilderState extends State<FinanceListViewBuilder> {
                       BlocProvider.of<ManageFinanceCubit>(
                         context,
                       ).getFinancesByDate(DateTime.now());
-                    } else {
-                      BlocProvider.of<ManageFinanceCubit>(
-                        context,
-                      ).getAllTotalBalance();
-                    }
+                    } 
                   }
                   BlocProvider.of<ManageFinanceCubit>(
                     context,

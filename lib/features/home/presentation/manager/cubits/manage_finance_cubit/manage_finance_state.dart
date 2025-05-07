@@ -1,3 +1,5 @@
+import 'package:finance_flutter_app/features/home/data/models/balance_summary.dart';
+
 import '../../../../data/models/finance_item_model.dart';
 
 class ManageFinanceState {}
@@ -93,6 +95,23 @@ class GetAllTotalBalanceSuccessState extends ManageFinanceState {
 
   GetAllTotalBalanceSuccessState({required this.totalBalance});
 }
+//! Get Total Balance
+class GetTotalBalanceLoadingState extends ManageFinanceState {}
+
+class GetTotalBalanceFailureState extends ManageFinanceState {
+  final String? failureMessage;
+
+  GetTotalBalanceFailureState({required this.failureMessage});
+}
+
+class GetTotalBalanceSuccessState extends ManageFinanceState {
+  final BalanceSummary balanceSummary;
+
+  GetTotalBalanceSuccessState({required this.balanceSummary});
+}
+
+
+
 //! Clear All Finances With Category Id
 
 class SetAllFinancesWithCategoryIdNulloadingState extends ManageFinanceState {}

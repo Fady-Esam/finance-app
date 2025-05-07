@@ -62,7 +62,6 @@ class ManageFinanceButtons extends StatelessWidget {
                 amount = -amount;
               }
               if (financeItemModel != null) {
-                double copyAmount = financeItemModel!.amount;
                 financeItemModel!.amount = amount;
                 financeItemModel!.title = titleController.text;
                 financeItemModel!.dateTime = modelDateTime;
@@ -84,13 +83,7 @@ class ManageFinanceButtons extends StatelessWidget {
                     BlocProvider.of<ManageFinanceCubit>(
                       context,
                     ).getFinancesByDate(DateTime.now());
-                  } else {
-                    if (amount != copyAmount) {
-                      BlocProvider.of<ManageFinanceCubit>(
-                        context,
-                      ).getAllTotalBalance();
-                    }
-                  }
+                  } 
                 }
                 BlocProvider.of<ManageFinanceCubit>(
                   context,

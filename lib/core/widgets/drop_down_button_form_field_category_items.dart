@@ -32,7 +32,7 @@ class DropdownButtonFormFieldCategoryItems extends StatelessWidget {
       items: [
         DropdownMenuItem<CategoryModel>(
           value: null,
-          child: Text(noTitle),
+          child: Text(noTitle, style: TextStyle(fontSize: 14)),
         ),
         ...categories.map((category) {
           return DropdownMenuItem<CategoryModel>(

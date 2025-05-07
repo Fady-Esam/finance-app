@@ -40,7 +40,7 @@ class CashFlowLineChart extends StatelessWidget {
           ),
         ),
         minX: 1,
-        maxX: 13,
+        maxX: 12,
         // minY:
         //     spots.isEmpty
         //         ? 0

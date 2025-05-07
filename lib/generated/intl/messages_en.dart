@@ -69,6 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "minus": MessageLookupByLibrary.simpleMessage("Minus"),
     "monthly": MessageLookupByLibrary.simpleMessage("Monthly"),
     "my_balance": MessageLookupByLibrary.simpleMessage("My Balance"),
+    "net_balance": MessageLookupByLibrary.simpleMessage("Net Balance"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
     "no_category_filter": MessageLookupByLibrary.simpleMessage(
       "No Category Filter",
@@ -121,6 +122,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "todya_activity": MessageLookupByLibrary.simpleMessage("Today\'s Activity"),
     "tooltipBalanceLabel": m0,
+    "total_expense": MessageLookupByLibrary.simpleMessage("Total Expense"),
+    "total_income": MessageLookupByLibrary.simpleMessage("Total Income"),
     "transactions": MessageLookupByLibrary.simpleMessage("Transactions"),
     "value": MessageLookupByLibrary.simpleMessage("Value: "),
     "welcome_title": MessageLookupByLibrary.simpleMessage("Welcome"),

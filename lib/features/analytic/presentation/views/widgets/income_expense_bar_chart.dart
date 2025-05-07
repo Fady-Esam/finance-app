@@ -26,6 +26,7 @@ class IncomeExpenseBarChart extends StatelessWidget {
         Expanded(
           child: BarChart(
             BarChartData(
+              // alignment: BarChartAlignment.end,
               barTouchData: BarTouchData(
                 enabled: true,
                 touchTooltipData: BarTouchTooltipData(

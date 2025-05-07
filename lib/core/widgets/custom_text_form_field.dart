@@ -31,8 +31,12 @@ class CustomTextFormField extends StatelessWidget {
       controller: controller,
       focusNode: focusNode,
       onChanged: onChanged,
-      
       decoration: InputDecoration(
+        contentPadding: EdgeInsetsDirectional.only(
+          start: 15,
+          bottom: 0,
+          top: 0,
+        ),
         suffixIcon: suffixIcon,
         hintText: hintText,
         filled: true,

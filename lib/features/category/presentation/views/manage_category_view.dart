@@ -55,6 +55,12 @@ class _ManageCategoryViewState extends State<ManageCategoryView> {
         child: Form(
           key: formKey,
           child: ListView(
+            padding: const EdgeInsets.symmetric(
+              vertical: 12,
+            ), // gives top/bottom breathing room
+            keyboardDismissBehavior:
+                ScrollViewKeyboardDismissBehavior
+                    .onDrag, // dismiss keyboard on scroll
             children: [
               CustomTextFormField(
                 hintText: S.of(context).category,
@@ -107,7 +113,7 @@ class _ManageCategoryViewState extends State<ManageCategoryView> {
               Text(S.of(context).select_icon, style: TextStyle(fontSize: 16)),
               const SizedBox(height: 12),
               SizedBox(
-                height: MediaQuery.sizeOf(context).height * 0.15,
+                height: MediaQuery.sizeOf(context).height * 0.12,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: iconList.length,
@@ -140,9 +146,14 @@ class _ManageCategoryViewState extends State<ManageCategoryView> {
                               color: Colors.grey[300],
                             ),
                           ),
-                          Text(
-                            getIconLabel(iconData, context),
-                            style: TextStyle(fontSize: 14),
+                          ConstrainedBox(
+                            constraints: const BoxConstraints(maxWidth: 100),
+
+                            child: Text(
+                              getIconLabel(iconData, context),
+                              style: TextStyle(fontSize: 14),
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ],
                       ),
@@ -150,11 +161,11 @@ class _ManageCategoryViewState extends State<ManageCategoryView> {
                   },
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 18),
               Text(S.of(context).select_color, style: TextStyle(fontSize: 16)),
               const SizedBox(height: 6),
               SizedBox(
-                height: MediaQuery.sizeOf(context).height * 0.12,
+                height: MediaQuery.sizeOf(context).height * 0.1,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: colorList.length,
@@ -190,7 +201,7 @@ class _ManageCategoryViewState extends State<ManageCategoryView> {
                   },
                 ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 18),
               BlocListener<ManageCategoryCubit, ManageCategoryState>(
                 listener: (context, state) {
                   if (state is AddCategorySuccessState) {
@@ -238,7 +249,7 @@ class _ManageCategoryViewState extends State<ManageCategoryView> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 6),
                     textStyle: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,

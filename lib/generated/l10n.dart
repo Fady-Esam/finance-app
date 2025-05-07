@@ -559,6 +559,31 @@ class S {
   String get value {
     return Intl.message('Value: ', name: 'value', desc: '', args: []);
   }
+
+  /// `Total Income`
+  String get total_income {
+    return Intl.message(
+      'Total Income',
+      name: 'total_income',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Expense`
+  String get total_expense {
+    return Intl.message(
+      'Total Expense',
+      name: 'total_expense',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Net Balance`
+  String get net_balance {
+    return Intl.message('Net Balance', name: 'net_balance', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

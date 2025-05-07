@@ -24,7 +24,7 @@ class AnalyticView extends StatefulWidget {
 }
 
 class _AnalyticViewState extends State<AnalyticView>
-    /*with AutomaticKeepAliveClientMixin*/ {
+    /*with AutomaticKeepAliveClientMixin */{
   // @override
   // bool get wantKeepAlive => true;
   List<FinanceItemModel> transactions = [];

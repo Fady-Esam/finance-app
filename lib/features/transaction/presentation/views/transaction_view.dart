@@ -99,7 +99,7 @@ class _TransactionViewState extends State<TransactionView> with AutomaticKeepAli
                 )
                 : Text(S.of(context).transactions),
       ),
-      body: TransactionViewBody(searchedText: searchText),
+      body: TransactionViewBody(searchedText: searchText, isSearching: isSearching),
       floatingActionButton: FloatingActionButton(
         heroTag: 'search',
         backgroundColor: Colors.greenAccent,
@@ -118,6 +118,4 @@ class _TransactionViewState extends State<TransactionView> with AutomaticKeepAli
       ),
     );
   }
-  
-
 }
