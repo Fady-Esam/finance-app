@@ -24,9 +24,9 @@ class AnalyticView extends StatefulWidget {
 }
 
 class _AnalyticViewState extends State<AnalyticView>
-    /*with AutomaticKeepAliveClientMixin */{
-  // @override
-  // bool get wantKeepAlive => true;
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
   List<FinanceItemModel> transactions = [];
   @override
   void initState() {
@@ -39,7 +39,7 @@ class _AnalyticViewState extends State<AnalyticView>
 
   @override
   Widget build(BuildContext context) {
-    //super.build(context);
+    super.build(context);
     return MultiBlocProvider(
       providers: [
         BlocProvider(

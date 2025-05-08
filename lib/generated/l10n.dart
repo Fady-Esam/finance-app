@@ -455,6 +455,26 @@ class S {
     return Intl.message('None', name: 'none', desc: '', args: []);
   }
 
+  /// `Daily`
+  String get daily {
+    return Intl.message('Daily', name: 'daily', desc: '', args: []);
+  }
+
+  /// `Weekly`
+  String get weekly {
+    return Intl.message('Weekly', name: 'weekly', desc: '', args: []);
+  }
+
+  /// `Monthly`
+  String get monthly {
+    return Intl.message('Monthly', name: 'monthly', desc: '', args: []);
+  }
+
+  /// `Yearly`
+  String get yearly {
+    return Intl.message('Yearly', name: 'yearly', desc: '', args: []);
+  }
+
   /// `Search`
   String get search {
     return Intl.message('Search', name: 'search', desc: '', args: []);
@@ -525,11 +545,6 @@ class S {
     return Intl.message('Analytics', name: 'analytics', desc: '', args: []);
   }
 
-  /// `Monthly`
-  String get monthly {
-    return Intl.message('Monthly', name: 'monthly', desc: '', args: []);
-  }
-
   /// `Cash Flow`
   String get cashflow {
     return Intl.message('Cash Flow', name: 'cashflow', desc: '', args: []);
@@ -583,6 +598,26 @@ class S {
   /// `Net Balance`
   String get net_balance {
     return Intl.message('Net Balance', name: 'net_balance', desc: '', args: []);
+  }
+
+  /// `, Recurr: {recurr}`
+  String recurrence(Object recurr) {
+    return Intl.message(
+      ', Recurr: $recurr',
+      name: 'recurrence',
+      desc: '',
+      args: [recurr],
+    );
+  }
+
+  /// `No category data to display`
+  String get no_category_data {
+    return Intl.message(
+      'No category data to display',
+      name: 'no_category_data',
+      desc: '',
+      args: [],
+    );
   }
 }
 

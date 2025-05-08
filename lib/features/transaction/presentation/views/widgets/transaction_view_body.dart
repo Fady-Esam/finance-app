@@ -76,12 +76,11 @@ class _TransactionViewBodyState extends State<TransactionViewBody> {
                   Expanded(
                     child: DateRangeFilter(
                       onTap: () async {
-                        final now = DateTime.now();
                         final picked = await showDateRangePicker(
                           context: context,
-                          firstDate: DateTime(now.year - 5),
-                          lastDate: DateTime(now.year + 1),
                           initialDateRange: selectedDateRange,
+                          firstDate: DateTime(DateTime.now().year - 5, 1, 1),
+                          lastDate: DateTime.now(),
                         );
                         if (picked != null) {
                           setState(() {

@@ -56,6 +56,10 @@
     "expense": "مصروفات",
     "no_category_filter" : "بدون تصفية فئة",
     "none": "لا شيء",
+    "daily": "يوميا",
+    "weekly": "اسبوعيا",
+    "monthly": "شهريا",
+    "yearly": "سنويا",
     "search": "بحث",
     "jan": "ينا",
     "feb": "فبر",
@@ -70,12 +74,13 @@
     "nov": "نوف",
     "dec": "ديس",
     "analytics": "تحليلات",
-    "monthly": "شهري",
     "cashflow": "التدفق النقدي",
     "duplicate_category_error": "هذه الفئة موجودة بالفعل",
     "tooltipBalanceLabel": "{month}\nالرصيد: {balance}",
     "value" : "القيمة: ",
     "total_income" : "الدخل الكلي",
     "total_expense" : "المصروفات الكلية",
-    "net_balance" : "الرصيد الصافي"
+    "net_balance" : "الرصيد الصافي",
+    "recurrence":"، تكرار : {recurr}",
+    "no_category_data": "لا يوجد بيانات للفئات لعرضها"
 }

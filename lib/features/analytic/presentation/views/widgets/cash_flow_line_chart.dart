@@ -84,12 +84,9 @@ class CashFlowLineChart extends StatelessWidget {
               getTitlesWidget: (value, _) {
                 final month = value.toInt();
                 if (month < 1 || month > 12) return const SizedBox.shrink();
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 2),
-                  child: Text(
-                    getMonthAbbreviation(context, month),
-                    style: const TextStyle(fontSize: 10),
-                  ),
+                return Text(
+                  getMonthAbbreviation(context, month),
+                  style: const TextStyle(fontSize: 10),
                 );
               },
             ),

@@ -1,8 +1,11 @@
 import 'package:finance_flutter_app/core/utils/icon_utils.dart';
 import 'package:finance_flutter_app/features/category/data/models/category_model.dart';
+import 'package:finance_flutter_app/features/home/data/enums/recurrence_type_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' show DateFormat;
+import '../../../../../core/funcs/get_recurrence_text.dart';
 import '../../../../../core/utils/color_utils.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../data/models/finance_item_model.dart';
 
 class FinanceItem extends StatelessWidget {
@@ -32,7 +35,7 @@ class FinanceItem extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
       ),
       subtitle: Text(
-        DateFormat('yyyy/MM/dd hh:mm a').format(financeItemModel.dateTime),
+        "${DateFormat('yyyy/MM/dd hh:mm a').format(financeItemModel.dateTime)}${financeItemModel.recurrence != RecurrenceType.none ? S.of(context).recurrence(getRecurrenceText(context, financeItemModel.recurrence)) : ''}",
       ),
       trailing: Directionality(
         textDirection: TextDirection.ltr, // Force LTR for the number

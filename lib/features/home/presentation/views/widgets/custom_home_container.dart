@@ -14,7 +14,7 @@ class CustomHomeContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return SizedBox(
-      height: 135,
+      height: 110,
       width: screenWidth * 0.9,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(15), // To match outer container
@@ -42,7 +42,7 @@ class CustomHomeContainer extends StatelessWidget {
                             balance,
                             key: ValueKey(balance),
                             style: const TextStyle(
-                              fontSize: 32,
+                              fontSize: 24,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
                             ),

@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class DatePickerField extends StatelessWidget {
-  const DatePickerField({
-    super.key,
-    required this.onTap,
-    required this.selectedDate,
-  });
+  const DatePickerField({super.key, required this.onTap, required this.selectedDate});
   final void Function() onTap;
   final DateTime selectedDate;
 
@@ -23,10 +19,10 @@ class DatePickerField extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              DateFormat.yMMMd().format(selectedDate),
-              style: TextStyle(fontSize: 16),
-            ),
+              Text(
+                DateFormat.yMMMd().format(selectedDate!),
+                style: TextStyle(fontSize: 16),
+              ),
             Icon(Icons.calendar_today),
           ],
         ),

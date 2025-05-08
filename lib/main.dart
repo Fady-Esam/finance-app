@@ -17,17 +17,27 @@ import 'cubits/change_theme_cubit/change_theme_cubit.dart';
 import 'cubits/change_theme_cubit/change_theme_state.dart';
 import 'features/category/data/repos/category_repo_impl.dart';
 import 'features/category/presentation/manager/cubits/manage_category_cubit/manage_category_cubit.dart';
+import 'features/home/data/enums/recurrence_type_enum.dart';
 import 'features/home/data/models/finance_item_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // log("getHexStringFromColor ${getHexStringFromColor(Colors.grey)}");
-  // log("getColorfromHex ${getColorfromHex('#9E9E9E').toARGB32().toRadixString(16)}");
   await Hive.initFlutter();
+  // Hive.registerAdapter(FinanceItemModelAdapter());
+  // Hive.registerAdapter(CategoryModelAdapter());
+  // Hive.registerAdapter(RecurrenceTypeAdapter());
+  // await Hive.openBox<FinanceItemModel>(
+  //   'finance',
+  // ).then((box) async => await box.clear());
+  // await Hive.openBox<CategoryModel>(
+  //   'category',
+  // ).then((box) async => await box.clear());
   Hive.registerAdapter(FinanceItemModelAdapter());
+  Hive.registerAdapter(RecurrenceTypeAdapter());
   Hive.registerAdapter(CategoryModelAdapter());
   await Hive.openBox<FinanceItemModel>('finance');
   await Hive.openBox<CategoryModel>('category');
+  //await Hive.openBox<RecurrenceType>('recurrenceType');
   final prefs = await SharedPreferences.getInstance();
   String deviceLang = PlatformDispatcher.instance.locale.languageCode;
   String defaultLangCode =

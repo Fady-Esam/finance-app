@@ -21,13 +21,15 @@ class FinanceItemModelAdapter extends TypeAdapter<FinanceItemModel> {
       dateTime: fields[1] as DateTime,
       amount: fields[2] as double,
       categoryId: fields[3] as int?,
+      recurrence: fields[4] as RecurrenceType,
+      recurrenceEndDate: fields[5] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, FinanceItemModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -35,7 +37,11 @@ class FinanceItemModelAdapter extends TypeAdapter<FinanceItemModel> {
       ..writeByte(2)
       ..write(obj.amount)
       ..writeByte(3)
-      ..write(obj.categoryId);
+      ..write(obj.categoryId)
+      ..writeByte(4)
+      ..write(obj.recurrence)
+      ..writeByte(5)
+      ..write(obj.recurrenceEndDate);
   }
 
   @override

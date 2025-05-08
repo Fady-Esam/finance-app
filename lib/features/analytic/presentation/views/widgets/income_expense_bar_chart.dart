@@ -86,7 +86,7 @@ class IncomeExpenseBarChart extends StatelessWidget {
                     getTitlesWidget: (value, meta) {
                       return Text(
                         getMonthAbbreviation(context, value.toInt()),
-                        style: const TextStyle(fontSize: 8),
+                        style: const TextStyle(fontSize: 10),
                       );
                     },
                   ),

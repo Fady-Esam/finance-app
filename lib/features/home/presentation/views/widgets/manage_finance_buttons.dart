@@ -1,6 +1,6 @@
-
 import 'package:finance_flutter_app/core/funcs/is_same_date.dart';
 import 'package:finance_flutter_app/features/category/data/models/category_model.dart';
+import 'package:finance_flutter_app/features/home/data/enums/recurrence_type_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../generated/l10n.dart';
@@ -23,6 +23,8 @@ class ManageFinanceButtons extends StatelessWidget {
     this.categoryFilteredId,
     this.isAmountPositive,
     this.dateTimeRange,
+    required this.recurrenceType,
+    this.endDate,
   });
 
   final TransactionTypeEnum transactionTypeEnum;
@@ -36,6 +38,8 @@ class ManageFinanceButtons extends StatelessWidget {
   final int? categoryFilteredId;
   final bool? isAmountPositive;
   final DateTimeRange? dateTimeRange;
+  final RecurrenceType recurrenceType;
+  final DateTime? endDate;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -66,6 +70,8 @@ class ManageFinanceButtons extends StatelessWidget {
                 financeItemModel!.title = titleController.text;
                 financeItemModel!.dateTime = modelDateTime;
                 financeItemModel!.categoryId = selectedCategory?.key;
+                financeItemModel!.recurrence = recurrenceType;
+                financeItemModel!.recurrenceEndDate = endDate;
                 await financeItemModel!.save();
                 if (isFromHomePage) {
                   BlocProvider.of<ManageFinanceCubit>(
@@ -83,7 +89,7 @@ class ManageFinanceButtons extends StatelessWidget {
                     BlocProvider.of<ManageFinanceCubit>(
                       context,
                     ).getFinancesByDate(DateTime.now());
-                  } 
+                  }
                 }
                 BlocProvider.of<ManageFinanceCubit>(
                   context,
@@ -96,6 +102,8 @@ class ManageFinanceButtons extends StatelessWidget {
                     dateTime: modelDateTime,
                     amount: amount,
                     categoryId: selectedCategory?.key,
+                    recurrence: recurrenceType,
+                    recurrenceEndDate: endDate,
                   ),
                 );
               }

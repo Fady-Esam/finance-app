@@ -1,9 +1,10 @@
-import 'package:finance_flutter_app/generated/l10n.dart';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/utils/color_utils.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../category/data/models/category_model.dart';
 import '../../../../category/presentation/manager/cubits/manage_category_cubit/manage_category_cubit.dart';
 import '../../../../home/data/models/finance_item_model.dart';
@@ -13,7 +14,6 @@ import '../../manager/cubits/manage_pie_chart_cubit/manage_pie_chart_cubit.dart'
 class CategoryPieChart extends StatelessWidget {
   const CategoryPieChart({super.key, required this.transactions});
   final List<FinanceItemModel> transactions;
-
   @override
   Widget build(BuildContext context) {
     bool dialogVisible = false;
@@ -21,6 +21,10 @@ class CategoryPieChart extends StatelessWidget {
       context,
     ).getGroupByCategory(transactions);
     final totalAmount = totals.values.fold(0.0, (sum, val) => sum + val);
+        if (totals.isEmpty) {
+      return Center(child:Text(S.of(context).no_category_data),);
+    }
+
     final pieSections =
         totals.entries.map((entry) {
           final percentage = (entry.value / totalAmount) * 100;
@@ -114,6 +118,6 @@ class CategoryPieChart extends StatelessWidget {
   CategoryModel? getCategoryById(BuildContext context, int? categoryId) {
     return BlocProvider.of<ManageCategoryCubit>(
       context,
-    ).getCategoryById(categoryId)!;
+    ).getCategoryById(categoryId);
   }
 }

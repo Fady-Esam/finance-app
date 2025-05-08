@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:finance_flutter_app/core/errors/failure.dart';
 import 'package:finance_flutter_app/features/home/data/models/finance_item_model.dart';
@@ -7,19 +5,66 @@ import 'package:finance_flutter_app/features/home/data/repos/home_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../../../../core/funcs/get_next_monthly_date.dart';
+import '../enums/recurrence_type_enum.dart';
 import '../models/balance_summary.dart';
 
 class HomeRepoImpl implements HomeRepo {
   @override
   Future<Either<Failure, void>> addFinance(FinanceItemModel item) async {
     try {
-      var box = Hive.box<FinanceItemModel>('finance');
-      await box.add(item);
+      final box = Hive.box<FinanceItemModel>('finance');
+
+      if (item.recurrence == RecurrenceType.none) {
+        box.add(item);
+        return right(null);
+      }
+      DateTime nextDate = item.dateTime;
+      final DateTime finalEndDate =
+          item.recurrenceEndDate ?? getNextMonthlyDate(nextDate);
+      while (nextDate.isBefore(finalEndDate) ||
+          nextDate.isAtSameMomentAs(finalEndDate)) {
+        final newItem = FinanceItemModel(
+          amount: item.amount,
+          dateTime: nextDate,
+          title: item.title,
+          categoryId: item.categoryId,
+          recurrence: item.recurrence,
+          recurrenceEndDate: item.recurrenceEndDate,
+        );
+        box.add(newItem);
+        switch (item.recurrence) {
+          case RecurrenceType.daily:
+            nextDate = nextDate.add(Duration(days: 1));
+            break;
+          case RecurrenceType.weekly:
+            nextDate = nextDate.add(Duration(days: 7));
+            break;
+          case RecurrenceType.monthly:
+            nextDate = getNextMonthlyDate(nextDate);
+            break;
+          case RecurrenceType.yearly:
+            nextDate = DateTime(
+              nextDate.year + 1,
+              nextDate.month,
+              nextDate.day,
+              nextDate.hour,
+              nextDate.minute,
+              nextDate.second,
+              nextDate.millisecond,
+            );
+            break;
+          case RecurrenceType.none:
+            break;
+        }
+      }
       return right(null);
     } catch (e) {
       return left(Failure(technicalMessage: e.toString()));
     }
   }
+
+
 
   // @override
   // Either<Failure, List<FinanceItemModel>> getAllFinances() {
@@ -218,7 +263,7 @@ class HomeRepoImpl implements HomeRepo {
   Either<Failure, double> getAllTotalBalance() {
     try {
       double totalBalance = 0.0;
-      getFilteredFinancesByDate().forEach((item) {
+      getFilteredFinancesByDate(dateRange: DateTimeRange(start: DateTime(DateTime.now().year - 5 , 1, 1), end: DateTime.now())).forEach((item) {
         totalBalance += item.amount;
       });
       // var box = Hive.box<FinanceItemModel>('finance');
@@ -299,7 +344,12 @@ class HomeRepoImpl implements HomeRepo {
     try {
       var balSum = BalanceSummary();
       List<FinanceItemModel> filteredItems =
-          items ?? getFilteredFinancesByDateRangeAndCategoryAndAmountSign(dateRange, categoryId: categoryId, isAmountPositive: isAmountPositive);
+          items ??
+          getFilteredFinancesByDateRangeAndCategoryAndAmountSign(
+            dateRange,
+            categoryId: categoryId,
+            isAmountPositive: isAmountPositive,
+          );
       for (var item in filteredItems) {
         balSum.totalIncome += item.amount > 0 ? item.amount : 0;
         balSum.totalExpense += item.amount < 0 ? item.amount.abs() : 0;

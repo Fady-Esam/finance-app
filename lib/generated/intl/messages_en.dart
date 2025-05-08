@@ -20,7 +20,9 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(month, balance) => "Month ${month}\nBalance: ${balance}";
+  static String m0(recurr) => ", Recurr: ${recurr}";
+
+  static String m1(month, balance) => "Month ${month}\nBalance: ${balance}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -38,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "category": MessageLookupByLibrary.simpleMessage("Category"),
     "closeApp": MessageLookupByLibrary.simpleMessage("Exit App"),
     "closeDrawer": MessageLookupByLibrary.simpleMessage("Close Drawer"),
+    "daily": MessageLookupByLibrary.simpleMessage("Daily"),
     "dark_mode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
     "dec": MessageLookupByLibrary.simpleMessage("Dec"),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
@@ -71,6 +74,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "my_balance": MessageLookupByLibrary.simpleMessage("My Balance"),
     "net_balance": MessageLookupByLibrary.simpleMessage("Net Balance"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "no_category_data": MessageLookupByLibrary.simpleMessage(
+      "No category data to display",
+    ),
     "no_category_filter": MessageLookupByLibrary.simpleMessage(
       "No Category Filter",
     ),
@@ -100,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Please enter a valid amount greater than 0",
     ),
     "plus": MessageLookupByLibrary.simpleMessage("Plus"),
+    "recurrence": m0,
     "required_field": MessageLookupByLibrary.simpleMessage(
       "This field is required",
     ),
@@ -121,11 +128,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "Today Total Balance",
     ),
     "todya_activity": MessageLookupByLibrary.simpleMessage("Today\'s Activity"),
-    "tooltipBalanceLabel": m0,
+    "tooltipBalanceLabel": m1,
     "total_expense": MessageLookupByLibrary.simpleMessage("Total Expense"),
     "total_income": MessageLookupByLibrary.simpleMessage("Total Income"),
     "transactions": MessageLookupByLibrary.simpleMessage("Transactions"),
     "value": MessageLookupByLibrary.simpleMessage("Value: "),
+    "weekly": MessageLookupByLibrary.simpleMessage("Weekly"),
     "welcome_title": MessageLookupByLibrary.simpleMessage("Welcome"),
+    "yearly": MessageLookupByLibrary.simpleMessage("Yearly"),
   };
 }

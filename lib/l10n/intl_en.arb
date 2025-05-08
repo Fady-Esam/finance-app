@@ -56,6 +56,10 @@
     "expense": "Expense",
     "no_category_filter": "No Category Filter",
     "none": "None",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
     "search": "Search",
     "jan": "Jan",
     "feb": "Feb",
@@ -70,12 +74,13 @@
     "nov": "Nov",
     "dec": "Dec",
     "analytics": "Analytics",
-    "monthly": "Monthly",
     "cashflow": "Cash Flow",
     "duplicate_category_error": "This category already exists",
     "tooltipBalanceLabel": "Month {month}\nBalance: {balance}",
     "value" : "Value: ",
     "total_income" : "Total Income",
     "total_expense" : "Total Expense",
-    "net_balance" : "Net Balance"
+    "net_balance" : "Net Balance",
+    "recurrence": ", Recurr: {recurr}",
+    "no_category_data": "No category data to display"
 }
