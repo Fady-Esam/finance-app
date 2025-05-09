@@ -11,6 +11,8 @@ import '../../../../../generated/l10n.dart';
 import '../../../../home/data/models/finance_item_model.dart';
 import '../../../../home/presentation/manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
 import '../../../../home/presentation/manager/cubits/manage_finance_cubit/manage_finance_state.dart';
+import '../../../../user_setup/data/models/user_setup_model.dart';
+import '../../../../user_setup/presentation/manager/cubits/manage_user_setup_cubit/manage_user_setup_cubit.dart';
 import 'build_summary_item_custom_widget.dart';
 import 'category_filter.dart';
 import 'transaction_type_toggle.dart';
@@ -35,9 +37,18 @@ class _TransactionViewBodyState extends State<TransactionViewBody> {
   bool? selectedtransactiontypeValue;
   var balSum = BalanceSummary();
   DateTimeRange selectedDateRange = DateTimeRange(
-    start: DateTime.now().subtract(const Duration(days: 7)),
+    start: DateTime(DateTime.now().year, DateTime.now().month, 1),
     end: DateTime.now(),
   );
+  UserSetupModel? userSetupModel;
+  Future<void> getUserSetupModelData() async {
+    userSetupModel =
+        await BlocProvider.of<ManageUserSetupCubit>(
+          context,
+        ).getUserSetupModel();
+    setState(() {});
+  }
+
   void getFilteredFinances() {
     BlocProvider.of<ManageFinanceCubit>(context).getFilteredFinances(
       selectedDateRange,
@@ -54,6 +65,7 @@ class _TransactionViewBodyState extends State<TransactionViewBody> {
   @override
   void initState() {
     super.initState();
+    getUserSetupModelData();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       onRefresh();
     });
@@ -79,7 +91,11 @@ class _TransactionViewBodyState extends State<TransactionViewBody> {
                         final picked = await showDateRangePicker(
                           context: context,
                           initialDateRange: selectedDateRange,
-                          firstDate: DateTime(DateTime.now().year - 5, 1, 1),
+                          firstDate: DateTime(
+                            userSetupModel!.startDateTime.year - 5,
+                            1,
+                            1,
+                          ),
                           lastDate: DateTime.now(),
                         );
                         if (picked != null) {
@@ -144,8 +160,7 @@ class _TransactionViewBodyState extends State<TransactionViewBody> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text(S.of(context).somethingWentWrong)),
                     );
-                  }
-                  if (state is GetTotalBalanceSuccessState) {
+                  } else if (state is GetTotalBalanceSuccessState) {
                     balSum = state.balanceSummary;
                     setState(() {});
                   }
@@ -181,7 +196,8 @@ class _TransactionViewBodyState extends State<TransactionViewBody> {
                             ),
                             BuildSummaryItemCustomWidget(
                               label: S.of(context).net_balance,
-                              value: balSum.netBalance,
+                              value:
+                                  balSum.netBalance + (userSetupModel?.balance?? 0.0),
                               color: Colors.blueAccent,
                             ),
                           ],

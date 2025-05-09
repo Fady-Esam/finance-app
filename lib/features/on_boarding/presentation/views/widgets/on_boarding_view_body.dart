@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../core/helper/app_images.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../../user_setup/presentation/views/user_setup_view.dart';
 import '../../../data/models/on_boarding_model.dart';
 import 'on_boarding_item.dart';
 
@@ -99,10 +100,19 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
                   if (_currentPage == 2) {
                     final prefs = await SharedPreferences.getInstance();
                     await prefs.setBool('onboarding_seen', true);
-                    Navigator.pushReplacementNamed(
-                      context,
-                      BottomNavBarView.routeName,
-                    );
+                    bool isUserSetupSeen =
+                        prefs.getBool('user_setup_seen') ?? false;
+                    if (isUserSetupSeen) {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        BottomNavBarView.routeName,
+                      );
+                    } else {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        UserSetupView.routeName,
+                      );
+                    }
                   } else {
                     _pageController.nextPage(
                       duration: Duration(milliseconds: 300),

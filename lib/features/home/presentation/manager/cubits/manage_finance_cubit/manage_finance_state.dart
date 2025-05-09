@@ -5,7 +5,6 @@ import '../../../../data/models/finance_item_model.dart';
 class ManageFinanceState {}
 
 class ManageFinanceInitialState extends ManageFinanceState {}
-
 //! Add
 class AddFinanceLoadingState extends ManageFinanceState {}
 

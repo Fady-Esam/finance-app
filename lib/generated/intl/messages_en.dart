@@ -24,6 +24,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(month, balance) => "Month ${month}\nBalance: ${balance}";
 
+  static String m2(name) => "Welcome, ${name}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "activity": MessageLookupByLibrary.simpleMessage("Activity"),
@@ -50,6 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "This category already exists",
     ),
     "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+    "enter_name": MessageLookupByLibrary.simpleMessage("Enter Your Name"),
     "expense": MessageLookupByLibrary.simpleMessage("Expense"),
     "feb": MessageLookupByLibrary.simpleMessage("Feb"),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
@@ -64,6 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "icon_transport": MessageLookupByLibrary.simpleMessage("Transport"),
     "icon_travel": MessageLookupByLibrary.simpleMessage("Travel"),
     "income": MessageLookupByLibrary.simpleMessage("Income"),
+    "initial_balance": MessageLookupByLibrary.simpleMessage("Initial Balance"),
     "jan": MessageLookupByLibrary.simpleMessage("Jan"),
     "jul": MessageLookupByLibrary.simpleMessage("Jul"),
     "jun": MessageLookupByLibrary.simpleMessage("Jun"),
@@ -72,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "minus": MessageLookupByLibrary.simpleMessage("Minus"),
     "monthly": MessageLookupByLibrary.simpleMessage("Monthly"),
     "my_balance": MessageLookupByLibrary.simpleMessage("My Balance"),
+    "name": MessageLookupByLibrary.simpleMessage("Name"),
     "net_balance": MessageLookupByLibrary.simpleMessage("Net Balance"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
     "no_category_data": MessageLookupByLibrary.simpleMessage(
@@ -105,6 +110,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseEnterValidAmount": MessageLookupByLibrary.simpleMessage(
       "Please enter a valid amount greater than 0",
     ),
+    "please_enter_name": MessageLookupByLibrary.simpleMessage(
+      "من فضلك ادخل اسمك",
+    ),
     "plus": MessageLookupByLibrary.simpleMessage("Plus"),
     "recurrence": m0,
     "required_field": MessageLookupByLibrary.simpleMessage(
@@ -134,7 +142,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "transactions": MessageLookupByLibrary.simpleMessage("Transactions"),
     "value": MessageLookupByLibrary.simpleMessage("Value: "),
     "weekly": MessageLookupByLibrary.simpleMessage("Weekly"),
-    "welcome_title": MessageLookupByLibrary.simpleMessage("Welcome"),
+    "welcome_name": m2,
+    "welcome_title": MessageLookupByLibrary.simpleMessage(
+      "Welcome to Finance Manager",
+    ),
     "yearly": MessageLookupByLibrary.simpleMessage("Yearly"),
   };
 }

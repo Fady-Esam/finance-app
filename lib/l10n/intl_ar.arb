@@ -9,7 +9,7 @@
     "onBoarding_subTitle_1": "احصل على رؤية واضحة لمصروفاتك الشهرية",
     "onBoarding_subTitle_2": "تحكم في أموالك من خلال إنشاء ميزانيات شهرية",
     "onBoarding_subTitle_3": "ادخر المال وحقق أهدافك المالية بشكل أسرع",
-    "welcome_title": "مرحبًا بك ",
+    "welcome_title": "مرحبًا في إدارة الماليات ",
     "dark_mode": "الوضع المظلم",
     "all_activities": "جميع الأنشطة",
     "plus": "إضافة",
@@ -82,5 +82,10 @@
     "total_expense" : "المصروفات الكلية",
     "net_balance" : "الرصيد الصافي",
     "recurrence":"، تكرار : {recurr}",
-    "no_category_data": "لا يوجد بيانات للفئات لعرضها"
+    "no_category_data": "لا يوجد بيانات للفئات لعرضها",
+    "welcome_name" : "مرحبا, {name}",
+    "name": "الاسم",
+    "initial_balance" : "الرصيد الابتدائي",
+    "enter_name"  : "أدخل اسمك",
+    "please_enter_name" : "من فضلك ادخل اسمك"
 }

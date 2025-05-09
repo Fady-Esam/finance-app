@@ -140,9 +140,14 @@ class S {
     );
   }
 
-  /// `Welcome`
+  /// `Welcome to Finance Manager`
   String get welcome_title {
-    return Intl.message('Welcome', name: 'welcome_title', desc: '', args: []);
+    return Intl.message(
+      'Welcome to Finance Manager',
+      name: 'welcome_title',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `Dark Mode`
@@ -615,6 +620,51 @@ class S {
     return Intl.message(
       'No category data to display',
       name: 'no_category_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Welcome, {name}`
+  String welcome_name(Object name) {
+    return Intl.message(
+      'Welcome, $name',
+      name: 'welcome_name',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `Name`
+  String get name {
+    return Intl.message('Name', name: 'name', desc: '', args: []);
+  }
+
+  /// `Initial Balance`
+  String get initial_balance {
+    return Intl.message(
+      'Initial Balance',
+      name: 'initial_balance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter Your Name`
+  String get enter_name {
+    return Intl.message(
+      'Enter Your Name',
+      name: 'enter_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `من فضلك ادخل اسمك`
+  String get please_enter_name {
+    return Intl.message(
+      'من فضلك ادخل اسمك',
+      name: 'please_enter_name',
       desc: '',
       args: [],
     );

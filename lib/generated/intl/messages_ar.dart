@@ -24,6 +24,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(month, balance) => "${month}\nالرصيد: ${balance}";
 
+  static String m2(name) => "مرحبا, ${name}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "activity": MessageLookupByLibrary.simpleMessage("النشاط"),
@@ -50,6 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "هذه الفئة موجودة بالفعل",
     ),
     "edit": MessageLookupByLibrary.simpleMessage("تعديل"),
+    "enter_name": MessageLookupByLibrary.simpleMessage("أدخل اسمك"),
     "expense": MessageLookupByLibrary.simpleMessage("مصروفات"),
     "feb": MessageLookupByLibrary.simpleMessage("فبر"),
     "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
@@ -64,6 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "icon_transport": MessageLookupByLibrary.simpleMessage("مواصلات"),
     "icon_travel": MessageLookupByLibrary.simpleMessage("سفر"),
     "income": MessageLookupByLibrary.simpleMessage("دخل"),
+    "initial_balance": MessageLookupByLibrary.simpleMessage("الرصيد الابتدائي"),
     "jan": MessageLookupByLibrary.simpleMessage("ينا"),
     "jul": MessageLookupByLibrary.simpleMessage("يول"),
     "jun": MessageLookupByLibrary.simpleMessage("يون"),
@@ -72,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "minus": MessageLookupByLibrary.simpleMessage("نقص"),
     "monthly": MessageLookupByLibrary.simpleMessage("شهريا"),
     "my_balance": MessageLookupByLibrary.simpleMessage("رصيدي"),
+    "name": MessageLookupByLibrary.simpleMessage("الاسم"),
     "net_balance": MessageLookupByLibrary.simpleMessage("الرصيد الصافي"),
     "next": MessageLookupByLibrary.simpleMessage("التالى"),
     "no_category_data": MessageLookupByLibrary.simpleMessage(
@@ -101,6 +106,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseEnterValidAmount": MessageLookupByLibrary.simpleMessage(
       "من فضلك أدخل قيمة صحيحة أكبر من صفر",
     ),
+    "please_enter_name": MessageLookupByLibrary.simpleMessage(
+      "من فضلك ادخل اسمك",
+    ),
     "plus": MessageLookupByLibrary.simpleMessage("إضافة"),
     "recurrence": m0,
     "required_field": MessageLookupByLibrary.simpleMessage("هذا الحقل مطلوب"),
@@ -128,7 +136,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "transactions": MessageLookupByLibrary.simpleMessage("المعاملات"),
     "value": MessageLookupByLibrary.simpleMessage("القيمة: "),
     "weekly": MessageLookupByLibrary.simpleMessage("اسبوعيا"),
-    "welcome_title": MessageLookupByLibrary.simpleMessage("مرحبًا بك "),
+    "welcome_name": m2,
+    "welcome_title": MessageLookupByLibrary.simpleMessage(
+      "مرحبًا في إدارة الماليات ",
+    ),
     "yearly": MessageLookupByLibrary.simpleMessage("سنويا"),
   };
 }

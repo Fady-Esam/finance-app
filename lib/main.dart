@@ -1,8 +1,12 @@
 import 'dart:ui';
+import 'package:finance_flutter_app/bottom_nav_bar_view.dart';
 import 'package:finance_flutter_app/core/helper/on_generate_routes.dart';
 import 'package:finance_flutter_app/features/category/data/models/category_model.dart';
 import 'package:finance_flutter_app/features/home/data/repos/home_repo_impl.dart';
 import 'package:finance_flutter_app/features/home/presentation/manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
+import 'package:finance_flutter_app/features/user_setup/data/repos/user_setup_repo_impl.dart';
+import 'package:finance_flutter_app/features/user_setup/presentation/manager/cubits/manage_user_setup_cubit/manage_user_setup_cubit.dart';
+import 'package:finance_flutter_app/features/user_setup/presentation/views/user_setup_view.dart';
 import 'package:finance_flutter_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,8 +27,8 @@ import 'features/home/data/models/finance_item_model.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  // Hive.registerAdapter(FinanceItemModelAdapter());
-  // Hive.registerAdapter(CategoryModelAdapter());
+  //Hive.registerAdapter(FinanceItemModelAdapter());
+  //Hive.registerAdapter(CategoryModelAdapter());
   // Hive.registerAdapter(RecurrenceTypeAdapter());
   // await Hive.openBox<FinanceItemModel>(
   //   'finance',
@@ -88,6 +92,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create:
               (context) => ManageCategoryCubit(homeRepo: CategoryRepoImpl()),
+        ),
+        BlocProvider(
+          create:
+              (context) => ManageUserSetupCubit(userSetupRepo: UserSetupRepoImpl()),
         ),
       ],
       child: BlocBuilder<ChangeThemeCubit, ChangeThemeState>(

@@ -7,6 +7,8 @@ import '../../../../../generated/l10n.dart';
 import '../../../../category/data/models/category_model.dart';
 import '../../../../category/presentation/manager/cubits/manage_category_cubit/manage_category_cubit.dart';
 import '../../../../category/presentation/manager/cubits/manage_category_cubit/manage_category_state.dart';
+import '../../../../user_setup/data/models/user_setup_model.dart';
+import '../../../../user_setup/presentation/manager/cubits/manage_user_setup_cubit/manage_user_setup_cubit.dart';
 import '../../../data/enums/recurrence_type_enum.dart';
 import '../../../data/enums/transaction_type_enum.dart';
 import '../../../data/models/finance_item_model.dart';
@@ -51,7 +53,14 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
   DateTime endDate = getNextMonthlyDate(DateTime.now());
   CategoryModel? selectedCategory;
   var recurrenceType = RecurrenceType.none;
-  int recurrenceCount = 0;
+  UserSetupModel? userSetupModel;
+  Future<void> getUserSetupModelData() async {
+    userSetupModel =
+        await BlocProvider.of<ManageUserSetupCubit>(
+          context,
+        ).getUserSetupModel();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -61,6 +70,7 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
     selectedCategory = BlocProvider.of<ManageCategoryCubit>(
       context,
     ).getCategoryById(widget.financeItemModel?.categoryId);
+    getUserSetupModelData();
     setState(() {});
   }
 
@@ -109,6 +119,7 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
                 if (pickedDate != null) {
                   setState(() {
                     selectedDate = pickedDate;
+                    endDate = getNextMonthlyDate(pickedDate);
                   });
                 }
               },
@@ -137,7 +148,7 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
                       RecurrenceType.values.map((type) {
                         return DropdownMenuItem(
                           value: type,
-                          child: Text(getRecurrenceText(context, type)), 
+                          child: Text(getRecurrenceText(context, type)),
                         );
                       }).toList(),
                   onChanged: (value) {
@@ -153,7 +164,7 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
                         context: context,
                         initialDate: endDate,
                         firstDate: DateTime.now().add(Duration(days: 1)),
-                        lastDate: DateTime(DateTime.now().year + 5, 12, 31),
+                        lastDate: DateTime(userSetupModel!.startDateTime.year + 5, 12, 31),
                       );
                       if (picked != null) {
                         setState(() => endDate = picked);

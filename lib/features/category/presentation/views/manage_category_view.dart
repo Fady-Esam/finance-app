@@ -54,6 +54,7 @@ class _ManageCategoryViewState extends State<ManageCategoryView> {
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Form(
           key: formKey,
+          autovalidateMode: autovalidateMode,
           child: ListView(
             padding: const EdgeInsets.symmetric(
               vertical: 12,
@@ -84,7 +85,7 @@ class _ManageCategoryViewState extends State<ManageCategoryView> {
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: const BorderSide(
-                    color: Colors.greenAccent, // Deep purple: primary highlight
+                    color: Colors.greenAccent, 
                     width: 1.8,
                   ),
                 ),
@@ -104,7 +105,7 @@ class _ManageCategoryViewState extends State<ManageCategoryView> {
                   if (isDuplicate) {
                     return S
                         .of(context)
-                        .duplicate_category_error; // Custom error message for duplicates
+                        .duplicate_category_error; 
                   }
                   return null;
                 },
@@ -216,6 +217,7 @@ class _ManageCategoryViewState extends State<ManageCategoryView> {
                 child: ElevatedButton(
                   onPressed: () async {
                     if (formKey.currentState!.validate()) {
+                      // formKey.currentState!.save();
                       final category = CategoryModel(
                         name: _nameController.text,
                         icon: selectedIcon,
@@ -237,7 +239,7 @@ class _ManageCategoryViewState extends State<ManageCategoryView> {
                       ).addCategory(category);
                     } else {
                       setState(() {
-                        autovalidateMode = AutovalidateMode.onUserInteraction;
+                        autovalidateMode = AutovalidateMode.always;
                       });
                     }
                   },

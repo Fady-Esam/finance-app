@@ -16,9 +16,9 @@ class CategoryView extends StatefulWidget {
   State<CategoryView> createState() => _CategoryViewState();
 }
 
-class _CategoryViewState extends State<CategoryView> with 
-    AutomaticKeepAliveClientMixin {
-    @override
+class _CategoryViewState extends State<CategoryView>
+    with AutomaticKeepAliveClientMixin {
+  @override
   bool get wantKeepAlive => true;
   List<CategoryModel> categories = [];
   @override
@@ -52,6 +52,9 @@ class _CategoryViewState extends State<CategoryView> with
             }
           },
           builder: (context, state) {
+            if (categories.isEmpty) {
+              return Center(child: Text(S.of(context).no_category_data));
+            }
             return CategoryListView(categories: categories);
           },
         ),
@@ -65,7 +68,7 @@ class _CategoryViewState extends State<CategoryView> with
             Navigator.pushNamed(
               context,
               ManageCategoryView.routeName,
-              arguments: {'categoryModel': null, 'categories' : categories},
+              arguments: {'categoryModel': null, 'categories': categories},
             );
           },
           child: const Icon(Icons.add, size: 32, color: Color(0xFF262626)),

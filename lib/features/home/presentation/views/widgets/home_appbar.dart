@@ -9,16 +9,18 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     required this.themeMode,
     required this.onThemeChanged,
+    this.userName,
   });
 
   final ThemeMode themeMode;
   final VoidCallback onThemeChanged;
+  final String? userName;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(
-        S.of(context).welcome_title,
+        userName != null ? S.of(context).welcome_name(userName!) : S.of(context).welcome_title,
         style: const TextStyle(fontSize: 20),
       ),
       actions: [

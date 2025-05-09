@@ -6,16 +6,16 @@ import 'amount_input_formatter.dart';
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
-    required this.hintText,
-    required this.color,
+    this.hintText,
+    this.color,
     this.prefixIcon,
     this.suffixIcon,
     this.hintStyle,
     this.controller,
     this.textLabelStyle,
   });
-  final String hintText;
-  final Color color;
+  final String? hintText;
+  final Color? color;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final TextStyle? hintStyle;
@@ -37,17 +37,10 @@ class CustomTextField extends StatelessWidget {
       //     FocusScope.of(context).unfocus();
       //   }
       // },
-      inputFormatters:
-          isAmount
-              ? [
-                /*FilteringTextInputFormatter.allow(RegExp(r'[0-9.<]'))*/
-                AmountInputFormatter(),
-              ]
-              : null,
+      inputFormatters: isAmount ? [AmountInputFormatter()] : null,
       style: textLabelStyle,
       controller: controller,
       textAlign: isRtl && isAmount ? TextAlign.end : TextAlign.start,
-      // Simplify textAlign to rely on textDirection
       keyboardType: !isAmount ? TextInputType.text : null,
       maxLines: isAmount ? 1 : 2,
       decoration: InputDecoration(

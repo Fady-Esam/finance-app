@@ -18,7 +18,7 @@ class FinanceItemModel extends HiveObject {
   RecurrenceType recurrence;
   @HiveField(5)
   DateTime? recurrenceEndDate;
-
+  // String? description;
   FinanceItemModel({
     required this.title,
     required this.dateTime,
@@ -27,7 +27,6 @@ class FinanceItemModel extends HiveObject {
     this.recurrence = RecurrenceType.none,
     DateTime? recurrenceEndDate,
   }) {
-    this.recurrenceEndDate =
-        recurrenceEndDate ?? getNextMonthlyDate(dateTime);
+    this.recurrenceEndDate = recurrenceEndDate ?? getNextMonthlyDate(dateTime);
   }
 }

@@ -20,7 +20,7 @@ class DatePickerField extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
               Text(
-                DateFormat.yMMMd().format(selectedDate!),
+                DateFormat.yMMMd().format(selectedDate),
                 style: TextStyle(fontSize: 16),
               ),
             Icon(Icons.calendar_today),

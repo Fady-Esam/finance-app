@@ -4,6 +4,8 @@ import 'package:finance_flutter_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../category/data/models/category_model.dart';
+import '../../../../user_setup/data/models/user_setup_model.dart';
+import '../../../../user_setup/presentation/manager/cubits/manage_user_setup_cubit/manage_user_setup_cubit.dart';
 import '../../../data/enums/transaction_type_enum.dart';
 import '../../manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
 import '../../manager/cubits/manage_finance_cubit/manage_finance_state.dart';
@@ -24,6 +26,16 @@ class _HomeBodyState extends State<HomeBody> {
   double allTotalBalance = 0.0;
   double todayTotalBalance = 0.0;
   Map<int, CategoryModel> categoryMap = {};
+  UserSetupModel? userSetupModel;
+  Future<void> getUserSetupModelData() async {
+    userSetupModel =
+        await BlocProvider.of<ManageUserSetupCubit>(
+          context,
+        ).getUserSetupModel();
+    setState(() {});
+    // allTotalBalance = userSetupModel!.balance ?? 0.0;
+  }
+
   void getFinancesByDay() {
     BlocProvider.of<ManageFinanceCubit>(
       context,
@@ -33,6 +45,7 @@ class _HomeBodyState extends State<HomeBody> {
   @override
   void initState() {
     super.initState();
+    getUserSetupModelData();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       getFinancesByDay();
     });
@@ -75,7 +88,8 @@ class _HomeBodyState extends State<HomeBody> {
             BlocConsumer<ManageFinanceCubit, ManageFinanceState>(
               listener: (context, state) {
                 if (state is GetAllTotalBalanceSuccessState) {
-                  allTotalBalance = state.totalBalance;
+                  allTotalBalance =
+                      state.totalBalance + (userSetupModel?.balance ?? 0.0);
                 } else if (state is GetAllTotalBalanceFailureState) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text(S.of(context).somethingWentWrong)),
@@ -122,7 +136,7 @@ class _HomeBodyState extends State<HomeBody> {
                       ManageTransactionView.routeName,
                       arguments: {
                         'transactionTypeEnum': TransactionTypeEnum.plus,
-                        'isFromHomePage' : true,
+                        'isFromHomePage': true,
                       },
                     );
                   },
@@ -142,7 +156,7 @@ class _HomeBodyState extends State<HomeBody> {
                       ManageTransactionView.routeName,
                       arguments: {
                         'transactionTypeEnum': TransactionTypeEnum.minus,
-                        'isFromHomePage' : true,
+                        'isFromHomePage': true,
                       },
                     );
                   },
@@ -187,7 +201,6 @@ class _HomeBodyState extends State<HomeBody> {
                 return FinanceListViewBuilder(
                   financeItems: financeItems,
                   currentDateTime: DateTime.now(),
-                  
                 );
               },
             ),
