@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'features/analytic/presentation/views/analytic_view.dart';
 import 'features/category/presentation/views/category_view.dart';
+import 'features/settings/presentation/views/settings_view.dart';
 
 class BottomNavBarView extends StatefulWidget {
   const BottomNavBarView({super.key});
@@ -22,7 +23,7 @@ class _BottomNavBarViewState extends State<BottomNavBarView> {
     TransactionView(),
     CategoryView(),
     AnalyticView(),
-    Placeholder(),
+    SettingsView(),
   ];
 
   @override

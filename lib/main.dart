@@ -1,20 +1,18 @@
 import 'dart:ui';
-import 'package:finance_flutter_app/bottom_nav_bar_view.dart';
 import 'package:finance_flutter_app/core/helper/on_generate_routes.dart';
 import 'package:finance_flutter_app/features/category/data/models/category_model.dart';
 import 'package:finance_flutter_app/features/home/data/repos/home_repo_impl.dart';
 import 'package:finance_flutter_app/features/home/presentation/manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
+import 'package:finance_flutter_app/features/notification/data/repos/notification_repo_impl.dart';
 import 'package:finance_flutter_app/features/user_setup/data/repos/user_setup_repo_impl.dart';
 import 'package:finance_flutter_app/features/user_setup/presentation/manager/cubits/manage_user_setup_cubit/manage_user_setup_cubit.dart';
-import 'package:finance_flutter_app/features/user_setup/presentation/views/user_setup_view.dart';
 import 'package:finance_flutter_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:workmanager/workmanager.dart';
 import 'cubits/change_language_cubit/change_language_cubit.dart';
 import 'cubits/change_language_cubit/change_language_state.dart';
 import 'cubits/change_theme_cubit/change_theme_cubit.dart';
@@ -27,8 +25,19 @@ import 'features/home/data/models/finance_item_model.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  //Hive.registerAdapter(FinanceItemModelAdapter());
-  //Hive.registerAdapter(CategoryModelAdapter());
+  await NotificationRepoImpl.init();
+  await Workmanager().initialize(
+    NotificationRepoImpl.callbackDispatcher,
+    isInDebugMode: false,
+  );
+  await Workmanager().registerPeriodicTask(
+    'recurring_notification_task',
+    'checkRecurringTransactions',
+    frequency: const Duration(days: 1),
+    initialDelay: const Duration(seconds: 10),
+  );
+  // Hive.registerAdapter(FinanceItemModelAdapter());
+  // Hive.registerAdapter(CategoryModelAdapter());
   // Hive.registerAdapter(RecurrenceTypeAdapter());
   // await Hive.openBox<FinanceItemModel>(
   //   'finance',
@@ -41,7 +50,7 @@ void main() async {
   Hive.registerAdapter(CategoryModelAdapter());
   await Hive.openBox<FinanceItemModel>('finance');
   await Hive.openBox<CategoryModel>('category');
-  //await Hive.openBox<RecurrenceType>('recurrenceType');
+  // await Hive.openBox<RecurrenceType>('recurrenceType');
   final prefs = await SharedPreferences.getInstance();
   String deviceLang = PlatformDispatcher.instance.locale.languageCode;
   String defaultLangCode =
@@ -95,7 +104,8 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create:
-              (context) => ManageUserSetupCubit(userSetupRepo: UserSetupRepoImpl()),
+              (context) =>
+                  ManageUserSetupCubit(userSetupRepo: UserSetupRepoImpl()),
         ),
       ],
       child: BlocBuilder<ChangeThemeCubit, ChangeThemeState>(

@@ -4,6 +4,7 @@ import 'package:finance_flutter_app/features/on_boarding/presentation/views/on_b
 import 'package:finance_flutter_app/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
 import '../../features/category/presentation/views/manage_category_view.dart';
+import '../../features/notification/presentation/views/notification_view.dart';
 import '../../features/user_setup/presentation/views/user_setup_view.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -12,6 +13,8 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const OnBoardingView());
     case UserSetupView.routeName:
       return MaterialPageRoute(builder: (context) => const UserSetupView());
+    case NotificationView.routeName:
+      return MaterialPageRoute(builder: (context) => const NotificationView());
     case BottomNavBarView.routeName:
       return MaterialPageRoute(builder: (context) => const BottomNavBarView());
     case ManageTransactionView.routeName:

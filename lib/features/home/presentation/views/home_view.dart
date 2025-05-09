@@ -1,4 +1,3 @@
-import 'package:finance_flutter_app/features/home/presentation/manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
 import 'package:finance_flutter_app/features/user_setup/data/models/user_setup_model.dart';
 import 'package:finance_flutter_app/features/user_setup/presentation/manager/cubits/manage_user_setup_cubit/manage_user_setup_cubit.dart';
 import 'package:flutter/material.dart';

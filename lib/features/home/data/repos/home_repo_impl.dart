@@ -5,6 +5,7 @@ import 'package:finance_flutter_app/features/home/data/repos/home_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../../../../core/funcs/calculate_next_occurence.dart';
 import '../../../../core/funcs/get_next_monthly_date.dart';
 import '../enums/recurrence_type_enum.dart';
 import '../models/balance_summary.dart';
@@ -33,36 +34,39 @@ class HomeRepoImpl implements HomeRepo {
           recurrenceEndDate: item.recurrenceEndDate,
         );
         box.add(newItem);
-        switch (item.recurrence) {
-          case RecurrenceType.daily:
-            nextDate = nextDate.add(Duration(days: 1));
-            break;
-          case RecurrenceType.weekly:
-            nextDate = nextDate.add(Duration(days: 7));
-            break;
-          case RecurrenceType.monthly:
-            nextDate = getNextMonthlyDate(nextDate);
-            break;
-          case RecurrenceType.yearly:
-            nextDate = DateTime(
-              nextDate.year + 1,
-              nextDate.month,
-              nextDate.day,
-              nextDate.hour,
-              nextDate.minute,
-              nextDate.second,
-              nextDate.millisecond,
-            );
-            break;
-          case RecurrenceType.none:
-            break;
-        }
+        nextDate = calculateNextOccurrence(nextDate, item.recurrence);
+        // switch (item.recurrence) {
+        //   case RecurrenceType.daily:
+        //     nextDate = nextDate.add(Duration(days: 1));
+        //     break;
+        //   case RecurrenceType.weekly:
+        //     nextDate = nextDate.add(Duration(days: 7));
+        //     break;
+        //   case RecurrenceType.monthly:
+        //     nextDate = getNextMonthlyDate(nextDate);
+        //     break;
+        //   case RecurrenceType.yearly:
+        //     nextDate = DateTime(
+        //       nextDate.year + 1,
+        //       nextDate.month,
+        //       nextDate.day,
+        //       nextDate.hour,
+        //       nextDate.minute,
+        //       nextDate.second,
+        //       nextDate.millisecond,
+        //     );
+        //     break;
+        //   case RecurrenceType.none:
+        //     break;
+        // }
       }
       return right(null);
     } catch (e) {
       return left(Failure(technicalMessage: e.toString()));
     }
   }
+
+
 
 
 

@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../generated/l10n.dart';
 import '../../../home/presentation/views/widgets/amount_input_formatter.dart';
-import '../../../on_boarding/presentation/views/on_boarding_view.dart';
 import '../../data/models/user_setup_model.dart';
 
 class UserSetupView extends StatefulWidget {
