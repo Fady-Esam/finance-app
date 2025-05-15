@@ -20,7 +20,7 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(recurr) => ", Recurr: ${recurr}";
+  static String m0(recurr) => ", Recurrence: ${recurr}";
 
   static String m1(month, balance) => "Month ${month}\nBalance: ${balance}";
 

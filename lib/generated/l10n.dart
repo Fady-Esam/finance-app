@@ -605,10 +605,10 @@ class S {
     return Intl.message('Net Balance', name: 'net_balance', desc: '', args: []);
   }
 
-  /// `, Recurr: {recurr}`
+  /// `, Recurrence: {recurr}`
   String recurrence(Object recurr) {
     return Intl.message(
-      ', Recurr: $recurr',
+      ', Recurrence: $recurr',
       name: 'recurrence',
       desc: '',
       args: [recurr],

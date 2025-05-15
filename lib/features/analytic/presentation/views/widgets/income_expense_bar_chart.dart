@@ -63,7 +63,7 @@ class IncomeExpenseBarChart extends StatelessWidget {
                 leftTitles: AxisTitles(
                   sideTitles: SideTitles(
                     showTitles: true,
-                    reservedSize: 50,
+                    reservedSize: 60,
                     // getTitlesWidget: (value, meta) {
                     //   return Padding(
                     //     padding: const EdgeInsets.only(

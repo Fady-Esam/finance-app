@@ -167,10 +167,7 @@ class _TransactionViewBodyState extends State<TransactionViewBody> {
                 },
                 builder: (context, state) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 12.0,
-                      horizontal: 8,
-                    ),
+                    padding: const EdgeInsets.only(top: 8, bottom: 4),
                     child: Card(
                       elevation: 2,
                       shape: RoundedRectangleBorder(
@@ -178,7 +175,7 @@ class _TransactionViewBodyState extends State<TransactionViewBody> {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                          vertical: 16.0,
+                          vertical: 16,
                           horizontal: 12,
                         ),
                         child: Row(
@@ -197,7 +194,8 @@ class _TransactionViewBodyState extends State<TransactionViewBody> {
                             BuildSummaryItemCustomWidget(
                               label: S.of(context).net_balance,
                               value:
-                                  balSum.netBalance + (userSetupModel?.balance?? 0.0),
+                                  balSum.netBalance +
+                                  (userSetupModel?.balance ?? 0.0),
                               color: Colors.blueAccent,
                             ),
                           ],

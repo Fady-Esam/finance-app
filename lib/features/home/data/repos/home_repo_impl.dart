@@ -327,7 +327,7 @@ class HomeRepoImpl implements HomeRepo {
     try {
       final DateTimeRange dateRange = DateTimeRange(
         start: DateTime(DateTime.now().year, 1, 1),
-        end: DateTime(DateTime.now().year, 12, 31),
+        end: DateTime.now(),
       );
       final filteredItems = getFilteredFinancesByDate(dateRange: dateRange);
 

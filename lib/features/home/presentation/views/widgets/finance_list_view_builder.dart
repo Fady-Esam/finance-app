@@ -70,6 +70,8 @@ class _FinanceListViewBuilderState extends State<FinanceListViewBuilder> {
                       'categoryFilteredId': widget.categoryFilterId,
                       'isAmountPositive': widget.isAmountPositive,
                       'dateTimeRange': widget.dateTimeRange,
+                      'endDate': financeItemModel.recurrenceEndDate,
+                      'recurrenceType': financeItemModel.recurrence,
                     },
                   );
                   return false; // <<< DON'T dismiss the item

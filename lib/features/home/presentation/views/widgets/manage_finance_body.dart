@@ -31,6 +31,8 @@ class ManageTransactionBody extends StatefulWidget {
     this.isAmountPositive,
     this.categoryFilteredId,
     this.dateTimeRange,
+    this.endDate,
+    this.recurrenceType,
   });
 
   final TransactionTypeEnum transactionTypeEnum;
@@ -43,6 +45,8 @@ class ManageTransactionBody extends StatefulWidget {
   final bool? isAmountPositive;
   final int? categoryFilteredId;
   final DateTimeRange? dateTimeRange;
+  final DateTime? endDate;
+  final RecurrenceType? recurrenceType;
   @override
   State<ManageTransactionBody> createState() => _ManageTransactionBodyState();
 }
@@ -50,9 +54,9 @@ class ManageTransactionBody extends StatefulWidget {
 class _ManageTransactionBodyState extends State<ManageTransactionBody> {
   late DateTime selectedDate;
   late DateTime currentDateTime;
-  DateTime endDate = getNextMonthlyDate(DateTime.now());
+  late DateTime endDate;
   CategoryModel? selectedCategory;
-  var recurrenceType = RecurrenceType.none;
+  late RecurrenceType recurrenceType;
   UserSetupModel? userSetupModel;
   Future<void> getUserSetupModelData() async {
     userSetupModel =
@@ -71,6 +75,8 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
       context,
     ).getCategoryById(widget.financeItemModel?.categoryId);
     getUserSetupModelData();
+    endDate = widget.endDate ?? getNextMonthlyDate(DateTime.now());
+    recurrenceType = widget.recurrenceType ?? RecurrenceType.none;
     setState(() {});
   }
 
@@ -166,10 +172,8 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
                         firstDate: DateTime.now().add(Duration(days: 1)),
                         lastDate: DateTime(userSetupModel!.startDateTime.year + 5, 12, 31),
                       );
-                      if (picked != null) {
-                        setState(() => endDate = picked);
-                      }
-                    },
+                      setState(() => endDate = picked!);
+                                        },
                   ),
               ],
             ),

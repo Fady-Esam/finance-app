@@ -1,4 +1,3 @@
-import 'package:finance_flutter_app/features/notification/presentation/views/notification_view.dart';
 import 'package:finance_flutter_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,18 +20,20 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(
-        userName != null ? S.of(context).welcome_name(userName!) : S.of(context).welcome_title,
+        userName != null
+            ? S.of(context).welcome_name(userName!)
+            : S.of(context).welcome_title,
         style: const TextStyle(fontSize: 20),
       ),
       actions: [
-                IconButton(
-          icon: Icon(
-            Icons.notifications,
-          ),
-          onPressed: (){
-            Navigator.pushNamed(context, NotificationView.routeName);
-          },
-        ),
+        //         IconButton(
+        //   icon: Icon(
+        //     Icons.notifications,
+        //   ),
+        //   onPressed: (){
+        //     Navigator.pushNamed(context, NotificationView.routeName);
+        //   },
+        // ),
         IconButton(
           icon: const Icon(Icons.language),
           onPressed: () async {

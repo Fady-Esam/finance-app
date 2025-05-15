@@ -1,3 +1,3 @@
-class ManageNotificationState {}
+// class ManageNotificationState {}
 
-class ManageNotificationInitialState extends ManageNotificationState {}
+// class ManageNotificationInitialState extends ManageNotificationState {}

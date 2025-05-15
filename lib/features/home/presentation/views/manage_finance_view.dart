@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:finance_flutter_app/features/home/data/enums/recurrence_type_enum.dart';
 import 'package:finance_flutter_app/features/home/data/enums/transaction_type_enum.dart';
 import 'package:finance_flutter_app/features/home/data/models/finance_item_model.dart';
 import 'package:finance_flutter_app/features/home/presentation/manager/cubits/manage_finance_cubit/manage_finance_state.dart';
@@ -20,7 +21,8 @@ class ManageTransactionView extends StatefulWidget {
     this.categoryFilteredId,
     this.isAmountPositive,
     this.dateTimeRange,
-  
+    this.endDate,
+    this.recurrenceType,
   });
   final TransactionTypeEnum transactionTypeEnum;
   final FinanceItemModel? financeItemModel;
@@ -30,6 +32,8 @@ class ManageTransactionView extends StatefulWidget {
   final int? categoryFilteredId;
   final bool? isAmountPositive;
   final DateTimeRange? dateTimeRange;
+  final DateTime? endDate;
+  final RecurrenceType? recurrenceType;
   static const routeName = 'manage-transaction-view';
   @override
   State<ManageTransactionView> createState() => _ManageTransactionViewState();
@@ -99,7 +103,8 @@ class _ManageTransactionViewState extends State<ManageTransactionView> {
           categoryFilteredId: widget.categoryFilteredId,
           isAmountPositive: widget.isAmountPositive,
           dateTimeRange: widget.dateTimeRange,
-          
+          endDate: widget.endDate,
+          recurrenceType: widget.recurrenceType
         ),
       ),
     );

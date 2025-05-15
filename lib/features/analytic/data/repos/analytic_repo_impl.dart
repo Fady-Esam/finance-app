@@ -14,11 +14,10 @@ class AnalyticRepoImpl implements AnalyticRepo {
   //   }
   //   return result;
   // }
-Map<int, Map<String, double>> getGroupByMonth(List<FinanceItemModel> items) {
+  Map<int, Map<String, double>> getGroupByMonth(List<FinanceItemModel> items) {
     final result = <int, Map<String, double>>{
       for (int i = 1; i <= 12; i++) i: {'income': 0, 'expense': 0},
     };
-
     for (var item in items) {
       final month = item.dateTime.month;
       final type = item.amount >= 0 ? 'income' : 'expense';
@@ -27,6 +26,7 @@ Map<int, Map<String, double>> getGroupByMonth(List<FinanceItemModel> items) {
 
     return result;
   }
+
   @override
   Map<int, double> getGroupByCategory(List<FinanceItemModel> items) {
     final Map<int, double> result = {};
@@ -51,7 +51,7 @@ Map<int, Map<String, double>> getGroupByMonth(List<FinanceItemModel> items) {
     }
 
     // Create cumulative total per month
-final lastUsedMonth = monthlySums.keys.reduce((a, b) => a > b ? a : b);
+    final lastUsedMonth = monthlySums.keys.reduce((a, b) => a > b ? a : b);
 
     double total = 0;
     List<FlSpot> spots = [];

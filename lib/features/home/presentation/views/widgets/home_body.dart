@@ -185,7 +185,7 @@ class _HomeBodyState extends State<HomeBody> {
                 ),
               ),
             ),
-
+            const SizedBox(height: 8),
             BlocConsumer<ManageFinanceCubit, ManageFinanceState>(
               listener: (context, state) {
                 if (state is GetFinancesByDateFailureState) {

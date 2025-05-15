@@ -20,8 +20,13 @@ class FinanceItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+      dense: true, // reduces default height
+      visualDensity: const VisualDensity(
+        vertical: 1,
+      ), // tighten vertical spacing
       leading: CircleAvatar(
-        radius: 30,
+        radius: 25,
         backgroundColor: getColorfromHex(categoryItem?.colorHex),
         child: Icon(
           getIconFromName(categoryItem?.icon),

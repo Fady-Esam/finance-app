@@ -81,7 +81,7 @@
     "total_income" : "Total Income",
     "total_expense" : "Total Expense",
     "net_balance" : "Net Balance",
-    "recurrence": ", Recurr: {recurr}",
+    "recurrence": ", Recurrence: {recurr}",
     "no_category_data": "No category data to display",
     "welcome_name" : "Welcome, {name}",
     "name": "Name",
