@@ -7,13 +7,11 @@ import '../../../../../cubits/change_language_cubit/change_language_cubit.dart';
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({
     super.key,
-    required this.themeMode,
-    required this.onThemeChanged,
+
     this.userName,
   });
 
-  final ThemeMode themeMode;
-  final VoidCallback onThemeChanged;
+
   final String? userName;
 
   @override
@@ -34,25 +32,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         //     Navigator.pushNamed(context, NotificationView.routeName);
         //   },
         // ),
-        IconButton(
-          icon: const Icon(Icons.language),
-          onPressed: () async {
-            String loadedLang =
-                await BlocProvider.of<ChangeLanguageCubit>(
-                  context,
-                ).getSavedLanguage();
-            final String langCode = loadedLang == "ar" ? "en" : "ar";
-            await BlocProvider.of<ChangeLanguageCubit>(
-              context,
-            ).changeLanguage(langCode);
-          },
-        ),
-        IconButton(
-          icon: Icon(
-            themeMode == ThemeMode.dark ? Icons.light_mode : Icons.dark_mode,
-          ),
-          onPressed: onThemeChanged,
-        ),
+
       ],
     );
   }

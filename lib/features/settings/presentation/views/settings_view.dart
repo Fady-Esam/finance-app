@@ -1,4 +1,14 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../cubits/change_language_cubit/change_language_cubit.dart';
+import '../../../../cubits/change_theme_cubit/change_theme_cubit.dart';
+import '../../../../generated/l10n.dart';
+import '../../../user_setup/data/models/user_setup_model.dart';
+import '../../../user_setup/presentation/manager/cubits/manage_user_setup_cubit/manage_user_setup_cubit.dart';
+import 'funcs/show_name_dialoge.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({super.key});
@@ -8,102 +18,129 @@ class SettingsView extends StatefulWidget {
 }
 
 class _SettingsViewState extends State<SettingsView> {
+  ThemeMode themeMode = ThemeMode.system;
+  String langCode =
+      PlatformDispatcher.instance.locale.languageCode == "ar" ||
+              PlatformDispatcher.instance.locale.languageCode == "en"
+          ? PlatformDispatcher.instance.locale.languageCode
+          : "en";
+  UserSetupModel? userSetupModel;
+  Future<void> getSavedTheme() async {
+    themeMode =
+        await BlocProvider.of<ChangeThemeCubit>(context).getSavedTheme();
+    setState(() {});
+  }
+
+  Future<void> getUserSetupModelData() async {
+    userSetupModel =
+        await BlocProvider.of<ManageUserSetupCubit>(
+          context,
+        ).getUserSetupModel();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUserSetupModelData();
+    getSavedTheme();
+  }
+
+  void toggleTheme() async {
+    await getSavedTheme();
+    ThemeMode newMode =
+        themeMode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
+    await BlocProvider.of<ChangeThemeCubit>(context).changeTheme(newMode);
+    setState(() {
+      themeMode = newMode;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Settings')),
-      body:ListView(
-            children: [
-              _sectionTitle('Profile'),
-              ListTile(
-                title: Text('Name'),
-                subtitle: Text("UserNaem"),
-                trailing: Icon(Icons.edit),
-                onTap: () => _showNameDialog(context, ""),
-              ),
-              ListTile(
-                title: Text('Currency'),
-                subtitle: Text("Currency"),
-                trailing: Icon(Icons.arrow_forward_ios),
-                onTap: () => _showCurrencyPicker(context),
-              ),
-              _sectionTitle('Notifications'),
-              SwitchListTile(
-                title: Text('Daily Summary'),
-                value: true,
-                onChanged:
-                    (val) =>()
-                        /*context.read<SettingsCubit>().toggleDailySummary(val),*/
-              ),
-              SwitchListTile(
-                title: Text('Low Balance Alert'),
-                value: true,
-                onChanged:
-                    (val) =>()/*context.read<SettingsCubit>().update(
-                      settings.copyWith(lowBalanceAlert: val),
-                    )*/,
-              ),
-              _sectionTitle('Appearance'),
-              ListTile(
-                title: Text('Theme'),
-                subtitle: Text("Theme"),
-                trailing: Icon(Icons.color_lens),
-                onTap: () => _showThemeDialog(context),
-              ),
-              _sectionTitle('About'),
-              ListTile(title: Text('App Version'), subtitle: Text('1.0.0')),
-            ],
-      
-          )
-
-    );
-  }
-
-  Widget _sectionTitle(String title) => Padding(
-    padding: const EdgeInsets.all(12.0),
-    child: Text(
-      title,
-      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-    ),
-  );
-
-  void _showNameDialog(BuildContext context, String currentName) {
-    final controller = TextEditingController(text: currentName);
-    showDialog(
-      context: context,
-      builder:
-          (_) => AlertDialog(
-            title: Text('Edit Name'),
-            content: TextField(controller: controller),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text('Cancel'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  final newName = controller.text.trim();
-                  if (newName.isNotEmpty) {
-                    // context.read<SettingsCubit>().update(
-                    //   context.read<SettingsCubit>().state.copyWith(
-                    //     userName: newName,
-                    //   ),
-                    // );
-                  }
+      appBar: AppBar(title: Text(S.of(context).settings)),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: ListView(
+          children: [
+            // Name Editor
+            ListTile(
+              title: Text(S.of(context).name),
+              subtitle: Text(userSetupModel?.name ?? ''),
+              trailing: Icon(Icons.edit),
+              onTap: () async {
+                var controller = TextEditingController(
+                  text: userSetupModel?.name,
+                );
+                showNameDialog(context, controller, () async {
+                  await BlocProvider.of<ManageUserSetupCubit>(
+                    context,
+                  ).saveUserSetupModel(
+                    UserSetupModel(
+                      name: controller.text,
+                      balance: userSetupModel?.balance,
+                      startDateTime: userSetupModel?.startDateTime,
+                    ),
+                  );
+                  await getUserSetupModelData();
                   Navigator.pop(context);
-                },
-                child: Text('Save'),
-              ),
-            ],
-          ),
+                });
+              },
+            ),
+            // Language Switcher
+            SwitchListTile(
+              title: Text(S.of(context).language),
+              subtitle: Text(S.of(context).english),
+              value: langCode == "en",
+              onChanged: (value) async {
+                String loadedLang =
+                    await BlocProvider.of<ChangeLanguageCubit>(
+                      context,
+                    ).getSavedLanguage();
+                langCode = loadedLang == "ar" ? "en" : "ar";
+                await BlocProvider.of<ChangeLanguageCubit>(
+                  context,
+                ).changeLanguage(langCode);
+              },
+              activeColor:
+                  Colors.green, // The color of the switch thumb when ON
+              activeTrackColor: Colors.green[200], // The track color when ON
+              inactiveThumbColor: Colors.grey, // Thumb color when OFF
+              inactiveTrackColor: Colors.grey[300], // Track color when OFF
+            ),
+            // Theme Switcher
+            SwitchListTile(
+              title: Text(S.of(context).theme),
+              subtitle: Text(S.of(context).dark_mode),
+              value: themeMode == ThemeMode.dark,
+              onChanged: (value) => toggleTheme(),
+              activeColor:
+                  Colors.green, // The color of the switch thumb when ON
+              activeTrackColor: Colors.green[200], // The track color when ON
+              inactiveThumbColor: Colors.grey, // Thumb color when OFF
+              inactiveTrackColor: Colors.grey[300], // Track color when OFF
+            ),
+            const SizedBox(height: 20),
+
+            // About Section
+            const Divider(),
+            ListTile(
+              title: Text(S.of(context).about),
+              subtitle: Text(S.of(context).about_text),
+            ),
+            ListTile(
+              title: Text(S.of(context).app_version),
+              subtitle: Text("1.0.0"),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
-  void _showCurrencyPicker(BuildContext context) {
-    // Could be a dropdown or search dialog
-  }
-
-  void _showThemeDialog(BuildContext context) {
-    // Dialog with Light / Dark / System options
-  }
+  // Future<String> _getAppVersion() async {
+  //   final info = await PackageInfo.fromPlatform();
+  //   return info.version;
+  // }
 }

@@ -28,12 +28,17 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "about": MessageLookupByLibrary.simpleMessage("حول"),
+    "about_text": MessageLookupByLibrary.simpleMessage(
+      "تتبع النفقات وإدارة الرصيد وجدولة المعاملات المتكررة بسهولة — مع حفظ البيانات بأمان على جهازك.",
+    ),
     "activity": MessageLookupByLibrary.simpleMessage("النشاط"),
     "add": MessageLookupByLibrary.simpleMessage("إضافة"),
     "add_category": MessageLookupByLibrary.simpleMessage("إضافة فئة"),
     "all": MessageLookupByLibrary.simpleMessage("الكل"),
     "all_activities": MessageLookupByLibrary.simpleMessage("جميع الأنشطة"),
     "analytics": MessageLookupByLibrary.simpleMessage("تحليلات"),
+    "app_version": MessageLookupByLibrary.simpleMessage("اصدار التطبيق"),
     "apr": MessageLookupByLibrary.simpleMessage("أبر"),
     "aug": MessageLookupByLibrary.simpleMessage("أغس"),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
@@ -52,6 +57,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "هذه الفئة موجودة بالفعل",
     ),
     "edit": MessageLookupByLibrary.simpleMessage("تعديل"),
+    "edit_name": MessageLookupByLibrary.simpleMessage("تعديل الاسم"),
+    "english": MessageLookupByLibrary.simpleMessage("الانجليزية"),
     "enter_name": MessageLookupByLibrary.simpleMessage("أدخل اسمك"),
     "expense": MessageLookupByLibrary.simpleMessage("مصروفات"),
     "feb": MessageLookupByLibrary.simpleMessage("فبر"),
@@ -71,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "jan": MessageLookupByLibrary.simpleMessage("ينا"),
     "jul": MessageLookupByLibrary.simpleMessage("يول"),
     "jun": MessageLookupByLibrary.simpleMessage("يون"),
+    "language": MessageLookupByLibrary.simpleMessage("اللغة"),
     "mar": MessageLookupByLibrary.simpleMessage("مار"),
     "may": MessageLookupByLibrary.simpleMessage("ماي"),
     "minus": MessageLookupByLibrary.simpleMessage("نقص"),
@@ -126,6 +134,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "splash_screen_title": MessageLookupByLibrary.simpleMessage("الماليات"),
     "start": MessageLookupByLibrary.simpleMessage("ابدأ"),
+    "theme": MessageLookupByLibrary.simpleMessage("السمة"),
     "today_total_balance": MessageLookupByLibrary.simpleMessage(
       " إجمالي الرصيد اليومي",
     ),

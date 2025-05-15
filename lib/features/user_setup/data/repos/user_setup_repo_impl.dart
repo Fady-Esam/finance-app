@@ -1,6 +1,5 @@
 import 'package:finance_flutter_app/features/user_setup/data/models/user_setup_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'user_setup_repo.dart';
 
 class UserSetupRepoImpl implements UserSetupRepo {

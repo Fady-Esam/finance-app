@@ -669,6 +669,46 @@ class S {
       args: [],
     );
   }
+
+  /// `About`
+  String get about {
+    return Intl.message('About', name: 'about', desc: '', args: []);
+  }
+
+  /// `Easily track expenses, manage your balance, and schedule recurring transactions as all securely on your device.`
+  String get about_text {
+    return Intl.message(
+      'Easily track expenses, manage your balance, and schedule recurring transactions as all securely on your device.',
+      name: 'about_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message('Language', name: 'language', desc: '', args: []);
+  }
+
+  /// `English`
+  String get english {
+    return Intl.message('English', name: 'english', desc: '', args: []);
+  }
+
+  /// `Edit Name`
+  String get edit_name {
+    return Intl.message('Edit Name', name: 'edit_name', desc: '', args: []);
+  }
+
+  /// `Theme`
+  String get theme {
+    return Intl.message('Theme', name: 'theme', desc: '', args: []);
+  }
+
+  /// `App Version`
+  String get app_version {
+    return Intl.message('App Version', name: 'app_version', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

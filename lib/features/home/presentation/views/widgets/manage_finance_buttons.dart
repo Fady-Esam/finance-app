@@ -73,24 +73,24 @@ class ManageFinanceButtons extends StatelessWidget {
                 financeItemModel!.recurrence = recurrenceType;
                 financeItemModel!.recurrenceEndDate = endDate;
                 await financeItemModel!.save();
-                if (isFromHomePage) {
-                  BlocProvider.of<ManageFinanceCubit>(
-                    context,
-                  ).getFinancesByDate(DateTime.now());
-                } else {
-                  BlocProvider.of<ManageFinanceCubit>(
-                    context,
-                  ).getFilteredFinances(
-                    dateTimeRange!,
-                    categoryId: categoryFilteredId,
-                    isAmountPositive: isAmountPositive,
-                  );
-                  if (isSameDate(modelDateTime, DateTime.now())) {
-                    BlocProvider.of<ManageFinanceCubit>(
-                      context,
-                    ).getFinancesByDate(DateTime.now());
-                  }
-                }
+                // if (isFromHomePage) {
+                //   BlocProvider.of<ManageFinanceCubit>(
+                //     context,
+                //   ).getFinancesByDate(DateTime.now());
+                // } else {
+                //   BlocProvider.of<ManageFinanceCubit>(
+                //     context,
+                //   ).getFilteredFinances(
+                //     dateTimeRange!,
+                //     categoryId: categoryFilteredId,
+                //     isAmountPositive: isAmountPositive,
+                //   );
+                //   if (isSameDate(modelDateTime, DateTime.now())) {
+                //     BlocProvider.of<ManageFinanceCubit>(
+                //       context,
+                //     ).getFinancesByDate(DateTime.now());
+                //   }
+                // }
                 BlocProvider.of<ManageFinanceCubit>(
                   context,
                 ).getChartsFinances();

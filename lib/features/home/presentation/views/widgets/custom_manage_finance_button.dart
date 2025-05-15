@@ -6,19 +6,24 @@ class CustomManageFinanceButton extends StatelessWidget {
     required this.text,
     required this.color,
     this.onPressed,
+    this.fontSize = 16,
+    this.horizontalPadding = 0.0,
   });
   final String text;
   final Color color;
   final void Function()? onPressed;
+  final double fontSize;
+  final double horizontalPadding;
   @override
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        padding:  EdgeInsets.symmetric(vertical: 8, horizontal: horizontalPadding,
+        ),
         backgroundColor: color, // Subtle background
-        textStyle: const TextStyle(
-          fontSize: 16,
+        textStyle:  TextStyle(
+          fontSize: fontSize,
           fontWeight: FontWeight.w600,
           letterSpacing: 1.2,
         ),
@@ -28,7 +33,7 @@ class CustomManageFinanceButton extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            fontSize: 18,
+            fontSize: fontSize,
             color: Color.fromARGB(255, 43, 75, 44),
           ),
         ),

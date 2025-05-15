@@ -28,12 +28,17 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "about": MessageLookupByLibrary.simpleMessage("About"),
+    "about_text": MessageLookupByLibrary.simpleMessage(
+      "Easily track expenses, manage your balance, and schedule recurring transactions as all securely on your device.",
+    ),
     "activity": MessageLookupByLibrary.simpleMessage("Activity"),
     "add": MessageLookupByLibrary.simpleMessage("Add"),
     "add_category": MessageLookupByLibrary.simpleMessage("Add Category"),
     "all": MessageLookupByLibrary.simpleMessage("All"),
     "all_activities": MessageLookupByLibrary.simpleMessage("All Activities"),
     "analytics": MessageLookupByLibrary.simpleMessage("Analytics"),
+    "app_version": MessageLookupByLibrary.simpleMessage("App Version"),
     "apr": MessageLookupByLibrary.simpleMessage("Apr"),
     "aug": MessageLookupByLibrary.simpleMessage("Aug"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -52,6 +57,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "This category already exists",
     ),
     "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+    "edit_name": MessageLookupByLibrary.simpleMessage("Edit Name"),
+    "english": MessageLookupByLibrary.simpleMessage("English"),
     "enter_name": MessageLookupByLibrary.simpleMessage("Enter Your Name"),
     "expense": MessageLookupByLibrary.simpleMessage("Expense"),
     "feb": MessageLookupByLibrary.simpleMessage("Feb"),
@@ -71,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "jan": MessageLookupByLibrary.simpleMessage("Jan"),
     "jul": MessageLookupByLibrary.simpleMessage("Jul"),
     "jun": MessageLookupByLibrary.simpleMessage("Jun"),
+    "language": MessageLookupByLibrary.simpleMessage("Language"),
     "mar": MessageLookupByLibrary.simpleMessage("Mar"),
     "may": MessageLookupByLibrary.simpleMessage("May"),
     "minus": MessageLookupByLibrary.simpleMessage("Minus"),
@@ -132,6 +140,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "splash_screen_title": MessageLookupByLibrary.simpleMessage("Finance"),
     "start": MessageLookupByLibrary.simpleMessage("Get Started"),
+    "theme": MessageLookupByLibrary.simpleMessage("Theme"),
     "today_total_balance": MessageLookupByLibrary.simpleMessage(
       "Today Total Balance",
     ),

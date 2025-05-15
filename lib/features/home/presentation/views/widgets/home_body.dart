@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../category/data/models/category_model.dart';
 import '../../../../user_setup/data/models/user_setup_model.dart';
-import '../../../../user_setup/presentation/manager/cubits/manage_user_setup_cubit/manage_user_setup_cubit.dart';
 import '../../../data/enums/transaction_type_enum.dart';
 import '../../manager/cubits/manage_finance_cubit/manage_finance_cubit.dart';
 import '../../manager/cubits/manage_finance_cubit/manage_finance_state.dart';
@@ -15,8 +14,8 @@ import 'finance_list_view_builder.dart';
 import 'transaction_button.dart';
 
 class HomeBody extends StatefulWidget {
-  const HomeBody({super.key});
-
+  const HomeBody({super.key, this.userSetupModel});
+  final UserSetupModel? userSetupModel;
   @override
   State<HomeBody> createState() => _HomeBodyState();
 }
@@ -26,30 +25,7 @@ class _HomeBodyState extends State<HomeBody> {
   double allTotalBalance = 0.0;
   double todayTotalBalance = 0.0;
   Map<int, CategoryModel> categoryMap = {};
-  UserSetupModel? userSetupModel;
-  Future<void> getUserSetupModelData() async {
-    userSetupModel =
-        await BlocProvider.of<ManageUserSetupCubit>(
-          context,
-        ).getUserSetupModel();
-    setState(() {});
-    // allTotalBalance = userSetupModel!.balance ?? 0.0;
-  }
 
-  void getFinancesByDay() {
-    BlocProvider.of<ManageFinanceCubit>(
-      context,
-    ).getFinancesByDate(DateTime.now());
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getUserSetupModelData();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      getFinancesByDay();
-    });
-  }
 
   String formatAmount(double value) {
     double absValue = value.abs();
@@ -73,139 +49,134 @@ class _HomeBodyState extends State<HomeBody> {
     }
   }
 
-  Future<void> _onRefresh() async {
-    getFinancesByDay();
-  }
+
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: _onRefresh,
-      child: SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        child: Column(
-          children: [
-            BlocConsumer<ManageFinanceCubit, ManageFinanceState>(
-              listener: (context, state) {
-                if (state is GetAllTotalBalanceSuccessState) {
-                  allTotalBalance =
-                      state.totalBalance + (userSetupModel?.balance ?? 0.0);
-                } else if (state is GetAllTotalBalanceFailureState) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(S.of(context).somethingWentWrong)),
-                  );
-                  log(state.failureMessage.toString());
-                }
-              },
-              builder: (context, state) {
-                return CustomHomeContainer(
-                  title: S.of(context).my_balance,
-                  balance: formatAmount(allTotalBalance),
-                  color: Colors.pink,
+    return SingleChildScrollView(
+      physics: const AlwaysScrollableScrollPhysics(),
+      child: Column(
+        children: [
+          BlocConsumer<ManageFinanceCubit, ManageFinanceState>(
+            listener: (context, state) {
+              if (state is GetAllTotalBalanceSuccessState) {
+                allTotalBalance =
+                    state.totalBalance + (widget.userSetupModel?.balance ?? 0.0);
+              } else if (state is GetAllTotalBalanceFailureState) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(S.of(context).somethingWentWrong)),
                 );
-              },
-            ),
-            const SizedBox(height: 10),
-            BlocConsumer<ManageFinanceCubit, ManageFinanceState>(
-              listener: (context, state) {
-                if (state is GetTodayTotalBalanceSuccessState) {
-                  todayTotalBalance = state.totalBalance;
-                } else if (state is GetTodayTotalBalanceFailureState) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(S.of(context).somethingWentWrong)),
-                  );
-                  log(state.failureMessage.toString());
-                }
-              },
-              builder: (context, state) {
-                return CustomHomeContainer(
-                  title: S.of(context).today_total_balance,
-                  balance: formatAmount(todayTotalBalance),
-                  color: const Color.fromARGB(255, 241, 234, 53),
+                log(state.failureMessage.toString());
+              }
+            },
+            builder: (context, state) {
+              return CustomHomeContainer(
+                title: S.of(context).my_balance,
+                balance: formatAmount(allTotalBalance),
+                color: Colors.pink,
+              );
+            },
+          ),
+          const SizedBox(height: 10),
+          BlocConsumer<ManageFinanceCubit, ManageFinanceState>(
+            listener: (context, state) {
+              if (state is GetTodayTotalBalanceSuccessState) {
+                todayTotalBalance = state.totalBalance;
+              } else if (state is GetTodayTotalBalanceFailureState) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(S.of(context).somethingWentWrong)),
                 );
-              },
-            ),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      ManageTransactionView.routeName,
-                      arguments: {
-                        'transactionTypeEnum': TransactionTypeEnum.plus,
-                        'isFromHomePage': true,
-                      },
-                    );
-                  },
-                  child: TransactionButton(
-                    title: S.of(context).plus,
-                    icon: const Icon(
-                      Icons.add,
-                      color: Color.fromARGB(255, 60, 58, 58),
-                    ),
-                    color: Colors.green,
+                log(state.failureMessage.toString());
+              }
+            },
+            builder: (context, state) {
+              return CustomHomeContainer(
+                title: S.of(context).today_total_balance,
+                balance: formatAmount(todayTotalBalance),
+                color: const Color.fromARGB(255, 241, 234, 53),
+              );
+            },
+          ),
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    ManageTransactionView.routeName,
+                    arguments: {
+                      'transactionTypeEnum': TransactionTypeEnum.plus,
+                      'isFromHomePage': true,
+                    },
+                  );
+                },
+                child: TransactionButton(
+                  title: S.of(context).plus,
+                  icon: const Icon(
+                    Icons.add,
+                    color: Color.fromARGB(255, 60, 58, 58),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      ManageTransactionView.routeName,
-                      arguments: {
-                        'transactionTypeEnum': TransactionTypeEnum.minus,
-                        'isFromHomePage': true,
-                      },
-                    );
-                  },
-                  child: TransactionButton(
-                    title: S.of(context).minus,
-                    icon: const Icon(
-                      Icons.remove,
-                      color: Color.fromARGB(255, 60, 58, 58),
-                    ),
-                    color: Colors.blue,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(start: 16),
-              child: Align(
-                alignment:
-                    Directionality.of(context) == TextDirection.ltr
-                        ? Alignment.centerLeft
-                        : Alignment.centerRight,
-                child: Text(
-                  S.of(context).todya_activity,
-                  style: const TextStyle(fontSize: 18),
+                  color: Colors.green,
                 ),
               ),
-            ),
-            const SizedBox(height: 8),
-            BlocConsumer<ManageFinanceCubit, ManageFinanceState>(
-              listener: (context, state) {
-                if (state is GetFinancesByDateFailureState) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(S.of(context).somethingWentWrong)),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    ManageTransactionView.routeName,
+                    arguments: {
+                      'transactionTypeEnum': TransactionTypeEnum.minus,
+                      'isFromHomePage': true,
+                    },
                   );
-                  log(state.failureMessage.toString());
-                } else if (state is GetFinancesByDateSuccessState) {
-                  financeItems = state.financeItems;
-                }
-              },
-              builder: (context, state) {
-                return FinanceListViewBuilder(
-                  financeItems: financeItems,
-                  currentDateTime: DateTime.now(),
-                );
-              },
+                },
+                child: TransactionButton(
+                  title: S.of(context).minus,
+                  icon: const Icon(
+                    Icons.remove,
+                    color: Color.fromARGB(255, 60, 58, 58),
+                  ),
+                  color: Colors.blue,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsetsDirectional.only(start: 16),
+            child: Align(
+              alignment:
+                  Directionality.of(context) == TextDirection.ltr
+                      ? Alignment.centerLeft
+                      : Alignment.centerRight,
+              child: Text(
+                S.of(context).todya_activity,
+                style: const TextStyle(fontSize: 18),
+              ),
             ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 8),
+          BlocConsumer<ManageFinanceCubit, ManageFinanceState>(
+            listener: (context, state) {
+              if (state is GetFinancesByDateFailureState) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(S.of(context).somethingWentWrong)),
+                );
+                log(state.failureMessage.toString());
+              } else if (state is GetFinancesByDateSuccessState) {
+                financeItems = state.financeItems;
+              }
+            },
+            builder: (context, state) {
+              return FinanceListViewBuilder(
+                financeItems: financeItems,
+                currentDateTime: DateTime.now(),
+              );
+            },
+          ),
+        ],
       ),
     );
   }

@@ -87,5 +87,12 @@
     "name": "Name",
     "initial_balance" : "Initial Balance",
     "enter_name" : "Enter Your Name",
-    "please_enter_name" : "من فضلك ادخل اسمك"
+    "please_enter_name" : "من فضلك ادخل اسمك",
+    "about":"About",
+    "about_text": "Easily track expenses, manage your balance, and schedule recurring transactions as all securely on your device.",
+    "language":"Language",
+    "english":"English",
+    "edit_name":"Edit Name",
+    "theme":"Theme",
+    "app_version":"App Version"
 }
