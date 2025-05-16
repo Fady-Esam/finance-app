@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'cubits/change_language_cubit/change_language_cubit.dart';
 import 'cubits/change_language_cubit/change_language_state.dart';
 import 'cubits/change_theme_cubit/change_theme_cubit.dart';
@@ -20,111 +21,115 @@ import 'features/category/presentation/manager/cubits/manage_category_cubit/mana
 import 'features/home/data/enums/recurrence_type_enum.dart';
 import 'features/home/data/models/finance_item_model.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Hive.registerAdapter(FinanceItemModelAdapter());
-  // Hive.registerAdapter(CategoryModelAdapter());
-  // Hive.registerAdapter(RecurrenceTypeAdapter());
-  // await Hive.openBox<FinanceItemModel>(
-  //   'finance',
-  // ).then((box) async => await box.clear());
-  // await Hive.openBox<CategoryModel>(
-  //   'category',
-  // ).then((box) async => await box.clear());
+
   await Hive.initFlutter();
   Hive.registerAdapter(FinanceItemModelAdapter());
   Hive.registerAdapter(RecurrenceTypeAdapter());
   Hive.registerAdapter(CategoryModelAdapter());
+
   await Hive.openBox<FinanceItemModel>('finance');
   await Hive.openBox<CategoryModel>('category');
-  // await Hive.openBox<RecurrenceType>('recurrenceType');
+
   final prefs = await SharedPreferences.getInstance();
-  String deviceLang = PlatformDispatcher.instance.locale.languageCode;
-  String defaultLangCode =
-      deviceLang == "ar" || deviceLang == "en" ? deviceLang : "en";
+
+  final deviceLang = PlatformDispatcher.instance.locale.languageCode;
+  final defaultLangCode =
+      (deviceLang == "ar" || deviceLang == "en") ? deviceLang : "en";
+
   final savedLanguage = prefs.getString("language") ?? defaultLangCode;
   final savedTheme = prefs.getString("theme") ?? "system";
-  runApp(
-    //MyApp(),
-    MyApp(savedLanguage: savedLanguage, savedTheme: savedTheme),
-  );
+
+  runApp(MyApp(savedLanguage: savedLanguage, savedTheme: savedTheme));
 }
 
 class MyApp extends StatelessWidget {
+  final String savedLanguage;
+  final String savedTheme;
+
   const MyApp({
     super.key,
     required this.savedLanguage,
     required this.savedTheme,
   });
-  final String savedLanguage;
-  final String savedTheme;
 
   @override
   Widget build(BuildContext context) {
-    Locale locale = Locale(savedLanguage);
-    ThemeMode mode =
-        savedTheme == "dark"
-            ? ThemeMode.dark
-            : savedTheme == "light"
-            ? ThemeMode.light
-            : WidgetsBinding.instance.platformDispatcher.platformBrightness ==
-                Brightness.dark
-            ? ThemeMode.dark
-            : ThemeMode.light;
+    final initialLocale = Locale(savedLanguage);
 
-    ThemeData setThemeData(Brightness brightness) {
-      return ThemeData(brightness: brightness, useMaterial3: true);
-    }
+    final initialThemeMode = _resolveThemeMode(savedTheme);
 
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => ChangeLanguageCubit(initialLocale: locale),
+          create: (_) => ChangeLanguageCubit(initialLocale: initialLocale),
         ),
-        BlocProvider(create: (context) => ChangeThemeCubit(initialTheme: mode)),
         BlocProvider(
-          create: (context) => ManageFinanceCubit(homeRepo: HomeRepoImpl()),
+          create: (_) => ChangeThemeCubit(initialTheme: initialThemeMode),
+        ),
+        BlocProvider(
+          create: (_) => ManageFinanceCubit(homeRepo: HomeRepoImpl()),
+        ),
+        BlocProvider(
+          create: (_) => ManageCategoryCubit(homeRepo: CategoryRepoImpl()),
         ),
         BlocProvider(
           create:
-              (context) => ManageCategoryCubit(homeRepo: CategoryRepoImpl()),
-        ),
-        BlocProvider(
-          create:
-              (context) =>
-                  ManageUserSetupCubit(userSetupRepo: UserSetupRepoImpl()),
+              (_) => ManageUserSetupCubit(userSetupRepo: UserSetupRepoImpl()),
         ),
       ],
       child: BlocBuilder<ChangeThemeCubit, ChangeThemeState>(
-        builder: (context, state) {
-          if (state is ChangeThemeDone) {
-            mode = state.theme;
-          }
+        builder: (context, themeState) {
+          final themeMode =
+              themeState is ChangeThemeDone
+                  ? themeState.theme
+                  : initialThemeMode;
+
           return BlocBuilder<ChangeLanguageCubit, ChangeLanguageState>(
-            builder: (context, state) {
-              if (state is ChangeLanguageDone) {
-                locale = state.language;
-              }
+            builder: (context, langState) {
+              final locale =
+                  langState is ChangeLanguageDone
+                      ? langState.language
+                      : initialLocale;
+
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
                 locale: locale,
-                localizationsDelegates: [
+                supportedLocales: S.delegate.supportedLocales,
+                localizationsDelegates: const [
                   S.delegate,
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
                   GlobalCupertinoLocalizations.delegate,
                 ],
-                supportedLocales: S.delegate.supportedLocales,
-                themeMode: mode,
-                theme: setThemeData(Brightness.light),
-                darkTheme: setThemeData(Brightness.dark),
+                themeMode: themeMode,
+                theme: _buildThemeData(Brightness.light),
+                darkTheme: _buildThemeData(Brightness.dark),
                 onGenerateRoute: onGenerateRoute,
-                //initialRoute: BottomNavBarView.routeName,
               );
             },
           );
         },
       ),
     );
+  }
+
+  static ThemeMode _resolveThemeMode(String theme) {
+    switch (theme) {
+      case 'dark':
+        return ThemeMode.dark;
+      case 'light':
+        return ThemeMode.light;
+      case 'system':
+      default:
+        final brightness =
+            WidgetsBinding.instance.platformDispatcher.platformBrightness;
+        return brightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light;
+    }
+  }
+
+  static ThemeData _buildThemeData(Brightness brightness) {
+    return ThemeData(brightness: brightness, useMaterial3: true);
   }
 }

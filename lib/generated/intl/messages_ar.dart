@@ -20,11 +20,13 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
-  static String m0(recurr) => "، تكرار : ${recurr}";
+  static String m0(day) => "، يوم ${day}";
 
-  static String m1(month, balance) => "${month}\nالرصيد: ${balance}";
+  static String m1(recurr) => "، تكرار : ${recurr}";
 
-  static String m2(name) => "مرحبا, ${name}";
+  static String m2(month, balance) => "${month}\nالرصيد: ${balance}";
+
+  static String m3(name) => "مرحبا, ${name}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -49,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "closeDrawer": MessageLookupByLibrary.simpleMessage("إغلاق السحب"),
     "daily": MessageLookupByLibrary.simpleMessage("يوميا"),
     "dark_mode": MessageLookupByLibrary.simpleMessage("الوضع المظلم"),
+    "day": m0,
     "dec": MessageLookupByLibrary.simpleMessage("ديس"),
     "delete": MessageLookupByLibrary.simpleMessage("حذف"),
     "details": MessageLookupByLibrary.simpleMessage("التفاصيل هنا..."),
@@ -118,7 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "من فضلك ادخل اسمك",
     ),
     "plus": MessageLookupByLibrary.simpleMessage("إضافة"),
-    "recurrence": m0,
+    "recurrence": m1,
     "required_field": MessageLookupByLibrary.simpleMessage("هذا الحقل مطلوب"),
     "save": MessageLookupByLibrary.simpleMessage("حفظ"),
     "search": MessageLookupByLibrary.simpleMessage("بحث"),
@@ -139,13 +142,13 @@ class MessageLookup extends MessageLookupByLibrary {
       " إجمالي الرصيد اليومي",
     ),
     "todya_activity": MessageLookupByLibrary.simpleMessage("نشاط اليوم"),
-    "tooltipBalanceLabel": m1,
+    "tooltipBalanceLabel": m2,
     "total_expense": MessageLookupByLibrary.simpleMessage("المصروفات الكلية"),
     "total_income": MessageLookupByLibrary.simpleMessage("الدخل الكلي"),
     "transactions": MessageLookupByLibrary.simpleMessage("المعاملات"),
     "value": MessageLookupByLibrary.simpleMessage("القيمة: "),
     "weekly": MessageLookupByLibrary.simpleMessage("اسبوعيا"),
-    "welcome_name": m2,
+    "welcome_name": m3,
     "welcome_title": MessageLookupByLibrary.simpleMessage(
       "مرحبًا في إدارة الماليات ",
     ),

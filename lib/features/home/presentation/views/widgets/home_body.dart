@@ -26,7 +26,6 @@ class _HomeBodyState extends State<HomeBody> {
   double todayTotalBalance = 0.0;
   Map<int, CategoryModel> categoryMap = {};
 
-
   String formatAmount(double value) {
     double absValue = value.abs();
     String format(double val, String suffix) {
@@ -50,7 +49,6 @@ class _HomeBodyState extends State<HomeBody> {
   }
 
 
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -61,7 +59,8 @@ class _HomeBodyState extends State<HomeBody> {
             listener: (context, state) {
               if (state is GetAllTotalBalanceSuccessState) {
                 allTotalBalance =
-                    state.totalBalance + (widget.userSetupModel?.balance ?? 0.0);
+                    state.totalBalance 
+                    /*+(widget.userSetupModel?.balance ?? 0.0)*/;
               } else if (state is GetAllTotalBalanceFailureState) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(S.of(context).somethingWentWrong)),
@@ -72,7 +71,8 @@ class _HomeBodyState extends State<HomeBody> {
             builder: (context, state) {
               return CustomHomeContainer(
                 title: S.of(context).my_balance,
-                balance: formatAmount(allTotalBalance),
+                balance: formatAmount(allTotalBalance + (widget.userSetupModel?.balance ?? 0.0),
+                ),
                 color: Colors.pink,
               );
             },
@@ -92,7 +92,8 @@ class _HomeBodyState extends State<HomeBody> {
             builder: (context, state) {
               return CustomHomeContainer(
                 title: S.of(context).today_total_balance,
-                balance: formatAmount(todayTotalBalance),
+                balance: formatAmount(todayTotalBalance ,
+                ),
                 color: const Color.fromARGB(255, 241, 234, 53),
               );
             },

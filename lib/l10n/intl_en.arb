@@ -94,5 +94,6 @@
     "english":"English",
     "edit_name":"Edit Name",
     "theme":"Theme",
-    "app_version":"App Version"
+    "app_version":"App Version",
+    "day": ", Day {day}"
 }

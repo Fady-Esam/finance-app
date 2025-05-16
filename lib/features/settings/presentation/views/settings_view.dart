@@ -1,8 +1,6 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../cubits/change_language_cubit/change_language_cubit.dart';
 import '../../../../cubits/change_theme_cubit/change_theme_cubit.dart';
 import '../../../../generated/l10n.dart';
@@ -17,7 +15,10 @@ class SettingsView extends StatefulWidget {
   State<SettingsView> createState() => _SettingsViewState();
 }
 
-class _SettingsViewState extends State<SettingsView> {
+class _SettingsViewState extends State<SettingsView>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
   ThemeMode themeMode = ThemeMode.system;
   String langCode =
       PlatformDispatcher.instance.locale.languageCode == "ar" ||
@@ -25,6 +26,10 @@ class _SettingsViewState extends State<SettingsView> {
           ? PlatformDispatcher.instance.locale.languageCode
           : "en";
   UserSetupModel? userSetupModel;
+  var formKey = GlobalKey<FormState>();
+  late TextEditingController controller;
+
+  var autovalidateMode = AutovalidateMode.disabled;
   Future<void> getSavedTheme() async {
     themeMode =
         await BlocProvider.of<ChangeThemeCubit>(context).getSavedTheme();
@@ -36,6 +41,7 @@ class _SettingsViewState extends State<SettingsView> {
         await BlocProvider.of<ManageUserSetupCubit>(
           context,
         ).getUserSetupModel();
+    controller = TextEditingController(text: userSetupModel?.name);
     setState(() {});
   }
 
@@ -44,6 +50,12 @@ class _SettingsViewState extends State<SettingsView> {
     super.initState();
     getUserSetupModelData();
     getSavedTheme();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
   }
 
   void toggleTheme() async {
@@ -58,6 +70,7 @@ class _SettingsViewState extends State<SettingsView> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: AppBar(title: Text(S.of(context).settings)),
       body: Padding(
@@ -70,22 +83,37 @@ class _SettingsViewState extends State<SettingsView> {
               subtitle: Text(userSetupModel?.name ?? ''),
               trailing: Icon(Icons.edit),
               onTap: () async {
-                var controller = TextEditingController(
-                  text: userSetupModel?.name,
+                showNameDialog(
+                  context,
+                  controller,
+                  () async {
+                    if (formKey.currentState!.validate()) {
+                      await BlocProvider.of<ManageUserSetupCubit>(
+                        context,
+                      ).saveUserSetupModel(
+                        UserSetupModel(
+                          name: controller.text,
+                          balance: userSetupModel?.balance,
+                          startDateTime: userSetupModel?.startDateTime,
+                        ),
+                      );
+                      await getUserSetupModelData();
+                      Navigator.pop(context);
+                    } else {
+                      setState(() {
+                        autovalidateMode = AutovalidateMode.always;
+                      });
+                    }
+                  },
+                  formKey,
+                  autovalidateMode,
+                  (val) {
+                    if (val == null || val.trim().isEmpty) {
+                      return S.of(context).please_enter_name;
+                    }
+                    return null;
+                  },
                 );
-                showNameDialog(context, controller, () async {
-                  await BlocProvider.of<ManageUserSetupCubit>(
-                    context,
-                  ).saveUserSetupModel(
-                    UserSetupModel(
-                      name: controller.text,
-                      balance: userSetupModel?.balance,
-                      startDateTime: userSetupModel?.startDateTime,
-                    ),
-                  );
-                  await getUserSetupModelData();
-                  Navigator.pop(context);
-                });
               },
             ),
             // Language Switcher

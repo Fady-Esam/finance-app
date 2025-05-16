@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:finance_flutter_app/core/errors/failure.dart';
 import 'package:finance_flutter_app/features/home/data/models/finance_item_model.dart';
@@ -15,60 +17,42 @@ class HomeRepoImpl implements HomeRepo {
   Future<Either<Failure, void>> addFinance(FinanceItemModel item) async {
     try {
       final box = Hive.box<FinanceItemModel>('finance');
-
-      if (item.recurrence == RecurrenceType.none) {
-        box.add(item);
-        return right(null);
-      }
-      DateTime nextDate = item.dateTime;
-      final DateTime finalEndDate =
-          item.recurrenceEndDate ?? getNextMonthlyDate(nextDate);
-      while (nextDate.isBefore(finalEndDate) ||
-          nextDate.isAtSameMomentAs(finalEndDate)) {
-        final newItem = FinanceItemModel(
-          amount: item.amount,
-          dateTime: nextDate,
-          title: item.title,
-          categoryId: item.categoryId,
-          recurrence: item.recurrence,
-          recurrenceEndDate: item.recurrenceEndDate,
-        );
-        box.add(newItem);
-        nextDate = calculateNextOccurrence(nextDate, item.recurrence);
-        // switch (item.recurrence) {
-        //   case RecurrenceType.daily:
-        //     nextDate = nextDate.add(Duration(days: 1));
-        //     break;
-        //   case RecurrenceType.weekly:
-        //     nextDate = nextDate.add(Duration(days: 7));
-        //     break;
-        //   case RecurrenceType.monthly:
-        //     nextDate = getNextMonthlyDate(nextDate);
-        //     break;
-        //   case RecurrenceType.yearly:
-        //     nextDate = DateTime(
-        //       nextDate.year + 1,
-        //       nextDate.month,
-        //       nextDate.day,
-        //       nextDate.hour,
-        //       nextDate.minute,
-        //       nextDate.second,
-        //       nextDate.millisecond,
-        //     );
-        //     break;
-        //   case RecurrenceType.none:
-        //     break;
-        // }
-      }
+      box.add(item);
+      log("Counter: ${item.recurrenceCount}");
       return right(null);
+
+      // int count = 1;
+      // DateTime currentDate = item.dateTime;
+      // DateTime nextDate = calculateNextOccurrence(currentDate, item.recurrence);
+      // final DateTime finalEndDate =
+      //     item.recurrenceEndDate ?? getNextMonthlyDate(nextDate);
+      // while (nextDate.isBefore(finalEndDate) ||
+      //     nextDate.isAtSameMomentAs(finalEndDate)) {
+      //   count++;
+      //   nextDate = calculateNextOccurrence(nextDate, item.recurrence);
+      // }
+      // return right(null);
+      // DateTime nextDate = item.dateTime;
+      // final DateTime finalEndDate =
+      //     item.recurrenceEndDate ?? getNextMonthlyDate(nextDate);
+      // while (nextDate.isBefore(finalEndDate) ||
+      //     nextDate.isAtSameMomentAs(finalEndDate)) {
+      //   final newItem = FinanceItemModel(
+      //     amount: item.amount,
+      //     dateTime: nextDate,
+      //     title: item.title,
+      //     categoryId: item.categoryId,
+      //     recurrence: item.recurrence,
+      //     recurrenceEndDate: item.recurrenceEndDate,
+      //   );
+      //   box.add(newItem);
+      //   nextDate = calculateNextOccurrence(nextDate, item.recurrence);
+      // }
+      // return right(null);
     } catch (e) {
       return left(Failure(technicalMessage: e.toString()));
     }
   }
-
-
-
-
 
   // @override
   // Either<Failure, List<FinanceItemModel>> getAllFinances() {
@@ -150,21 +134,102 @@ class HomeRepoImpl implements HomeRepo {
     }
 
     // Filter items
-    final filteredItems =
-        box.values.where((item) {
-          final date = item.dateTime;
+    // final filteredItems =
+    //     box.values.where((item) {
+    //       final date = item.dateTime;
 
-          // Check if date falls within the range (inclusive)
-          final matchesDate =
-              isSingleDayForDateTimeRange
-                  ? date.year == start.year &&
-                      date.month == start.month &&
-                      date.day == start.day
-                  : !date.isBefore(start) && !date.isAfter(end);
-          return matchesDate;
-        }).toList();
-
+    //       // Check if date falls within the range (inclusive)
+    //       final matchesDate =
+    //           isSingleDayForDateTimeRange
+    //               ? date.year == start.year &&
+    //                   date.month == start.month &&
+    //                   date.day == start.day
+    //               : !date.isBefore(start) && !date.isAfter(end);
+    //       return matchesDate;
+    //     }).toList();
+    final filteredItems = <FinanceItemModel>[];
+    for (final item in box.values) {
+      if (item.recurrence != RecurrenceType.none) {
+        final count = _calculateRecurrenceCount(
+          item.dateTime,
+          item.recurrence,
+          item.recurrenceEndDate,
+          start,
+          end,
+        );
+        item.recurrenceCount = count;
+      }
+      //if (item.recurrence == RecurrenceType.none) {
+      final date = item.dateTime;
+      final matchesDate =
+          isSingleDayForDateTimeRange
+              ? date.year == start.year &&
+                  date.month == start.month &&
+                  date.day == start.day
+              : !date.isBefore(start) && !date.isAfter(end);
+      if (matchesDate) {
+        filteredItems.add(item);
+      }
+      // }
+      // else {
+      //   final count = _calculateRecurrenceCount(
+      //     item.dateTime,
+      //     item.recurrence,
+      //     item.recurrenceEndDate,
+      //     start,
+      //     end,
+      //   );
+      //   if (count > 0) {
+      //     item.recurrenceCount = count;
+      //     filteredItems.add(item);
+        //  // log('count: $count');
+      //   }
+      // }
+    }
     return filteredItems;
+  }
+
+  int _calculateRecurrenceCount(
+    DateTime startDate,
+    RecurrenceType recurrence,
+    DateTime? recurrenceEndDate,
+    DateTime rangeStart,
+    DateTime rangeEnd,
+  ) {
+    final finalEndDate = recurrenceEndDate ?? getNextMonthlyDate(startDate);
+    int count = 0;
+    DateTime current = startDate;
+    while (!current.isAfter(finalEndDate)) {
+      if (!current.isBefore(rangeStart) && !current.isAfter(rangeEnd)) {
+        count++;
+      }
+      current = calculateNextOccurrence(current, recurrence);
+
+      // Optimization: stop if next recurrence is after both rangeEnd and recurrenceEndDate
+      if (current.isAfter(rangeEnd) || current.isAfter(finalEndDate)) {
+        break;
+      }
+    }
+
+    return count;
+
+    // int count = 0;
+    // DateTime current = startDate;
+    // while (current.isBefore(effectiveEnd) ||
+    //     current.isAtSameMomentAs(effectiveEnd)) {
+    //   if (rangeStart != null && rangeEnd != null) {
+    //     final matches =
+    //         !current.isBefore(rangeStart) && !current.isAfter(rangeEnd);
+    //     if (matches) {
+    //       count++;
+    //     }
+    //   }
+    //   current = calculateNextOccurrence(current, recurrence);
+    //   if (rangeEnd != null && current.isAfter(rangeEnd)) {
+    //     break;
+    //   }
+    // }
+    // return count;
   }
 
   //! Get FilteredByDateRange
@@ -214,7 +279,6 @@ class HomeRepoImpl implements HomeRepo {
         getFilteredFinancesByDate(dateRange: dateRange).where((item) {
           final matchesCategory =
               categoryId == null || item.categoryId == categoryId;
-
           return matchesCategory;
         }).toList();
 
@@ -265,10 +329,17 @@ class HomeRepoImpl implements HomeRepo {
 
   @override
   Either<Failure, double> getAllTotalBalance() {
-    try { 
+    try {
       double totalBalance = 0.0;
-      getFilteredFinancesByDate(dateRange: DateTimeRange(start: DateTime(DateTime.now().year - 5 , 1, 1), end: DateTime.now())).forEach((item) {
-        totalBalance += item.amount;
+      getFilteredFinancesByDate(
+        dateRange: DateTimeRange(
+          start: DateTime(DateTime.now().year - 5, 1, 1),
+          end: DateTime.now(),
+        ),
+      ).forEach((item) {
+        totalBalance +=
+            item.amount *
+            (item.recurrenceCount == 0 ? 1 : item.recurrenceCount);
       });
       // var box = Hive.box<FinanceItemModel>('finance');
       // double totalBalance = 0.0;
@@ -286,7 +357,9 @@ class HomeRepoImpl implements HomeRepo {
     try {
       double totalBalance = 0.0;
       getFilteredFinancesByDate(singleDate: DateTime.now()).forEach((item) {
-        totalBalance += item.amount;
+        totalBalance +=
+            item.amount *
+            (item.recurrenceCount == 0 ? 1 : item.recurrenceCount);
       });
       // var box = Hive.box<FinanceItemModel>('finance');
       // double totalBalance = 0.0;
@@ -355,8 +428,16 @@ class HomeRepoImpl implements HomeRepo {
             isAmountPositive: isAmountPositive,
           );
       for (var item in filteredItems) {
-        balSum.totalIncome += item.amount > 0 ? item.amount : 0;
-        balSum.totalExpense += item.amount < 0 ? item.amount.abs() : 0;
+        balSum.totalIncome +=
+            item.amount > 0
+                ? item.amount *
+                    (item.recurrenceCount == 0 ? 1 : item.recurrenceCount)
+                : 0;
+        balSum.totalExpense +=
+            item.amount < 0
+                ? item.amount.abs() *
+                    (item.recurrenceCount == 0 ? 1 : item.recurrenceCount)
+                : 0;
       }
       return right(balSum);
     } catch (e) {

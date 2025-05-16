@@ -20,11 +20,13 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(recurr) => ", Recurrence: ${recurr}";
+  static String m0(day) => ", Day ${day}";
 
-  static String m1(month, balance) => "Month ${month}\nBalance: ${balance}";
+  static String m1(recurr) => ", Recurrence: ${recurr}";
 
-  static String m2(name) => "Welcome, ${name}";
+  static String m2(month, balance) => "Month ${month}\nBalance: ${balance}";
+
+  static String m3(name) => "Welcome, ${name}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -49,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "closeDrawer": MessageLookupByLibrary.simpleMessage("Close Drawer"),
     "daily": MessageLookupByLibrary.simpleMessage("Daily"),
     "dark_mode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
+    "day": m0,
     "dec": MessageLookupByLibrary.simpleMessage("Dec"),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "details": MessageLookupByLibrary.simpleMessage("Details here...."),
@@ -122,7 +125,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "من فضلك ادخل اسمك",
     ),
     "plus": MessageLookupByLibrary.simpleMessage("Plus"),
-    "recurrence": m0,
+    "recurrence": m1,
     "required_field": MessageLookupByLibrary.simpleMessage(
       "This field is required",
     ),
@@ -145,13 +148,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "Today Total Balance",
     ),
     "todya_activity": MessageLookupByLibrary.simpleMessage("Today\'s Activity"),
-    "tooltipBalanceLabel": m1,
+    "tooltipBalanceLabel": m2,
     "total_expense": MessageLookupByLibrary.simpleMessage("Total Expense"),
     "total_income": MessageLookupByLibrary.simpleMessage("Total Income"),
     "transactions": MessageLookupByLibrary.simpleMessage("Transactions"),
     "value": MessageLookupByLibrary.simpleMessage("Value: "),
     "weekly": MessageLookupByLibrary.simpleMessage("Weekly"),
-    "welcome_name": m2,
+    "welcome_name": m3,
     "welcome_title": MessageLookupByLibrary.simpleMessage(
       "Welcome to Finance Manager",
     ),

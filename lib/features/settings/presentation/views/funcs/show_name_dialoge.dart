@@ -4,7 +4,7 @@ import '../../../../../generated/l10n.dart';
 import '../../../../home/presentation/views/widgets/custom_manage_finance_button.dart';
 
 void showNameDialog(BuildContext context, TextEditingController controller, void Function()? onPressed,
-) async {
+GlobalKey<FormState>? key, AutovalidateMode autovalidateMode, String? Function(String?)? validator) async {
   await showDialog(
     context: context,
     builder:
@@ -13,29 +13,33 @@ void showNameDialog(BuildContext context, TextEditingController controller, void
             borderRadius: BorderRadius.circular(16),
           ),
           title: Text(S.of(context).edit_name),
-          content: TextField(
-            controller: controller,
-
-            //decoration: InputDecoration(labelText: S.of(context).name),
-            autofocus: true,
-            decoration: InputDecoration(
-              labelText: S.of(context).name,
-              labelStyle: TextStyle(color: Colors.white),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(
-                  color: Color(0xFFB0BEC5),
-                  width: 1.2,
+          content: Form(
+            key: key,
+            autovalidateMode: autovalidateMode,
+            child: TextFormField(
+              controller: controller,
+              validator: validator,
+              //decoration: InputDecoration(labelText: S.of(context).name),
+              autofocus: true,
+              decoration: InputDecoration(
+                labelText: S.of(context).name,
+                labelStyle: TextStyle(color: Colors.white),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFB0BEC5),
+                    width: 1.2,
+                  ),
                 ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(
-                  color: Colors.greenAccent,
-                  width: 1.2,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(
+                    color: Colors.greenAccent,
+                    width: 1.2,
+                  ),
                 ),
+                prefixIcon: Icon(Icons.person),
               ),
-              prefixIcon: Icon(Icons.person),
             ),
           ),
           actions: [

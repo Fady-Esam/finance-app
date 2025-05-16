@@ -1,8 +1,8 @@
-import 'package:finance_flutter_app/core/funcs/is_same_date.dart';
 import 'package:finance_flutter_app/features/category/data/models/category_model.dart';
 import 'package:finance_flutter_app/features/home/data/enums/recurrence_type_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/funcs/calculate_recurrence_count.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../data/enums/transaction_type_enum.dart';
 import '../../../data/models/finance_item_model.dart';
@@ -72,25 +72,27 @@ class ManageFinanceButtons extends StatelessWidget {
                 financeItemModel!.categoryId = selectedCategory?.key;
                 financeItemModel!.recurrence = recurrenceType;
                 financeItemModel!.recurrenceEndDate = endDate;
+                financeItemModel!.recurrenceCount = calculateRecurrenceCount(
+                  modelDateTime,
+                  recurrenceType,
+                  endDate,
+                  null,
+                  null,
+                );
                 await financeItemModel!.save();
-                // if (isFromHomePage) {
-                //   BlocProvider.of<ManageFinanceCubit>(
-                //     context,
-                //   ).getFinancesByDate(DateTime.now());
-                // } else {
-                //   BlocProvider.of<ManageFinanceCubit>(
-                //     context,
-                //   ).getFilteredFinances(
-                //     dateTimeRange!,
-                //     categoryId: categoryFilteredId,
-                //     isAmountPositive: isAmountPositive,
-                //   );
-                //   if (isSameDate(modelDateTime, DateTime.now())) {
-                //     BlocProvider.of<ManageFinanceCubit>(
-                //       context,
-                //     ).getFinancesByDate(DateTime.now());
-                //   }
-                // }
+                if (isFromHomePage) {
+                  BlocProvider.of<ManageFinanceCubit>(
+                    context,
+                  ).getFinancesByDate(DateTime.now());
+                } else {
+                  BlocProvider.of<ManageFinanceCubit>(
+                    context,
+                  ).getFilteredFinances(
+                    dateTimeRange!,
+                    categoryId: categoryFilteredId,
+                    isAmountPositive: isAmountPositive,
+                  );
+                }
                 BlocProvider.of<ManageFinanceCubit>(
                   context,
                 ).getChartsFinances();
@@ -104,6 +106,13 @@ class ManageFinanceButtons extends StatelessWidget {
                     categoryId: selectedCategory?.key,
                     recurrence: recurrenceType,
                     recurrenceEndDate: endDate,
+                    recurrenceCount: calculateRecurrenceCount(
+                      modelDateTime,
+                      recurrenceType,
+                      endDate,
+                      null,
+                      null,
+                    ),
                   ),
                 );
               }

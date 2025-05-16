@@ -37,6 +37,8 @@ class CustomHomeContainer extends StatelessWidget {
                       Directionality(
                         textDirection: TextDirection.ltr,
                         child: AnimatedSwitcher(
+                          switchInCurve: Curves.easeOut,
+                          switchOutCurve: Curves.easeIn,
                           duration: const Duration(milliseconds: 300),
                           child: Text(
                             balance,

@@ -169,11 +169,17 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
                       DateTime? picked = await showDatePicker(
                         context: context,
                         initialDate: endDate,
-                        firstDate: DateTime.now().add(Duration(days: 1)),
-                        lastDate: DateTime(userSetupModel!.startDateTime.year + 5, 12, 31),
+                        firstDate: selectedDate.add(Duration(days: 1)),
+                        lastDate: DateTime(
+                          userSetupModel!.startDateTime.year + 5,
+                          12,
+                          31,
+                        ),
                       );
-                      setState(() => endDate = picked!);
-                                        },
+                      if(picked != null){
+                        setState(() => endDate = picked);
+                      }
+                    },
                   ),
               ],
             ),

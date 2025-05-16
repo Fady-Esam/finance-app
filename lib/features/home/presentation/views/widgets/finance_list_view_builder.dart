@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/funcs/is_same_date.dart';
 import '../../../../category/presentation/manager/cubits/manage_category_cubit/manage_category_cubit.dart';
 import '../../../../category/presentation/manager/cubits/manage_category_cubit/manage_category_state.dart';
 import '../../../data/enums/transaction_type_enum.dart';
@@ -90,11 +89,6 @@ class _FinanceListViewBuilderState extends State<FinanceListViewBuilder> {
                       categoryId: widget.categoryFilterId,
                       isAmountPositive: widget.isAmountPositive,
                     );
-                    if (isSameDate(financeItemModel.dateTime, DateTime.now())) {
-                      BlocProvider.of<ManageFinanceCubit>(
-                        context,
-                      ).getFinancesByDate(DateTime.now());
-                    } 
                   }
                   BlocProvider.of<ManageFinanceCubit>(
                     context,

@@ -709,6 +709,11 @@ class S {
   String get app_version {
     return Intl.message('App Version', name: 'app_version', desc: '', args: []);
   }
+
+  /// `, Day {day}`
+  String day(Object day) {
+    return Intl.message(', Day $day', name: 'day', desc: '', args: [day]);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
