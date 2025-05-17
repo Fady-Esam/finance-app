@@ -10,7 +10,8 @@ class TransactionView extends StatefulWidget {
   State<TransactionView> createState() => _TransactionViewState();
 }
 
-class _TransactionViewState extends State<TransactionView> with AutomaticKeepAliveClientMixin{
+class _TransactionViewState extends State<TransactionView>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
   bool isSearching = false;
@@ -99,7 +100,10 @@ class _TransactionViewState extends State<TransactionView> with AutomaticKeepAli
                 )
                 : Text(S.of(context).transactions),
       ),
-      body: TransactionViewBody(searchedText: searchText, isSearching: isSearching),
+      body: TransactionViewBody(
+        searchedText: searchText,
+        isSearching: isSearching,
+      ),
       floatingActionButton: FloatingActionButton(
         heroTag: 'search',
         backgroundColor: Colors.greenAccent,

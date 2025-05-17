@@ -214,7 +214,6 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
                 ],
               ],
             ),
-
             const SizedBox(height: 22),
             Directionality(
               textDirection: TextDirection.ltr,

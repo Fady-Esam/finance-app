@@ -9,18 +9,17 @@ import '../../features/user_setup/presentation/views/user_setup_view.dart';
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
     case OnBoardingView.routeName:
-      return MaterialPageRoute(builder: (context) => const OnBoardingView());
+      return MaterialPageRoute(builder: (_) => const OnBoardingView());
     case UserSetupView.routeName:
-      return MaterialPageRoute(builder: (context) => const UserSetupView());
-    // case NotificationView.routeName:
-    //   return MaterialPageRoute(builder: (context) => const NotificationView());
+      return MaterialPageRoute(builder: (_) => const UserSetupView());
     case BottomNavBarView.routeName:
-      return MaterialPageRoute(builder: (context) => const BottomNavBarView());
+      return MaterialPageRoute(builder: (_) => const BottomNavBarView());
+
     case ManageTransactionView.routeName:
-      final args = settings.arguments as Map<String, dynamic>;
+      final args = settings.arguments as Map<String, dynamic>? ?? {};
       return MaterialPageRoute(
         builder:
-            (context) => ManageTransactionView(
+            (_) => ManageTransactionView(
               transactionTypeEnum: args['transactionTypeEnum'],
               financeItemModel: args['financeItemModel'],
               modelDateTime: args['modelDateTime'],
@@ -33,18 +32,18 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
               recurrenceType: args['recurrenceType'],
             ),
       );
-    // case AllActivitiesView.routeName:
-    //   return MaterialPageRoute(builder: (context) => const AllActivitiesView());
+
     case ManageCategoryView.routeName:
-      final args = settings.arguments as Map<String, dynamic>;
+      final args = settings.arguments as Map<String, dynamic>? ?? {};
       return MaterialPageRoute(
         builder:
-            (context) => ManageCategoryView(
+            (_) => ManageCategoryView(
               categoryModel: args['categoryModel'],
               categories: args['categories'],
             ),
       );
+
     default:
-      return MaterialPageRoute(builder: (context) => const SplashView());
+      return MaterialPageRoute(builder: (_) => const SplashView());
   }
 }

@@ -4,37 +4,29 @@ import 'package:fl_chart/fl_chart.dart';
 
 class AnalyticRepoImpl implements AnalyticRepo {
   @override
-  // Map<int, Map<String, double>> getGroupByMonth(List<FinanceItemModel> items) {
-  //   final result = <int, Map<String, double>>{};
-  //   for (var item in items) {
-  //     final month = item.dateTime.month;
-  //     final type = item.amount >= 0 ? 'income' : 'expense';
-  //     result[month] ??= {'income': 0, 'expense': 0};
-  //     result[month]![type] = result[month]![type]! + item.amount.abs();
-  //   }
-  //   return result;
-  // }
   Map<int, Map<String, double>> getGroupByMonth(List<FinanceItemModel> items) {
     final result = <int, Map<String, double>>{
       for (int i = 1; i <= 12; i++) i: {'income': 0, 'expense': 0},
     };
-    for (var item in items) {
+    for (final item in items) {
       final month = item.dateTime.month;
       final type = item.amount >= 0 ? 'income' : 'expense';
-      result[month]![type] = result[month]![type]! + item.amount.abs();
+      final count = item.recurrenceCount == 0 ? 1 : item.recurrenceCount;
+      result[month]![type] = result[month]![type]! + item.amount.abs() * count;
     }
-
     return result;
   }
 
   @override
   Map<int, double> getGroupByCategory(List<FinanceItemModel> items) {
-    final Map<int, double> result = {};
+    final result = <int, double>{};
 
-    for (var item in items) {
+    for (final item in items) {
       if (item.amount > 0 || item.categoryId == null) continue;
-      int categoryId = item.categoryId!;
-      result[categoryId] = (result[categoryId] ?? 0) + item.amount.abs();
+      final categoryId = item.categoryId!;
+      final count = item.recurrenceCount == 0 ? 1 : item.recurrenceCount;
+      result[categoryId] =
+          (result[categoryId] ?? 0) + item.amount.abs() * count;
     }
     return result;
   }
@@ -43,21 +35,20 @@ class AnalyticRepoImpl implements AnalyticRepo {
   List<FlSpot> calculateCumulativeBalance(List<FinanceItemModel> items) {
     if (items.isEmpty) return [];
 
-    // Group by month (1-12), sum up balance change
-    Map<int, double> monthlySums = {};
-    for (var item in items) {
+    final monthlySums = <int, double>{};
+    for (final item in items) {
       final month = item.dateTime.month;
-      monthlySums[month] = (monthlySums[month] ?? 0) + item.amount;
+      final count = item.recurrenceCount == 0 ? 1 : item.recurrenceCount;
+      monthlySums[month] = (monthlySums[month] ?? 0) + item.amount * count;
     }
 
-    // Create cumulative total per month
-    final lastUsedMonth = monthlySums.keys.reduce((a, b) => a > b ? a : b);
+    final lastMonth = monthlySums.keys.reduce((a, b) => a > b ? a : b);
 
     double total = 0;
-    List<FlSpot> spots = [];
-    for (int m = 1; m <= lastUsedMonth; m++) {
-      total += (monthlySums[m] ?? 0);
-      spots.add(FlSpot(m.toDouble(), total));
+    final spots = <FlSpot>[];
+    for (int month = 1; month <= lastMonth; month++) {
+      total += (monthlySums[month] ?? 0);
+      spots.add(FlSpot(month.toDouble(), total));
     }
 
     return spots;

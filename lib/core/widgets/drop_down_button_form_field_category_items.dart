@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../features/category/data/models/category_model.dart';
 import '../../generated/l10n.dart';
 import '../utils/color_utils.dart';
@@ -13,10 +12,12 @@ class DropdownButtonFormFieldCategoryItems extends StatelessWidget {
     required this.onCategoryChanged,
     required this.noTitle,
   });
+
   final CategoryModel? selectedCategory;
   final List<CategoryModel> categories;
   final ValueChanged<CategoryModel?> onCategoryChanged;
   final String noTitle;
+
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<CategoryModel>(
@@ -26,16 +27,16 @@ class DropdownButtonFormFieldCategoryItems extends StatelessWidget {
       onChanged: onCategoryChanged,
       decoration: InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-        contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       ),
-      icon: Icon(Icons.arrow_drop_down),
+      icon: const Icon(Icons.arrow_drop_down),
       items: [
         DropdownMenuItem<CategoryModel>(
           value: null,
-          child: Text(noTitle, style: TextStyle(fontSize: 14)),
+          child: Text(noTitle, style: const TextStyle(fontSize: 14)),
         ),
-        ...categories.map((category) {
-          return DropdownMenuItem<CategoryModel>(
+        ...categories.map(
+          (category) => DropdownMenuItem<CategoryModel>(
             value: category,
             child: Row(
               children: [
@@ -47,8 +48,8 @@ class DropdownButtonFormFieldCategoryItems extends StatelessWidget {
                 Text(category.name),
               ],
             ),
-          );
-        }),
+          ),
+        ),
       ],
     );
   }

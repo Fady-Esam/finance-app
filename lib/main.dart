@@ -6,22 +6,25 @@ import 'package:finance_flutter_app/features/home/presentation/manager/cubits/ma
 import 'package:finance_flutter_app/features/user_setup/data/repos/user_setup_repo_impl.dart';
 import 'package:finance_flutter_app/features/user_setup/presentation/manager/cubits/manage_user_setup_cubit/manage_user_setup_cubit.dart';
 import 'package:finance_flutter_app/generated/l10n.dart';
+import 'package:finance_flutter_app/simple_bloc_observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'cubits/change_language_cubit/change_language_cubit.dart';
-import 'cubits/change_language_cubit/change_language_state.dart';
-import 'cubits/change_theme_cubit/change_theme_cubit.dart';
-import 'cubits/change_theme_cubit/change_theme_state.dart';
+import 'core/cubits/change_language_cubit/change_language_cubit.dart';
+import 'core/cubits/change_language_cubit/change_language_state.dart';
+import 'core/cubits/change_theme_cubit/change_theme_cubit.dart';
+import 'core/cubits/change_theme_cubit/change_theme_state.dart';
 import 'features/category/data/repos/category_repo_impl.dart';
 import 'features/category/presentation/manager/cubits/manage_category_cubit/manage_category_cubit.dart';
 import 'features/home/data/enums/recurrence_type_enum.dart';
 import 'features/home/data/models/finance_item_model.dart';
 
 Future<void> main() async {
+  Bloc.observer = SimpleBlocObserver(); // assign it globally
+
   WidgetsFlutterBinding.ensureInitialized();
 
   await Hive.initFlutter();

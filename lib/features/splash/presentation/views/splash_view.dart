@@ -20,7 +20,6 @@ class _SplashViewState extends State<SplashView> {
       bool isOnboardingSeen = prefs.getBool('onboarding_seen') ?? false;
       if (isOnboardingSeen) {
         Navigator.pushReplacementNamed(context, BottomNavBarView.routeName);
-        // Navigator.pushReplacementNamed(context, 'onBoarding');
       } else {
         Navigator.pushReplacementNamed(context, OnBoardingView.routeName);
       }

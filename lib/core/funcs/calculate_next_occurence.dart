@@ -7,10 +7,10 @@ DateTime calculateNextOccurrence(
 ) {
   switch (recurrence) {
     case RecurrenceType.daily:
-      return originalDate.add(Duration(days: 1));
+      return originalDate.add(const Duration(days: 1));
 
     case RecurrenceType.weekly:
-      return originalDate.add(Duration(days: 7));
+      return originalDate.add(const Duration(days: 7));
 
     case RecurrenceType.monthly:
       return getNextMonthlyDate(originalDate);
@@ -25,8 +25,8 @@ DateTime calculateNextOccurrence(
         originalDate.second,
         originalDate.millisecond,
       );
+
     case RecurrenceType.none:
-      break;
+      return originalDate;
   }
-  return originalDate;
 }

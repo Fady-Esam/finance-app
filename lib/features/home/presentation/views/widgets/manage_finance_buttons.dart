@@ -52,7 +52,7 @@ class ManageFinanceButtons extends StatelessWidget {
             text: S.of(context).done,
             color: const Color.fromARGB(255, 159, 210, 252),
             onPressed: () async {
-              if(titleController.text.trim().isEmpty){
+              if (titleController.text.trim().isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(S.of(context).please_enter_title)),
                 );
@@ -81,13 +81,13 @@ class ManageFinanceButtons extends StatelessWidget {
                 financeItemModel!.categoryId = selectedCategory?.key;
                 financeItemModel!.recurrence = recurrenceType;
                 financeItemModel!.recurrenceEndDate = endDate;
-                financeItemModel!.recurrenceCount = calculateRecurrenceCount(
-                  modelDateTime,
-                  recurrenceType,
-                  endDate,
-                  null,
-                  null,
-                );
+                // financeItemModel!.recurrenceCount = calculateRecurrenceCount(
+                //   modelDateTime,
+                //   recurrenceType,
+                //   endDate,
+                //   null,
+                //   null,
+                // );
                 await financeItemModel!.save();
                 if (isFromHomePage) {
                   BlocProvider.of<ManageFinanceCubit>(
@@ -116,13 +116,14 @@ class ManageFinanceButtons extends StatelessWidget {
                     categoryId: selectedCategory?.key,
                     recurrence: recurrenceType,
                     recurrenceEndDate: endDate,
-                    recurrenceCount: calculateRecurrenceCount(
-                      modelDateTime,
-                      recurrenceType,
-                      endDate,
-                      null,
-                      null,
-                    ),
+                    //recurrenceCount: recurrenceType == RecurrenceType.none ? 0 : 1,
+                    // recurrenceCount: calculateRecurrenceCount(
+                    //   modelDateTime,
+                    //   recurrenceType,
+                    //   endDate,
+                    //   null,
+                    //   null,
+                    // ),
                   ),
                 );
               }

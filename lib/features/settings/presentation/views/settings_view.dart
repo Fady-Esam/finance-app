@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../cubits/change_language_cubit/change_language_cubit.dart';
-import '../../../../cubits/change_theme_cubit/change_theme_cubit.dart';
+import '../../../../core/cubits/change_language_cubit/change_language_cubit.dart';
+import '../../../../core/cubits/change_theme_cubit/change_theme_cubit.dart';
 import '../../../../generated/l10n.dart';
 import '../../../user_setup/data/models/user_setup_model.dart';
 import '../../../user_setup/presentation/manager/cubits/manage_user_setup_cubit/manage_user_setup_cubit.dart';

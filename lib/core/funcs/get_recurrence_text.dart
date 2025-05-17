@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 
 String getRecurrenceText(BuildContext context, RecurrenceType recurrenceType) {
   switch (recurrenceType) {
-    // case RecurrenceType.none:
-    //   return 'None';
     case RecurrenceType.daily:
       return S.of(context).daily;
     case RecurrenceType.weekly:

@@ -1,8 +1,6 @@
 import 'dart:ui';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'change_language_state.dart';
 
 class ChangeLanguageCubit extends Cubit<ChangeLanguageState> {

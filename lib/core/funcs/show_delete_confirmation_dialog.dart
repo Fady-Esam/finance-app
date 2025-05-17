@@ -1,64 +1,20 @@
+import 'package:finance_flutter_app/core/widgets/delete_confirmation_dialog_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../../features/home/presentation/views/widgets/custom_manage_finance_button.dart';
-import '../../generated/l10n.dart';
-
-Future<void> showDeleteConfirmationDialog(
+Future<bool?> showDeleteConfirmationDialog(
   BuildContext context,
-  String confirmationTex, {
+  String confirmationText, {
   required bool Function() onCancel,
   required Future<bool> Function() onConfirm,
 }) {
-  return showDialog(
+  return showDialog<bool>(
     context: context,
-    barrierDismissible: false, // Prevent closing by tapping outside
-    builder: (context) {
-      return AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: Text(
-          S.of(context).confirm_delete,
-          style: TextStyle(fontWeight: FontWeight.bold),
+    barrierDismissible: false,
+    builder:
+        (context) => DeleteConfirmationDialogWidget(
+          confirmationText: confirmationText,
+          onCancel: onCancel,
+          onConfirm: onConfirm,
         ),
-        content: Text(confirmationTex),
-        actionsPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        actions: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: CustomManageFinanceButton(
-                  text: S.of(context).cancel,
-                  color: const Color.fromARGB(255, 159, 210, 252),
-                  onPressed: onCancel,
-                  fontSize: 14,
-                  horizontalPadding: 8,
-                  verticalPadding: 4,
-                ),
-              ),
-              const SizedBox(width: 32),
-              Expanded(
-                child: CustomManageFinanceButton(
-                  text: S.of(context).delete,
-                  color: const Color.fromARGB(255, 244, 119, 161),
-                  onPressed: onConfirm,
-                  fontSize: 14,
-                  horizontalPadding: 8,
-                  verticalPadding: 4,
-                ),
-              ),
-            ],
-          ),
-          // TextButton(
-          //   onPressed: () => onCancel(),
-          //   child: Text(S.of(context).cancel),
-          // ),
-          // ElevatedButton(
-          //   onPressed: () => onConfirm(),
-          //   style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-          //   child:  Text(S.of(context).delete),
-          // ),
-        ],
-      );
-    },
   );
 }

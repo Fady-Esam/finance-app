@@ -14,6 +14,7 @@ class CustomTextFormField extends StatelessWidget {
     this.focusNode,
     this.suffixIcon,
   });
+
   final TextEditingController? controller;
   final String hintText;
   final String? Function(String?)? validator;
@@ -32,7 +33,7 @@ class CustomTextFormField extends StatelessWidget {
       focusNode: focusNode,
       onChanged: onChanged,
       decoration: InputDecoration(
-        contentPadding: EdgeInsetsDirectional.only(
+        contentPadding: const EdgeInsetsDirectional.only(
           start: 15,
           bottom: 0,
           top: 0,
@@ -40,8 +41,7 @@ class CustomTextFormField extends StatelessWidget {
         suffixIcon: suffixIcon,
         hintText: hintText,
         filled: true,
-        //fillColor: Colors.white,
-        hintStyle: TextStyle(fontSize: 16),
+        hintStyle: const TextStyle(fontSize: 16),
         border: border,
         focusedBorder: focusedBorder,
         enabledBorder: enabledBorder,
