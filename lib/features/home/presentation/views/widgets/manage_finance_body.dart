@@ -14,6 +14,7 @@ import '../../../data/enums/transaction_type_enum.dart';
 import '../../../data/models/finance_item_model.dart';
 import 'amount_field.dart';
 import 'date_picker_field.dart';
+import 'description_field.dart';
 import 'title_field.dart';
 import 'custom_number_keyboard.dart';
 import 'manage_finance_buttons.dart';
@@ -24,6 +25,7 @@ class ManageTransactionBody extends StatefulWidget {
     required this.transactionTypeEnum,
     required this.amountController,
     required this.titleController,
+    required this.descriptionController,
     required this.modelDateTime,
     required this.currentDateTime,
     this.financeItemModel,
@@ -38,6 +40,7 @@ class ManageTransactionBody extends StatefulWidget {
   final TransactionTypeEnum transactionTypeEnum;
   final TextEditingController amountController;
   final TextEditingController titleController;
+  final TextEditingController descriptionController;
   final FinanceItemModel? financeItemModel;
   final DateTime? currentDateTime;
   final DateTime? modelDateTime;
@@ -88,7 +91,9 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
         child: Column(
           children: [
             TitleField(titleController: widget.titleController),
-            const SizedBox(height: 16),
+            const SizedBox(height: 12),
+            DescriptionField(titleController: widget.descriptionController),
+            const SizedBox(height: 12),
             AmountField(
               transactionTypeEnum: widget.transactionTypeEnum,
               amountController: widget.amountController,
@@ -100,7 +105,7 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
                   final categoryList = state.categoryItems;
                   return DropdownButtonFormFieldCategoryItems(
                     categories: categoryList,
-                    noTitle: S.of(context).none,
+                    noTitle: S.of(context).no_category,
                     selectedCategory: selectedCategory,
                     onCategoryChanged: (value) {
                       setState(() {
@@ -113,7 +118,19 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
                 }
               },
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
+            Align(
+              alignment: AlignmentDirectional.centerStart,
+              child: Text(
+                S.of(context).addition_datetime,
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: const Color.fromARGB(255, 180, 180, 180),
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
             DatePickerField(
               onTap: () async {
                 final pickedDate = await showDatePicker(
@@ -162,7 +179,20 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
                   },
                 ),
                 const SizedBox(height: 8),
-                if (recurrenceType != RecurrenceType.none)
+                if (recurrenceType != RecurrenceType.none) ...[
+                  const SizedBox(height: 6),
+                  Align(
+                    alignment: AlignmentDirectional.centerStart,
+                    child: Text(
+                      S.of(context).recurrence_end_datetime,
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                        color: const Color.fromARGB(255, 180, 180, 180),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
                   DatePickerField(
                     selectedDate: endDate,
                     onTap: () async {
@@ -176,11 +206,12 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
                           31,
                         ),
                       );
-                      if(picked != null){
+                      if (picked != null) {
                         setState(() => endDate = picked);
                       }
                     },
                   ),
+                ],
               ],
             ),
 
@@ -196,6 +227,7 @@ class _ManageTransactionBodyState extends State<ManageTransactionBody> {
               transactionTypeEnum: widget.transactionTypeEnum,
               amountController: widget.amountController,
               titleController: widget.titleController,
+              descriptionController: widget.descriptionController,
               financeItemModel: widget.financeItemModel,
               modelDateTime: selectedDate,
               currentDateTime: currentDateTime,

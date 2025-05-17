@@ -5,7 +5,9 @@ import 'package:finance_flutter_app/features/home/presentation/manager/cubits/ma
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/funcs/show_delete_confirmation_dialog.dart';
 import '../../../../../generated/l10n.dart';
+import '../../manager/cubits/manage_category_cubit/manage_category_cubit.dart';
 import 'category_item.dart';
 
 class CategoryListView extends StatefulWidget {
@@ -31,20 +33,33 @@ class _CategoryListViewState extends State<CategoryListView> {
               Navigator.pushNamed(
                 context,
                 ManageCategoryView.routeName,
-                arguments: {'categoryModel': categoryItemModel, 'categories' : widget.categories},
+                arguments: {
+                  'categoryModel': categoryItemModel,
+                  'categories': widget.categories,
+                },
               );
               return false; // <<< DON'T dismiss the item
             } else if (direction == DismissDirection.endToStart) {
               // Swipe from right to left --> DELETE
-              await BlocProvider.of<ManageFinanceCubit>(
+              await showDeleteConfirmationDialog(
                 context,
-              ).setAllFinancesWithCategoryIdNull(
-                categoryItemModel.key,
+                S.of(context).sure_confirm_delete_category,
+                onCancel: () {
+                  Navigator.of(context).pop();
+                  return false;
+                },
+                onConfirm: () async {
+                  await BlocProvider.of<ManageFinanceCubit>(
+                    context,
+                  ).setAllFinancesWithCategoryIdNull(categoryItemModel.key);
+                  await categoryItemModel.delete();
+                  BlocProvider.of<ManageCategoryCubit>(
+                    context,
+                  ).getAllCategories();
+                  Navigator.pop(context);
+                  return true; // <<< Allow dismiss
+                },
               );
-              await categoryItemModel.delete();
-              // BlocProvider.of<ManageCategoryCubit>(context)
-              //     .getAllCategories();
-              return true; // <<< Allow dismiss
             }
             return false;
           },

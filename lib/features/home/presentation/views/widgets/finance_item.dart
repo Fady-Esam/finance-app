@@ -40,7 +40,7 @@ class FinanceItem extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
       ),
       subtitle: Text(
-        "${DateFormat('yyyy/MM/dd hh:mm a').format(financeItemModel.dateTime)}${financeItemModel.recurrence != RecurrenceType.none ? S.of(context).recurrence(getRecurrenceText(context, financeItemModel.recurrence)) : ''}${financeItemModel.recurrenceCount != 0 ?  S.of(context).day(financeItemModel.recurrenceCount) : ''}",
+        "${DateFormat('yyyy/MM/dd hh:mm a').format(financeItemModel.dateTime)}${financeItemModel.recurrence != RecurrenceType.none ? S.of(context).recurrence(getRecurrenceText(context, financeItemModel.recurrence)) : ''}${financeItemModel.recurrenceCount != 0 ?  S.of(context).occurrence(financeItemModel.recurrenceCount) : ''}",
       ),
       trailing: Directionality(
         textDirection: TextDirection.ltr, // Force LTR for the number

@@ -3,8 +3,14 @@ import 'package:flutter/material.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../home/presentation/views/widgets/custom_manage_finance_button.dart';
 
-void showNameDialog(BuildContext context, TextEditingController controller, void Function()? onPressed,
-GlobalKey<FormState>? key, AutovalidateMode autovalidateMode, String? Function(String?)? validator) async {
+void showNameDialog(
+  BuildContext context,
+  TextEditingController controller,
+  void Function()? onPressed,
+  GlobalKey<FormState>? key,
+  AutovalidateMode autovalidateMode,
+  String? Function(String?)? validator,
+) async {
   await showDialog(
     context: context,
     builder:
@@ -55,6 +61,7 @@ GlobalKey<FormState>? key, AutovalidateMode autovalidateMode, String? Function(S
                     },
                     fontSize: 16,
                     horizontalPadding: 8,
+                    verticalPadding: 4,
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -65,6 +72,7 @@ GlobalKey<FormState>? key, AutovalidateMode autovalidateMode, String? Function(S
                     onPressed: onPressed,
                     fontSize: 16,
                     horizontalPadding: 8,
+                    verticalPadding: 4,
                   ),
                 ),
               ],

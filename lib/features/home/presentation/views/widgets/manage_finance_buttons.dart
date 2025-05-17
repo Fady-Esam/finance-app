@@ -15,6 +15,7 @@ class ManageFinanceButtons extends StatelessWidget {
     required this.transactionTypeEnum,
     required this.amountController,
     required this.titleController,
+    required this.descriptionController,
     this.financeItemModel,
     required this.modelDateTime,
     required this.currentDateTime,
@@ -30,6 +31,7 @@ class ManageFinanceButtons extends StatelessWidget {
   final TransactionTypeEnum transactionTypeEnum;
   final TextEditingController amountController;
   final TextEditingController titleController;
+  final TextEditingController descriptionController;
   final FinanceItemModel? financeItemModel;
   final DateTime modelDateTime;
   final DateTime currentDateTime;
@@ -50,6 +52,12 @@ class ManageFinanceButtons extends StatelessWidget {
             text: S.of(context).done,
             color: const Color.fromARGB(255, 159, 210, 252),
             onPressed: () async {
+              if(titleController.text.trim().isEmpty){
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(S.of(context).please_enter_title)),
+                );
+                return;
+              }
               String text = amountController.text.trim();
               // Validation Step
               if (text.isEmpty ||
@@ -68,6 +76,7 @@ class ManageFinanceButtons extends StatelessWidget {
               if (financeItemModel != null) {
                 financeItemModel!.amount = amount;
                 financeItemModel!.title = titleController.text;
+                financeItemModel!.description = descriptionController.text;
                 financeItemModel!.dateTime = modelDateTime;
                 financeItemModel!.categoryId = selectedCategory?.key;
                 financeItemModel!.recurrence = recurrenceType;
@@ -101,6 +110,7 @@ class ManageFinanceButtons extends StatelessWidget {
                 await BlocProvider.of<ManageFinanceCubit>(context).addFinance(
                   FinanceItemModel(
                     title: titleController.text,
+                    description: descriptionController.text,
                     dateTime: modelDateTime,
                     amount: amount,
                     categoryId: selectedCategory?.key,

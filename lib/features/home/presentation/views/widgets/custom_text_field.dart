@@ -25,24 +25,15 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isRtl = Directionality.of(context) == TextDirection.rtl;
-    final bool isAmount = hintText != S.of(context).details;
+    final bool isAmount = hintText != S.of(context).title && hintText != S.of(context).description;
     return TextField(
       enabled: !isAmount,
-      //autofocus: !isAmount,
-      // showCursor: !isAmount,
-      // enableInteractiveSelection: !isAmount,
-      // readOnly: isAmount,
-      // onTap: () {
-      //   if (isAmount) {
-      //     FocusScope.of(context).unfocus();
-      //   }
-      // },
       inputFormatters: isAmount ? [AmountInputFormatter()] : null,
       style: textLabelStyle,
       controller: controller,
       textAlign: isRtl && isAmount ? TextAlign.end : TextAlign.start,
       keyboardType: !isAmount ? TextInputType.text : null,
-      maxLines: isAmount ? 1 : 2,
+      maxLines: hintText == S.of(context).description ? 3 : 1,
       decoration: InputDecoration(
         hintText: hintText,
         filled: true,

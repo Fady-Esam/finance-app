@@ -1,7 +1,8 @@
-
+import 'package:finance_flutter_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/funcs/show_delete_confirmation_dialog.dart';
 import '../../../../category/presentation/manager/cubits/manage_category_cubit/manage_category_cubit.dart';
 import '../../../../category/presentation/manager/cubits/manage_category_cubit/manage_category_state.dart';
 import '../../../data/enums/transaction_type_enum.dart';
@@ -75,25 +76,37 @@ class _FinanceListViewBuilderState extends State<FinanceListViewBuilder> {
                   );
                   return false; // <<< DON'T dismiss the item
                 } else if (direction == DismissDirection.endToStart) {
-                  // Swipe from right to left --> DELETE
-                  await financeItemModel.delete();
-                  if (widget.isFromHomePage) {
-                    BlocProvider.of<ManageFinanceCubit>(
-                      context,
-                    ).getFinancesByDate(DateTime.now());
-                  } else {
-                    BlocProvider.of<ManageFinanceCubit>(
-                      context,
-                    ).getFilteredFinances(
-                      widget.dateTimeRange!,
-                      categoryId: widget.categoryFilterId,
-                      isAmountPositive: widget.isAmountPositive,
-                    );
-                  }
-                  BlocProvider.of<ManageFinanceCubit>(
+                  // Swipe from right to left -->
+                  await showDeleteConfirmationDialog(
                     context,
-                  ).getChartsFinances();
-                  return true; // <<< Allow dismiss
+                    S.of(context).sure_confirm_delete_finance,
+                    onCancel: () {
+                      Navigator.of(context).pop();
+                      return false;
+                    },
+                    onConfirm: () async {
+                      await financeItemModel.delete();
+                      if (widget.isFromHomePage) {
+                        BlocProvider.of<ManageFinanceCubit>(
+                          context,
+                        ).getFinancesByDate(DateTime.now());
+                      } else {
+                        BlocProvider.of<ManageFinanceCubit>(
+                          context,
+                        ).getFilteredFinances(
+                          widget.dateTimeRange!,
+                          categoryId: widget.categoryFilterId,
+                          isAmountPositive: widget.isAmountPositive,
+                        );
+                      }
+                      BlocProvider.of<ManageFinanceCubit>(
+                        context,
+                      ).getChartsFinances();
+                      Navigator.of(context).pop();
+                      return true;
+                    },
+                  );
+                  // return true; // <<< Allow dismiss
                 }
                 return false;
               },

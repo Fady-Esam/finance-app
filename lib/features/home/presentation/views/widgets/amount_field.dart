@@ -16,7 +16,7 @@ class AmountField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomTextField(
-      color: const Color.fromARGB(255, 123, 245, 186),
+      color: const Color.fromARGB(255, 161, 254, 209),
       hintText: "0.0",
       prefixIcon:
           Directionality.of(context) == TextDirection.ltr

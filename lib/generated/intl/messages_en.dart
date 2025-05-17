@@ -20,7 +20,7 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(day) => ", Day ${day}";
+  static String m0(occurrence) => ", Occurrence: ${occurrence}";
 
   static String m1(recurr) => ", Recurrence: ${recurr}";
 
@@ -37,6 +37,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "activity": MessageLookupByLibrary.simpleMessage("Activity"),
     "add": MessageLookupByLibrary.simpleMessage("Add"),
     "add_category": MessageLookupByLibrary.simpleMessage("Add Category"),
+    "addition_datetime": MessageLookupByLibrary.simpleMessage(
+      "Addition Datetime",
+    ),
     "all": MessageLookupByLibrary.simpleMessage("All"),
     "all_activities": MessageLookupByLibrary.simpleMessage("All Activities"),
     "analytics": MessageLookupByLibrary.simpleMessage("Analytics"),
@@ -49,11 +52,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "category": MessageLookupByLibrary.simpleMessage("Category"),
     "closeApp": MessageLookupByLibrary.simpleMessage("Exit App"),
     "closeDrawer": MessageLookupByLibrary.simpleMessage("Close Drawer"),
+    "confirm_delete": MessageLookupByLibrary.simpleMessage("Confirm Delete"),
     "daily": MessageLookupByLibrary.simpleMessage("Daily"),
     "dark_mode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
-    "day": m0,
     "dec": MessageLookupByLibrary.simpleMessage("Dec"),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+    "description": MessageLookupByLibrary.simpleMessage("Description"),
     "details": MessageLookupByLibrary.simpleMessage("Details here...."),
     "done": MessageLookupByLibrary.simpleMessage("Done"),
     "duplicate_category_error": MessageLookupByLibrary.simpleMessage(
@@ -90,15 +94,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "name": MessageLookupByLibrary.simpleMessage("Name"),
     "net_balance": MessageLookupByLibrary.simpleMessage("Net Balance"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "no_category": MessageLookupByLibrary.simpleMessage("No Category"),
     "no_category_data": MessageLookupByLibrary.simpleMessage(
       "No category data to display",
     ),
     "no_category_filter": MessageLookupByLibrary.simpleMessage(
       "No Category Filter",
     ),
+    "no_recurrence": MessageLookupByLibrary.simpleMessage("No Recurrence"),
     "none": MessageLookupByLibrary.simpleMessage("None"),
     "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
     "nov": MessageLookupByLibrary.simpleMessage("Nov"),
+    "occurrence": m0,
     "oct": MessageLookupByLibrary.simpleMessage("Oct"),
     "onBoarding_subTitle_1": MessageLookupByLibrary.simpleMessage(
       "Get a clear view of where your money goes every month",
@@ -124,8 +131,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "please_enter_name": MessageLookupByLibrary.simpleMessage(
       "من فضلك ادخل اسمك",
     ),
+    "please_enter_title": MessageLookupByLibrary.simpleMessage(
+      "Please enter a title",
+    ),
     "plus": MessageLookupByLibrary.simpleMessage("Plus"),
     "recurrence": m1,
+    "recurrence_end_datetime": MessageLookupByLibrary.simpleMessage(
+      "Recurrence End Datetime",
+    ),
     "required_field": MessageLookupByLibrary.simpleMessage(
       "This field is required",
     ),
@@ -143,7 +156,14 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "splash_screen_title": MessageLookupByLibrary.simpleMessage("Finance"),
     "start": MessageLookupByLibrary.simpleMessage("Get Started"),
+    "sure_confirm_delete_category": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to delete this category item?",
+    ),
+    "sure_confirm_delete_finance": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to delete this finance item?",
+    ),
     "theme": MessageLookupByLibrary.simpleMessage("Theme"),
+    "title": MessageLookupByLibrary.simpleMessage("Title"),
     "today_total_balance": MessageLookupByLibrary.simpleMessage(
       "Today Total Balance",
     ),

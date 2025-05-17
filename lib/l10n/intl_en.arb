@@ -56,6 +56,13 @@
     "expense": "Expense",
     "no_category_filter": "No Category Filter",
     "none": "None",
+    "title": "Title",
+    "description": "Description",
+    "no_category": "No Category",
+    "no_recurrence": "No Recurrence",
+    "addition_datetime": "Addition Datetime",
+    "recurrence_end_datetime" : "Recurrence End Datetime",
+    "please_enter_title": "Please enter a title",
     "daily": "Daily",
     "weekly": "Weekly",
     "monthly": "Monthly",
@@ -95,5 +102,8 @@
     "edit_name":"Edit Name",
     "theme":"Theme",
     "app_version":"App Version",
-    "day": ", Day {day}"
+    "occurrence": ", Occurrence: {occurrence}",
+    "confirm_delete": "Confirm Delete",
+    "sure_confirm_delete_finance": "Are you sure you want to delete this finance item?",
+    "sure_confirm_delete_category": "Are you sure you want to delete this category item?"
 }

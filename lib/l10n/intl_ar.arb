@@ -56,6 +56,13 @@
     "expense": "مصروفات",
     "no_category_filter" : "بدون تصفية فئة",
     "none": "لا شيء",
+    "no_category": "لا فئة محددة",
+    "no_recurrence": "بدون تكرار",
+    "title": "العنوان",
+    "description": "الوصف",
+    "addition_datetime": "تاريخ الاضافة",
+    "recurrence_end_datetime" : "تاريخ انتهاء التكرار",
+    "please_enter_title": "من فضلك ادخل عنوان",
     "daily": "يوميا",
     "weekly": "اسبوعيا",
     "monthly": "شهريا",
@@ -95,5 +102,8 @@
     "edit_name": "تعديل الاسم",
     "theme":"السمة",
     "app_version":"اصدار التطبيق",
-    "day": "، يوم {day}"
+    "occurrence": "، عدد التكرار: {occurrence}",
+    "confirm_delete": "تاكيد الحذف",
+    "sure_confirm_delete_finance": "هل تريد حذف هذه المعاملة؟",
+    "sure_confirm_delete_category": "هل تريد حذف هذه الفئة؟"
 }

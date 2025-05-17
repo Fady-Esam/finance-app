@@ -45,6 +45,7 @@ class _ManageTransactionViewState extends State<ManageTransactionView> {
 
   late TextEditingController amountController;
   late TextEditingController titleController;
+  late TextEditingController descriptionController;
 
   String get appBarTitle {
     switch (widget.transactionTypeEnum) {
@@ -64,7 +65,10 @@ class _ManageTransactionViewState extends State<ManageTransactionView> {
       text: widget.financeItemModel?.amount.abs().toString() ?? '',
     );
     titleController = TextEditingController(
-      text: widget.financeItemModel?.title.toString() ?? '',
+      text: widget.financeItemModel?.title.toString(),
+    );
+    descriptionController = TextEditingController(
+      text: widget.financeItemModel?.description.toString(),
     );
     currentDateTime = widget.currentDateTime ?? DateTime.now();
     modelDateTime = widget.modelDateTime ?? DateTime.now();
@@ -96,6 +100,7 @@ class _ManageTransactionViewState extends State<ManageTransactionView> {
           transactionTypeEnum: widget.transactionTypeEnum,
           amountController: amountController,
           titleController: titleController,
+          descriptionController: descriptionController,
           financeItemModel: widget.financeItemModel,
           modelDateTime: modelDateTime,
           currentDateTime: currentDateTime,

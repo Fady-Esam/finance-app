@@ -15,6 +15,6 @@ String getRecurrenceText(BuildContext context, RecurrenceType recurrenceType) {
     case RecurrenceType.yearly:
       return S.of(context).yearly;
     default:
-      return S.of(context).none;
+      return S.of(context).no_recurrence;
   }
 }

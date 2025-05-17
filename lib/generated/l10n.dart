@@ -460,6 +460,61 @@ class S {
     return Intl.message('None', name: 'none', desc: '', args: []);
   }
 
+  /// `Title`
+  String get title {
+    return Intl.message('Title', name: 'title', desc: '', args: []);
+  }
+
+  /// `Description`
+  String get description {
+    return Intl.message('Description', name: 'description', desc: '', args: []);
+  }
+
+  /// `No Category`
+  String get no_category {
+    return Intl.message('No Category', name: 'no_category', desc: '', args: []);
+  }
+
+  /// `No Recurrence`
+  String get no_recurrence {
+    return Intl.message(
+      'No Recurrence',
+      name: 'no_recurrence',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Addition Datetime`
+  String get addition_datetime {
+    return Intl.message(
+      'Addition Datetime',
+      name: 'addition_datetime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recurrence End Datetime`
+  String get recurrence_end_datetime {
+    return Intl.message(
+      'Recurrence End Datetime',
+      name: 'recurrence_end_datetime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a title`
+  String get please_enter_title {
+    return Intl.message(
+      'Please enter a title',
+      name: 'please_enter_title',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Daily`
   String get daily {
     return Intl.message('Daily', name: 'daily', desc: '', args: []);
@@ -710,9 +765,44 @@ class S {
     return Intl.message('App Version', name: 'app_version', desc: '', args: []);
   }
 
-  /// `, Day {day}`
-  String day(Object day) {
-    return Intl.message(', Day $day', name: 'day', desc: '', args: [day]);
+  /// `, Occurrence: {occurrence}`
+  String occurrence(Object occurrence) {
+    return Intl.message(
+      ', Occurrence: $occurrence',
+      name: 'occurrence',
+      desc: '',
+      args: [occurrence],
+    );
+  }
+
+  /// `Confirm Delete`
+  String get confirm_delete {
+    return Intl.message(
+      'Confirm Delete',
+      name: 'confirm_delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this finance item?`
+  String get sure_confirm_delete_finance {
+    return Intl.message(
+      'Are you sure you want to delete this finance item?',
+      name: 'sure_confirm_delete_finance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this category item?`
+  String get sure_confirm_delete_category {
+    return Intl.message(
+      'Are you sure you want to delete this category item?',
+      name: 'sure_confirm_delete_category',
+      desc: '',
+      args: [],
+    );
   }
 }
 

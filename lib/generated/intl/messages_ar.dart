@@ -20,7 +20,7 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
-  static String m0(day) => "، يوم ${day}";
+  static String m0(occurrence) => "، عدد التكرار: ${occurrence}";
 
   static String m1(recurr) => "، تكرار : ${recurr}";
 
@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "activity": MessageLookupByLibrary.simpleMessage("النشاط"),
     "add": MessageLookupByLibrary.simpleMessage("إضافة"),
     "add_category": MessageLookupByLibrary.simpleMessage("إضافة فئة"),
+    "addition_datetime": MessageLookupByLibrary.simpleMessage("تاريخ الاضافة"),
     "all": MessageLookupByLibrary.simpleMessage("الكل"),
     "all_activities": MessageLookupByLibrary.simpleMessage("جميع الأنشطة"),
     "analytics": MessageLookupByLibrary.simpleMessage("تحليلات"),
@@ -49,11 +50,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "category": MessageLookupByLibrary.simpleMessage("فئة"),
     "closeApp": MessageLookupByLibrary.simpleMessage("إغلاق التطبيق"),
     "closeDrawer": MessageLookupByLibrary.simpleMessage("إغلاق السحب"),
+    "confirm_delete": MessageLookupByLibrary.simpleMessage("تاكيد الحذف"),
     "daily": MessageLookupByLibrary.simpleMessage("يوميا"),
     "dark_mode": MessageLookupByLibrary.simpleMessage("الوضع المظلم"),
-    "day": m0,
     "dec": MessageLookupByLibrary.simpleMessage("ديس"),
     "delete": MessageLookupByLibrary.simpleMessage("حذف"),
+    "description": MessageLookupByLibrary.simpleMessage("الوصف"),
     "details": MessageLookupByLibrary.simpleMessage("التفاصيل هنا..."),
     "done": MessageLookupByLibrary.simpleMessage("تم"),
     "duplicate_category_error": MessageLookupByLibrary.simpleMessage(
@@ -90,15 +92,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "name": MessageLookupByLibrary.simpleMessage("الاسم"),
     "net_balance": MessageLookupByLibrary.simpleMessage("الرصيد الصافي"),
     "next": MessageLookupByLibrary.simpleMessage("التالى"),
+    "no_category": MessageLookupByLibrary.simpleMessage("لا فئة محددة"),
     "no_category_data": MessageLookupByLibrary.simpleMessage(
       "لا يوجد بيانات للفئات لعرضها",
     ),
     "no_category_filter": MessageLookupByLibrary.simpleMessage(
       "بدون تصفية فئة",
     ),
+    "no_recurrence": MessageLookupByLibrary.simpleMessage("بدون تكرار"),
     "none": MessageLookupByLibrary.simpleMessage("لا شيء"),
     "notifications": MessageLookupByLibrary.simpleMessage("الإشعارات"),
     "nov": MessageLookupByLibrary.simpleMessage("نوف"),
+    "occurrence": m0,
     "oct": MessageLookupByLibrary.simpleMessage("أكت"),
     "onBoarding_subTitle_1": MessageLookupByLibrary.simpleMessage(
       "احصل على رؤية واضحة لمصروفاتك الشهرية",
@@ -120,8 +125,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "please_enter_name": MessageLookupByLibrary.simpleMessage(
       "من فضلك ادخل اسمك",
     ),
+    "please_enter_title": MessageLookupByLibrary.simpleMessage(
+      "من فضلك ادخل عنوان",
+    ),
     "plus": MessageLookupByLibrary.simpleMessage("إضافة"),
     "recurrence": m1,
+    "recurrence_end_datetime": MessageLookupByLibrary.simpleMessage(
+      "تاريخ انتهاء التكرار",
+    ),
     "required_field": MessageLookupByLibrary.simpleMessage("هذا الحقل مطلوب"),
     "save": MessageLookupByLibrary.simpleMessage("حفظ"),
     "search": MessageLookupByLibrary.simpleMessage("بحث"),
@@ -137,7 +148,14 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "splash_screen_title": MessageLookupByLibrary.simpleMessage("الماليات"),
     "start": MessageLookupByLibrary.simpleMessage("ابدأ"),
+    "sure_confirm_delete_category": MessageLookupByLibrary.simpleMessage(
+      "هل تريد حذف هذه الفئة؟",
+    ),
+    "sure_confirm_delete_finance": MessageLookupByLibrary.simpleMessage(
+      "هل تريد حذف هذه المعاملة؟",
+    ),
     "theme": MessageLookupByLibrary.simpleMessage("السمة"),
+    "title": MessageLookupByLibrary.simpleMessage("العنوان"),
     "today_total_balance": MessageLookupByLibrary.simpleMessage(
       " إجمالي الرصيد اليومي",
     ),
