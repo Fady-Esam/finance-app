@@ -1,4 +1,3 @@
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +9,6 @@ import '../../../../category/presentation/manager/cubits/manage_category_cubit/m
 import '../../../../home/data/models/finance_item_model.dart';
 import '../../manager/cubits/manage_pie_chart_cubit/manage_pie_chart_cubit.dart';
 
-
 class CategoryPieChart extends StatelessWidget {
   const CategoryPieChart({super.key, required this.transactions});
   final List<FinanceItemModel> transactions;
@@ -21,8 +19,8 @@ class CategoryPieChart extends StatelessWidget {
       context,
     ).getGroupByCategory(transactions);
     final totalAmount = totals.values.fold(0.0, (sum, val) => sum + val);
-        if (totals.isEmpty) {
-      return Center(child:Text(S.of(context).no_category_data),);
+    if (totals.isEmpty) {
+      return Center(child: Text(S.of(context).no_category_data));
     }
 
     final pieSections =
@@ -48,19 +46,22 @@ class CategoryPieChart extends StatelessWidget {
         sections: pieSections,
         pieTouchData: PieTouchData(
           touchCallback: (FlTouchEvent event, pieTouchResponse) {
-            if (dialogVisible) return;
             if (!event.isInterestedForInteractions ||
-                pieTouchResponse?.touchedSection == null) {
+                pieTouchResponse?.touchedSection == null ||
+                dialogVisible) {
               return;
             }
             final sectionIndex =
                 pieTouchResponse!.touchedSection!.touchedSectionIndex;
-            if (sectionIndex < 0 || sectionIndex >= pieSections.length) return;
+            if (sectionIndex < 0 || sectionIndex >= pieSections.length) {
+              return;
+            }
             final section = pieSections[sectionIndex];
             final title = section.title;
             final value = section.value;
             showDialog(
               context: context,
+              barrierDismissible: false,
               builder:
                   (dialogContext) => AlertDialog(
                     shape: RoundedRectangleBorder(
@@ -78,7 +79,7 @@ class CategoryPieChart extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         IconButton(
-                          icon: Icon(Icons.close),
+                          icon: Icon(Icons.close, color: Colors.red),
                           onPressed: () {
                             dialogVisible = false;
                             Navigator.pop(dialogContext);

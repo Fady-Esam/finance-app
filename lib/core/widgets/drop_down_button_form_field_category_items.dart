@@ -45,7 +45,16 @@ class DropdownButtonFormFieldCategoryItems extends StatelessWidget {
                   color: getColorfromHex(category.colorHex),
                 ),
                 const SizedBox(width: 8),
-                Text(category.name),
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: MediaQuery.sizeOf(context).width * 0.25,
+                  ),
+                  child: Text(
+                    category.name,
+                    style: const TextStyle(fontSize: 14),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
               ],
             ),
           ),

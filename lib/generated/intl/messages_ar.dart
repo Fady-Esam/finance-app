@@ -32,7 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("حول"),
     "about_text": MessageLookupByLibrary.simpleMessage(
-      "تتبع النفقات وإدارة الرصيد وجدولة المعاملات المتكررة بسهولة — مع حفظ البيانات بأمان على جهازك.",
+      "تتبع النفقات وإدارة الرصيد وجدولة المعاملات المتكررة بسهولة مع حفظ البيانات بأمان على جهازك.",
     ),
     "activity": MessageLookupByLibrary.simpleMessage("النشاط"),
     "add": MessageLookupByLibrary.simpleMessage("إضافة"),

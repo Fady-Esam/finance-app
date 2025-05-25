@@ -41,7 +41,8 @@ class HomeRepoImpl implements HomeRepo {
       //           item.dateTime.month == dateTime.month &&
       //           item.dateTime.day == dateTime.day;
       //     }).toList();
-      List<FinanceItemModel> filteredItems = getFilteredFinancesByDate(
+      List<FinanceItemModel> filteredItems = 
+      getFilteredFinancesByDate(
         singleDate: dateTime,
       );
       for (var item in filteredItems) {
@@ -362,10 +363,29 @@ class HomeRepoImpl implements HomeRepo {
           end: DateTime.now(),
         ),
       ).forEach((item) {
+        if (item.recurrence != RecurrenceType.none) {
+          item.recurrenceCount = calculateRecurrenceCount(
+            item.dateTime,
+            item.recurrence,
+            item.recurrenceEndDate!,
+            item.dateTime,
+            DateTime.now(),
+          );
+        }
         totalBalance +=
             item.amount *
             (item.recurrenceCount == 0 ? 1 : item.recurrenceCount);
       });
+      //     for (var item in filteredItems) {
+      // if (item.recurrence != RecurrenceType.none) {
+      //   item.recurrenceCount = calculateRecurrenceCount(
+      //     item.dateTime,
+      //     item.recurrence,
+      //     item.recurrenceEndDate!,
+      //     dateRange.start,
+      //     dateRange.end,
+      //   );
+      // }
       // var box = Hive.box<FinanceItemModel>('finance');
       // double totalBalance = 0.0;
       // for (var item in box.values) {
@@ -382,9 +402,7 @@ class HomeRepoImpl implements HomeRepo {
     try {
       double totalBalance = 0.0;
       getFilteredFinancesByDate(singleDate: DateTime.now()).forEach((item) {
-        totalBalance +=
-            item.amount *
-            (item.recurrenceCount == 0 ? 1 : item.recurrenceCount);
+        totalBalance += item.amount;
       });
       // var box = Hive.box<FinanceItemModel>('finance');
       // double totalBalance = 0.0;
