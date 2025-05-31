@@ -83,6 +83,7 @@ class _SettingsViewState extends State<SettingsView>
               subtitle: Text(userSetupModel?.name ?? ''),
               trailing: Icon(Icons.edit),
               onTap: () async {
+                final String oldText = controller.text;
                 showNameDialog(
                   context,
                   controller,
@@ -112,6 +113,10 @@ class _SettingsViewState extends State<SettingsView>
                       return S.of(context).please_enter_name;
                     }
                     return null;
+                  },
+                  () {
+                    controller.text = oldText;
+                    Navigator.pop(context);
                   },
                 );
               },

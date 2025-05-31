@@ -23,7 +23,7 @@ import 'features/home/data/enums/recurrence_type_enum.dart';
 import 'features/home/data/models/finance_item_model.dart';
 
 Future<void> main() async {
-  Bloc.observer = SimpleBlocObserver(); // assign it globally
+  //Bloc.observer = SimpleBlocObserver(); // assign it globally
 
   WidgetsFlutterBinding.ensureInitialized();
 

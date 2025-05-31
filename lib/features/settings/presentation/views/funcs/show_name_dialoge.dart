@@ -10,6 +10,7 @@ void showNameDialog(
   GlobalKey<FormState>? key,
   AutovalidateMode autovalidateMode,
   String? Function(String?)? validator,
+  void Function()? onCancelPressed,
 ) async {
   await showDialog(
     context: context,
@@ -56,9 +57,7 @@ void showNameDialog(
                   child: CustomManageFinanceButton(
                     text: S.of(context).cancel,
                     color: const Color.fromARGB(255, 244, 119, 161),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
+                    onPressed: onCancelPressed,
                     fontSize: 16,
                     horizontalPadding: 8,
                     verticalPadding: 4,
