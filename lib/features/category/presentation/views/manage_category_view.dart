@@ -100,7 +100,9 @@ class _ManageCategoryViewState extends State<ManageCategoryView> {
                   bool isDuplicate = widget.categories.any(
                     (category) =>
                         category.name.toLowerCase() ==
-                        value.trim().toLowerCase(),
+                        value.trim().toLowerCase() &&
+                        category.key !=
+                        widget.categoryModel?.key, 
                   );
                   if (isDuplicate) {
                     return S
