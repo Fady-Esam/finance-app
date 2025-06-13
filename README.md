@@ -28,7 +28,6 @@ A sleek and powerful local finance management app built with Flutter and **Hive*
 
 ## 🎬 Preview
 
-[NotesApp.webm](https://github.com/Fady-Esam/Notes-App/assets/146977882/b9c0cc1c-1003-480d-a3a2-b29a44f1df4c)
 
 ---
 
