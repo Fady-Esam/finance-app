@@ -1,16 +1,70 @@
-# finance_flutter_app
+# 💰 Flutter Finance App
 
-A new Flutter project.
+A sleek and powerful local finance management app built with Flutter and **Hive** for local storage . It empowers users to track income and expenses, categorize transactions, and analyze their financial habits with smooth UI and navigation.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## ✨ Features
 
-A few resources to get you started if this is your first Flutter project:
+- ➕➖ Add income or expense with detailed info title, description, and amount for each entry
+- 📅 Custom date selection for each transaction  
+- 🔁 Recurrence support with occurrence count tracking   
+- 🧮 View total balance, today balance, and today's transactions on the Home screen  
+- 📄 Transaction view with full history  
+- 🔍 Search transactions by title  
+- 🧮 Filter by:
+  - ✅ Category  
+  - 💰 Type (Income / Expense / All)  
+  - 🕒 Specific date or custom time range 
+- 📊 Interactive charts (Bar, Pie, Line) for visual analytics
+- 🗂️ Add categorize transactions (e.g., Food, Rent, Salary) and View them  
+- ⚙️ Settings screen enables editing and adding user name
+- 📝 Edit and delete any transaction or category
+- 🧭 Navigate with ease through clean tabbed UI  
+- 🌐 Multi-language support (English & Arabic)  
+- 🎨 Light & Dark theme switching  
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🎬 Preview
+
+
+---
+
+## 🛠️ Languages & Tools
+<p align="left"> 
+        <img src="https://www.vectorlogo.zone/logos/flutterio/flutterio-icon.svg" alt="flutter" width="50" height="45"/> 
+        <img src="https://www.vectorlogo.zone/logos/dartlang/dartlang-icon.svg" alt="dart" width="50" height="45"/>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMPq4YNrCDzxfBUu7I4wlkncj7XnUgF8rl1A&s" alt="Hive" width="50" height="45" />
+        <img src="https://github.com/user-attachments/assets/81601bc6-d10f-436a-a3fa-fb3b129feaf6" alt="VS Code" width="50" height="45"/>
+        <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="Git" width="50" height="45"/>
+</p>
+
+---
+
+## 📦 Packages Used
+
+- 🧠 `flutter_bloc`  
+- 💾 `shared_preferences`  
+- 🖼️ `flutter_svg`  
+- 🐝 `hive` / `hive_flutter`  
+- 🧠 `dartz`  
+- 📅 `table_calendar`  
+- 🌐 `intl`  
+- 📊 `fl_chart`
+
+---
+
+## 📫 Connect With Me
+<h5 align="left"> 
+<a href="https://www.linkedin.com/in/fady-esam/" target="_blank"> 
+  <img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="Fady Esam" height="45" width="45" /> 
+  </a> 
+   &nbsp;
+  <a href="mailto:fady.esam.0101@gmail.com" target="_blank"> 
+    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email" height="45" width="50" /> 
+</a> 
+</h5>
+
+
+
