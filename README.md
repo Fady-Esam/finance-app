@@ -28,7 +28,7 @@ A sleek and powerful local finance management app built with Flutter and **Hive*
 
 ## 🎬 Preview
 
-https://cs178.clideo.com/p/4ATFi95k8l8SXJsH_Z5Spw/8890e0a993227d4ab8297fc46038f33f/compressed3_2leZh3xM.mp4
+https://github.com/user-attachments/assets/32e09b18-6e56-4bbc-a64e-255e2f932356
 
 ---
 
