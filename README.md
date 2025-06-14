@@ -34,11 +34,8 @@ https://github.com/user-attachments/assets/32e09b18-6e56-4bbc-a64e-255e2f932356
 
 ## 🛠️ Languages & Tools
 <p align="left"> 
-        <img src="https://www.vectorlogo.zone/logos/flutterio/flutterio-icon.svg" alt="flutter" width="50" height="45"/> 
-        <img src="https://www.vectorlogo.zone/logos/dartlang/dartlang-icon.svg" alt="dart" width="50" height="45"/>
+        <img src="https://skillicons.dev/icons?i=flutter,dart,vscode,visualstudio,git,github" alt="Tech stack icons" />
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMPq4YNrCDzxfBUu7I4wlkncj7XnUgF8rl1A&s" alt="Hive" width="50" height="45" />
-        <img src="https://github.com/user-attachments/assets/81601bc6-d10f-436a-a3fa-fb3b129feaf6" alt="VS Code" width="50" height="45"/>
-        <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="Git" width="50" height="45"/>
 </p>
 
 ---
