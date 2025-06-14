@@ -34,7 +34,7 @@ https://github.com/user-attachments/assets/32e09b18-6e56-4bbc-a64e-255e2f932356
 
 ## 🛠️ Languages & Tools
 <p align="left"> 
-        <img src="https://skillicons.dev/icons?i=flutter,dart,vscode,visualstudio,git,github" alt="Tech stack icons" />
+        <img src="https://skillicons.dev/icons?i=flutter,dart,vscode,git,github" alt="Tech stack icons" />
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMPq4YNrCDzxfBUu7I4wlkncj7XnUgF8rl1A&s" alt="Hive" width="50" height="45" />
 </p>
 
