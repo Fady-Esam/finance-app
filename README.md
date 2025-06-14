@@ -21,7 +21,7 @@ A sleek and powerful local finance management app built with Flutter and **Hive*
 - ⚙️ Settings screen enables editing and adding user name
 - 📝 Edit and delete any transaction or category
 - 🧭 Navigate with ease through clean tabbed UI  
-- 🌐 Multi-language support (English & Arabic)  
+- 🌐 Multi-language support (English / Arabic)  
 - 🎨 Light & Dark theme switching  
 
 ---
