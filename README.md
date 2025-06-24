@@ -19,7 +19,7 @@ Empowers users to track income and expenses, categorize transactions, and analyz
   - 🕒 Specific date or custom time range 
 - 📊 Interactive charts (Bar, Pie, Line) for visual analytics
 - 🗂️ Add categorize transactions (e.g., Food, Rent, Salary) and View them  
-- ⚙️ Settings screen enables editing and adding user name
+- ⚙️ Settings screen allows users to manage and customize their preferences with options
 - 📝 Edit and delete any transaction or category
 - 🧭 Navigate with ease through clean tabbed UI  
 - 🌐 Multi-language support (English / Arabic)  
