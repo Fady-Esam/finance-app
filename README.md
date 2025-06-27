@@ -1,7 +1,7 @@
 # 💰 Flutter Finance App
 
 A sleek and powerful local finance management app built with Flutter and **Hive** for local storage.  
-Empowers users to track income and expenses, categorize transactions, and analyze their financial habits with smooth UI and navigation.
+Empowers users to track income and expenses, categorize transactions, and analyze their financial habits with smooth UI and navigation.  
 Built with **MVVM** architecture for scalability and maintainability and **BLoC** pattern for predictable and scalable UI logic.
 
 ---
