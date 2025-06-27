@@ -2,6 +2,7 @@
 
 A sleek and powerful local finance management app built with Flutter and **Hive** for local storage.  
 Empowers users to track income and expenses, categorize transactions, and analyze their financial habits with smooth UI and navigation.
+Built with **MVVM** architecture for scalability and maintainability and **BLoC** pattern for predictable and scalable UI logic.
 
 ---
 
@@ -24,7 +25,8 @@ Empowers users to track income and expenses, categorize transactions, and analyz
 - 🧭 Navigate with ease through clean tabbed UI  
 - 🌐 Multi-language support (English / Arabic)  
 - 🎨 Light & Dark theme switching  
-
+- 🗂️ MVVM Architecture with a clear separation of concerns between Model, View, and ViewModel layers for scalability and maintainability    
+- 🧠 Robust State Management built with the BLoC pattern for predictable and scalable UI logic  
 ---
 
 ## 🎬 Preview
