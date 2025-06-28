@@ -6,18 +6,18 @@ Built with **MVVM** architecture for scalability and maintainability and **BLoC*
 
 ---
 
-## ✨ Features
+## ✨ Features & Highlights
 
 - ➕➖ Add income or expense with detailed info title, description, and amount for each entry
 - 📅 Custom date selection for each transaction  
 - 🔁 Recurrence support with occurrence count tracking   
 - 🧮 View total balance, today balance, and today's transactions on the Home screen  
-- 📄 Transaction view with full history  
-- 🔍 Search transactions by title  
+- 📄 Full transaction history organized in a clean view
+- 🔍 Search transactions by title for quick access
 - 🧮 Filter by:
   - ✅ Category  
   - 💰 Type (Income / Expense / All)  
-  - 🕒 Specific date or custom time range 
+  - 🕒 Date or custom time range
 - 📊 Interactive charts (Bar, Pie, Line) for visual analytics
 - 🗂️ Add categorize transactions (e.g., Food, Rent, Salary) and View them  
 - ⚙️ Settings screen allows users to manage and customize their preferences with options
@@ -27,6 +27,7 @@ Built with **MVVM** architecture for scalability and maintainability and **BLoC*
 - 🎨 Light & Dark theme switching  
 - 🗂️ MVVM Architecture with a clear separation of concerns between Model, View, and ViewModel layers for scalability and maintainability    
 - 🧠 Robust State Management built with the BLoC pattern for predictable and scalable UI logic  
+
 ---
 
 ## 🎬 Preview
