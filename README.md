@@ -6,7 +6,7 @@ Built with **MVVM** architecture for scalability and maintainability and **BLoC*
 
 ---
 
-## ✨ Features 
+## ✨ Features
 
 - ➕➖ Add income or expense with detailed info title, description, and amount for each entry
 - 📅 Custom date selection for each transaction  
