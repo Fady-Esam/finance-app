@@ -25,9 +25,6 @@ Built with **MVVM** architecture for scalability and maintainability and **BLoC*
 - 🧭 Navigate with ease through clean tabbed UI  
 - 🌐 Multi-language support (English / Arabic)  
 - 🎨 Light & Dark theme switching
-- 🗃️ Local database for full local data management, high-performance storage and optimized data persistence 
-- 🗂️ MVVM Architecture with a clear separation of concerns between Model, View, and ViewModel layers for scalability and maintainability    
-- 🧠 Robust State Management built with the BLoC pattern for predictable and scalable UI logic  
 
 ---
 
